@@ -1,14 +1,17 @@
 import _ from 'lodash';
-
 import {
     FETCH_INGREDIENTS,
     FETCH_INGREDIENT,
     CREATE_INGREDIENT,
     EDIT_INGREDIENT,
     DELETE_INGREDIENT
-} from '../actions/types';
+} from '../constants/action-types';
 
-export default (state = {}, action) => {
+const initialState = {
+
+};
+
+export default (state = initialState, action) => {
     switch (action.type) {
         case FETCH_INGREDIENTS:
             return { ...state, ..._.mapKeys(action.payload, 'id')};

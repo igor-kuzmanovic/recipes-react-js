@@ -1,14 +1,17 @@
 import _ from 'lodash';
-
 import {
     FETCH_CATEGORIES,
     FETCH_CATEGORY,
     CREATE_CATEGORY,
     EDIT_CATEGORY,
     DELETE_CATEGORY
-} from '../actions/types';
+} from '../constants/action-types';
 
-export default (state = {}, action) => {
+const initialState = {
+
+};
+
+export default (state = initialState, action) => {
     switch (action.type) {
         case FETCH_CATEGORIES:
             return { ...state, ..._.mapKeys(action.payload, 'id')};

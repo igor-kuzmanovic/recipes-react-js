@@ -5,7 +5,7 @@ import {
     CREATE_CATEGORY,
     EDIT_CATEGORY,
     DELETE_CATEGORY
-} from './types';
+} from '../constants/action-types';
 
 export const fetchCategories = () => async dispatch => {
     const response = await api.get('/categories');

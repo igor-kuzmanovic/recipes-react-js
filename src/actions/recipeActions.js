@@ -5,7 +5,7 @@ import {
     CREATE_RECIPE,
     EDIT_RECIPE,
     DELETE_RECIPE
-} from './types';
+} from '../constants/action-types';
 
 export const fetchRecipes = () => async dispatch => {
     const response = await api.get('/recipes');

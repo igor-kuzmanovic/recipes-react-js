@@ -5,7 +5,7 @@ import {
     CREATE_TAG,
     EDIT_TAG,
     DELETE_TAG
-} from './types';
+} from '../constants/action-types';
 
 export const fetchTags = () => async dispatch => {
     const response = await api.get('/tags');
