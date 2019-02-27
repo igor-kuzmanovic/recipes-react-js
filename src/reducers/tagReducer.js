@@ -5,7 +5,7 @@ import {
     CREATE_TAG,
     EDIT_TAG,
     DELETE_TAG
-} from '../constants/action-types';
+} from '../actions/types';
 
 const initialState = {
 

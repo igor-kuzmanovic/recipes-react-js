@@ -5,7 +5,7 @@ import {
     CREATE_INGREDIENT,
     EDIT_INGREDIENT,
     DELETE_INGREDIENT
-} from '../constants/action-types';
+} from './types';
 
 export const fetchIngredients = () => async dispatch => {
     const response = await api.get('/ingredients');

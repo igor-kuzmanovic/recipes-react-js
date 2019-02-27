@@ -5,7 +5,7 @@ import {
     CREATE_RECIPE,
     EDIT_RECIPE,
     DELETE_RECIPE
-} from '../constants/action-types';
+} from '../actions/types';
 
 const initialState = {
 

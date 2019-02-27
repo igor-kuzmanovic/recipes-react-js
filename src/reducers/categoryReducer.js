@@ -5,7 +5,7 @@ import {
     CREATE_CATEGORY,
     EDIT_CATEGORY,
     DELETE_CATEGORY
-} from '../constants/action-types';
+} from '../actions/types';
 
 const initialState = {
 
