@@ -1,11 +1,11 @@
-import api from '../apis/api';
+import api from '../apis/recipes';
 import {
     FETCH_CATEGORIES,
     FETCH_CATEGORY,
     CREATE_CATEGORY,
-    EDIT_CATEGORY,
+    UPDATE_CATEGORY,
     DELETE_CATEGORY
-} from './types';
+} from '../constants/actionTypes';
 
 export const fetchCategories = () => async dispatch => {
     const response = await api.get('/categories');
@@ -25,10 +25,10 @@ export const createCategory = formValues => async dispatch => {
     dispatch({ type: CREATE_CATEGORY, payload: response.data });
 };
 
-export const editCategory = (id, formValues) => async dispatch => {
+export const updateCategory = (id, formValues) => async dispatch => {
     const response = await api.put(`/categories/${id}`, formValues);
 
-    dispatch({ type: EDIT_CATEGORY, payload: response.data });
+    dispatch({ type: UPDATE_CATEGORY, payload: response.data });
 };
 
 export const deleteCategory = id => async dispatch => {

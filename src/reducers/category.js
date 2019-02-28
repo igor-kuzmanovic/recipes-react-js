@@ -3,31 +3,22 @@ import {
     FETCH_CATEGORIES,
     FETCH_CATEGORY,
     CREATE_CATEGORY,
-    EDIT_CATEGORY,
+    UPDATE_CATEGORY,
     DELETE_CATEGORY
-} from '../actions/types';
+} from '../constants/actionTypes';
 
-const initialState = {
-
-};
+const initialState = {};
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case FETCH_CATEGORIES:
             return { ...state, ..._.mapKeys(action.payload, 'id')};
-
         case FETCH_CATEGORY:
-            return { ...state, [action.payload.id]: action.payload };
-
         case CREATE_CATEGORY:
+        case UPDATE_CATEGORY:
             return { ...state, [action.payload.id]: action.payload };
-
-        case EDIT_CATEGORY:
-            return { ...state, [action.payload.id]: action.payload };
-
         case DELETE_CATEGORY:
             return _.omit(state, action.payload);
-
         default:
             return state;
     }

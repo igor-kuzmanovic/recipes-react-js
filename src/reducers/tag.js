@@ -3,31 +3,22 @@ import {
     FETCH_TAGS,
     FETCH_TAG,
     CREATE_TAG,
-    EDIT_TAG,
+    UPDATE_TAG,
     DELETE_TAG
-} from '../actions/types';
+} from '../constants/actionTypes';
 
-const initialState = {
-
-};
+const initialState = {};
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case FETCH_TAGS:
             return { ...state, ..._.mapKeys(action.payload, 'id')};
-
         case FETCH_TAG:
-            return { ...state, [action.payload.id]: action.payload };
-
         case CREATE_TAG:
+        case UPDATE_TAG:
             return { ...state, [action.payload.id]: action.payload };
-
-        case EDIT_TAG:
-            return { ...state, [action.payload.id]: action.payload };
-
         case DELETE_TAG:
             return _.omit(state, action.payload);
-
         default:
             return state;
     }

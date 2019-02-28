@@ -1,11 +1,11 @@
-import api from '../apis/api';
+import api from '../apis/recipes';
 import {
     FETCH_RECIPES,
     FETCH_RECIPE,
     CREATE_RECIPE,
-    EDIT_RECIPE,
+    UPDATE_RECIPE,
     DELETE_RECIPE
-} from './types';
+} from '../constants/actionTypes';
 
 export const fetchRecipes = () => async dispatch => {
     const response = await api.get('/recipes');
@@ -25,10 +25,10 @@ export const createRecipe = formValues => async dispatch => {
     dispatch({ type: CREATE_RECIPE, payload: response.data });
 };
 
-export const editRecipe = (id, formValues) => async dispatch => {
+export const updateRecipe = (id, formValues) => async dispatch => {
     const response = await api.put(`/recipes/${id}`, formValues);
 
-    dispatch({ type: EDIT_RECIPE, payload: response.data });
+    dispatch({ type: UPDATE_RECIPE, payload: response.data });
 };
 
 export const deleteRecipe = id => async dispatch => {

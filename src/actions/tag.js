@@ -1,11 +1,11 @@
-import api from '../apis/api';
+import api from '../apis/recipes';
 import {
     FETCH_TAGS,
     FETCH_TAG,
     CREATE_TAG,
-    EDIT_TAG,
+    UPDATE_TAG,
     DELETE_TAG
-} from './types';
+} from '../constants/actionTypes';
 
 export const fetchTags = () => async dispatch => {
     const response = await api.get('/tags');
@@ -25,10 +25,10 @@ export const createTag = formValues => async dispatch => {
     dispatch({ type: CREATE_TAG, payload: response.data });
 };
 
-export const editTag = (id, formValues) => async dispatch => {
+export const updateTag = (id, formValues) => async dispatch => {
     const response = await api.put(`/tags/${id}`, formValues);
 
-    dispatch({ type: EDIT_TAG, payload: response.data });
+    dispatch({ type: UPDATE_TAG, payload: response.data });
 };
 
 export const deleteTag = id => async dispatch => {
