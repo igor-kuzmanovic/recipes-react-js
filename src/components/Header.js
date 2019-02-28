@@ -3,21 +3,21 @@ import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <div className="ui secondary pointing menu">
+        <div>
             <Link to="/" className="item">
                 RecipesApp
             </Link>
-            <div className="right menu">
-                <NavLink to="/recipes" className="item">
+            <div>
+                <NavLink to="/recipes">
                     Recipes
                 </NavLink>
-                <NavLink to="/ingredients" className="item">
+                <NavLink to="/ingredients">
                     Ingredients
                 </NavLink>
-                <NavLink to="/categories" className="item">
+                <NavLink to="/categories">
                     Categories
                 </NavLink>
-                <NavLink to="/tags" className="item">
+                <NavLink to="/tags">
                     Tags
                 </NavLink>
             </div>

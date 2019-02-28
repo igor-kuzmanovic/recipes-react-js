@@ -12,27 +12,29 @@ class TagList extends React.Component {
         return this.props.tags.map(tag => {
             const { id, name } = tag;
             return (
-                <div className="item" key={id}>
-                    <div className="right floated content">
-                        <Link to={`/tags/update/${id}`} className="ui button primary">
+                <li key={id}>
+                    <div>
+                        <Link to={`/tags/${id}`}>
+                            {name}
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to={`/tags/update/${id}`}>
                             Update
                         </Link>
-                        <Link to={`/tags/delete/${id}`} className="ui button negative">
+                        <Link to={`/tags/delete/${id}`}>
                             Delete
                         </Link>
                     </div>
-                    <Link to={`/tags/${id}`} className="header">
-                        {name}
-                    </Link>
-                </div>
+                </li>
             )
         })
     }
 
     renderCreate() {
         return (
-            <div style={{ textAlign: 'right' }}>
-                <Link to="/tags/create" className="ui button positive">
+            <div>
+                <Link to="/tags/create">
                     Create Tag
                 </Link>
             </div>
@@ -43,7 +45,7 @@ class TagList extends React.Component {
         return (
             <div>
                 <h2>Tags</h2>
-                <div className="ui big relaxed divided list">{this.renderList()}</div>
+                <ul>{this.renderList()}</ul>
                 {this.renderCreate()}
             </div>
         )

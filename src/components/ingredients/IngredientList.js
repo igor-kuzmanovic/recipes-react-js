@@ -12,27 +12,29 @@ class IngredientList extends React.Component {
         return this.props.ingredients.map(ingredient => {
             const { id, name } = ingredient;
             return (
-                <div className="item" key={id}>
-                    <div className="right floated content">
-                        <Link to={`/ingredients/update/${id}`} className="ui button primary">
+                <li key={id}>
+                    <div>
+                        <Link to={`/ingredients/${id}`}>
+                            {name}
+                        </Link>
+                    </div>
+                    <div >
+                        <Link to={`/ingredients/update/${id}`}>
                             Update
                         </Link>
-                        <Link to={`/ingredients/delete/${id}`} className="ui button negative">
+                        <Link to={`/ingredients/delete/${id}`}>
                             Delete
                         </Link>
                     </div>
-                    <Link to={`/ingredients/${id}`} className="header">
-                        {name}
-                    </Link>
-                </div>
+                </li>
             )
         })
     }
 
     renderCreate() {
         return (
-            <div style={{ textAlign: 'right' }}>
-                <Link to="/ingredients/create" className="ui button positive">
+            <div>
+                <Link to="/ingredients/create">
                     Create Ingredient
                 </Link>
             </div>
@@ -43,7 +45,7 @@ class IngredientList extends React.Component {
         return (
             <div>
                 <h2>Ingredients</h2>
-                <div className="ui big relaxed divided list">{this.renderList()}</div>
+                <ul>{this.renderList()}</ul>
                 {this.renderCreate()}
             </div>
         )

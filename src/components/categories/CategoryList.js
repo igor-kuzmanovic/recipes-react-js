@@ -12,27 +12,29 @@ class CategoryList extends React.Component {
         return this.props.categories.map(category => {
             const { id, name } = category;
             return (
-                <div className="item" key={id}>
-                    <div className="right floated content">
-                        <Link to={`/categories/update/${id}`} className="ui button primary">
+                <li key={id}>
+                    <div>
+                        <Link to={`/categories/${id}`}>
+                            {name}
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to={`/categories/update/${id}`}>
                             Update
                         </Link>
-                        <Link to={`/categories/delete/${id}`} className="ui button negative">
+                        <Link to={`/categories/delete/${id}`}>
                             Delete
                         </Link>
                     </div>
-                    <Link to={`/categories/${id}`} className="header">
-                        {name}
-                    </Link>
-                </div>
+                </li>
             )
         })
     }
 
     renderCreate() {
         return (
-            <div style={{ textAlign: 'right' }}>
-                <Link to="/categories/create" className="ui button positive">
+            <div>
+                <Link to="/categories/create">
                     Create Category
                 </Link>
             </div>
@@ -43,7 +45,7 @@ class CategoryList extends React.Component {
         return (
             <div>
                 <h2>Categories</h2>
-                <div className="ui big relaxed divided list">{this.renderList()}</div>
+                <ul>{this.renderList()}</ul>
                 {this.renderCreate()}
             </div>
         )
