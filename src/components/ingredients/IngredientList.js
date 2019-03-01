@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchIngredients } from '../../actions/ingredient';
 import {Link} from "react-router-dom";
+import {Button, ButtonGroup, Table} from "react-bootstrap";
+import {LinkContainer} from "react-router-bootstrap";
 
 class IngredientList extends React.Component {
     componentDidMount() {
@@ -12,32 +14,32 @@ class IngredientList extends React.Component {
         return this.props.ingredients.map(ingredient => {
             const { id, name } = ingredient;
             return (
-                <li key={id}>
-                    <div>
+                <tr key={id}>
+                    <td className="w-100">
                         <Link to={`/ingredients/${id}`}>
                             {name}
                         </Link>
-                    </div>
-                    <div >
-                        <Link to={`/ingredients/update/${id}`}>
-                            Update
-                        </Link>
-                        <Link to={`/ingredients/delete/${id}`}>
-                            Delete
-                        </Link>
-                    </div>
-                </li>
+                    </td>
+                    <td>
+                        <ButtonGroup>
+                            <LinkContainer to={`/ingredients/update/${id}`}>
+                                <Button variant="primary" size="small">Update</Button>
+                            </LinkContainer>
+                            <LinkContainer to={`/ingredients/delete/${id}`}>
+                                <Button variant="danger" size="small">Delete</Button>
+                            </LinkContainer>
+                        </ButtonGroup>
+                    </td>
+                </tr>
             )
         })
     }
 
     renderCreate() {
         return (
-            <div>
-                <Link to="/ingredients/create">
-                    Create Ingredient
-                </Link>
-            </div>
+            <LinkContainer to={`/ingredients/create`}>
+                <Button variant="primary">Create Ingredient</Button>
+            </LinkContainer>
         )
     }
 
@@ -45,7 +47,17 @@ class IngredientList extends React.Component {
         return (
             <div>
                 <h2>Ingredients</h2>
-                <ul>{this.renderList()}</ul>
+                <Table responsive striped bordered hover size="sm">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>{null}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderList()}
+                    </tbody>
+                </Table>
                 {this.renderCreate()}
             </div>
         )

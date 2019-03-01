@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCategories } from '../../actions/category';
+import {Button, ButtonGroup, Table} from "react-bootstrap";
+import {LinkContainer} from "react-router-bootstrap";
 
 class CategoryList extends React.Component {
     componentDidMount() {
@@ -12,32 +14,32 @@ class CategoryList extends React.Component {
         return this.props.categories.map(category => {
             const { id, name } = category;
             return (
-                <li key={id}>
-                    <div>
+                <tr key={id}>
+                    <td className="w-100">
                         <Link to={`/categories/${id}`}>
                             {name}
                         </Link>
-                    </div>
-                    <div>
-                        <Link to={`/categories/update/${id}`}>
-                            Update
-                        </Link>
-                        <Link to={`/categories/delete/${id}`}>
-                            Delete
-                        </Link>
-                    </div>
-                </li>
+                    </td>
+                    <td>
+                        <ButtonGroup>
+                            <LinkContainer to={`/categories/update/${id}`}>
+                                <Button variant="primary" size="small">Update</Button>
+                            </LinkContainer>
+                            <LinkContainer to={`/categories/delete/${id}`}>
+                                <Button variant="danger" size="small">Delete</Button>
+                            </LinkContainer>
+                        </ButtonGroup>
+                    </td>
+                </tr>
             )
         })
     }
 
     renderCreate() {
         return (
-            <div>
-                <Link to="/categories/create">
-                    Create Category
-                </Link>
-            </div>
+            <LinkContainer to={`/categories/create`}>
+                <Button variant="primary">Create Category</Button>
+            </LinkContainer>
         )
     }
 
@@ -45,7 +47,17 @@ class CategoryList extends React.Component {
         return (
             <div>
                 <h2>Categories</h2>
-                <ul>{this.renderList()}</ul>
+                <Table responsive striped bordered hover size="sm">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>{null}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderList()}
+                    </tbody>
+                </Table>
                 {this.renderCreate()}
             </div>
         )

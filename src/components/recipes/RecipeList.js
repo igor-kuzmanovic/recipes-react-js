@@ -1,8 +1,9 @@
-import moment from 'moment';
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchRecipes } from '../../actions/recipe';
 import {Link} from "react-router-dom";
+import {Button, ButtonGroup, Table} from "react-bootstrap";
+import {LinkContainer} from "react-router-bootstrap";
 
 class RecipeList extends React.Component {
     componentDidMount() {
@@ -11,43 +12,34 @@ class RecipeList extends React.Component {
 
     renderList() {
         return this.props.recipes.map(recipe => {
-            const { id, title, description, image, creationDate } = recipe;
+            const { id, title } = recipe;
             return (
-                <li key={id}>
-                    <div>
-                        <img
-                            src={image}
-                            alt={description}
-                        />
+                <tr key={id}>
+                    <td className="w-100">
                         <Link to={`/recipes/${id}`}>
                             {title}
                         </Link>
-                        <div>
-                            {description}
-                            <br/>
-                            <i>{moment(creationDate).format('LL')}</i>
-                        </div>
-                    </div>
-                    <div>
-                        <Link to={`/recipes/update/${id}`}>
-                            Update
-                        </Link>
-                        <Link to={`/recipes/delete/${id}`}>
-                            Delete
-                        </Link>
-                    </div>
-                </li>
+                    </td>
+                    <td>
+                        <ButtonGroup>
+                            <LinkContainer to={`/recipes/update/${id}`}>
+                                <Button variant="primary" size="small">Update</Button>
+                            </LinkContainer>
+                            <LinkContainer to={`/recipes/delete/${id}`}>
+                                <Button variant="danger" size="small">Delete</Button>
+                            </LinkContainer>
+                        </ButtonGroup>
+                    </td>
+                </tr>
             )
         })
     }
 
     renderCreate() {
         return (
-            <div>
-                <Link to="/recipes/create">
-                    Create Recipe
-                </Link>
-            </div>
+            <LinkContainer to={`/recipes/create`}>
+                <Button variant="primary">Create Recipe</Button>
+            </LinkContainer>
         )
     }
 
@@ -55,7 +47,17 @@ class RecipeList extends React.Component {
         return (
             <div>
                 <h2>Recipes</h2>
-                <ul>{this.renderList()}</ul>
+                <Table responsive striped bordered hover size="sm">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>{null}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderList()}
+                    </tbody>
+                </Table>
                 {this.renderCreate()}
             </div>
         )

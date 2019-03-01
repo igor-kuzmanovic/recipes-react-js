@@ -8,31 +8,37 @@ import { TagList, TagShow, TagCreate, TagUpdate, TagDelete } from './tags';
 
 const App = () => {
     return (
-        <div className="container">
+        <div>
             <Header />
-            <Switch>
-                <Route path="/" exact />
-                <Route path="/recipes" exact component={RecipeList} />
-                <Route path="/recipes/:id" exact component={RecipeShow} />
-                <Route path="/recipes/create" exact component={RecipeCreate} />
-                <Route path="/recipes/update/:id" exact component={RecipeUpdate} />
-                <Route path="/recipes/delete/:id" exact component={RecipeDelete} />
-                <Route path="/ingredients" exact component={IngredientList} />
-                <Route path="/ingredients/:id" exact component={IngredientShow} />
-                <Route path="/ingredients/create" exact component={IngredientCreate} />
-                <Route path="/ingredients/update/:id" exact component={IngredientUpdate} />
-                <Route path="/ingredients/delete/:id" exact component={IngredientDelete} />
-                <Route path="/categories" exact component={CategoryList} />
-                <Route path="/categories/:id" exact component={CategoryShow} />
-                <Route path="/categories/create" exact component={CategoryCreate} />
-                <Route path="/categories/update/:id" exact component={CategoryUpdate} />
-                <Route path="/categories/delete/:id" exact component={CategoryDelete} />
-                <Route path="/tags" exact component={TagList} />
-                <Route path="/tags/:id" exact component={TagShow} />
-                <Route path="/tags/create" exact component={TagCreate} />
-                <Route path="/tags/update/:id" exact component={TagUpdate} />
-                <Route path="/tags/delete/:id" exact component={TagDelete} />
-            </Switch>
+            <div className="container">
+                <Switch>
+                    <Route path="/" exact />
+
+                    <Route path="/recipes" exact component={RecipeList} />
+                    <Route path="/recipes/:id" exact component={RecipeShow} />
+                    <Route path="/recipes/create" exact component={RecipeCreate} />
+                    <Route path="/recipes/update/:id" exact component={RecipeUpdate} />
+                    <Route path="/recipes/delete/:id" exact component={RecipeDelete} />
+
+                    <Route path="/ingredients" exact component={IngredientList} />
+                    <Route path="/ingredients/:id" exact component={IngredientShow} />
+                    <Route path="/ingredients/create" exact component={IngredientCreate} />
+                    <Route path="/ingredients/update/:id" exact component={IngredientUpdate} />
+                    <Route path="/ingredients/delete/:id" exact component={IngredientDelete} />
+
+                    <Route path="/categories" exact component={CategoryList} />
+                    <Route path="/categories/:id" exact component={CategoryShow} />
+                    <Route path="/categories/create" exact component={CategoryCreate} />
+                    <Route path="/categories/update/:id" exact component={CategoryUpdate} />
+                    <Route path="/categories/delete/:id" exact component={CategoryDelete} />
+
+                    <Route path="/tags" exact component={TagList} />
+                    <Route path="/tags/:id" exact component={TagShow} />
+                    <Route path="/tags/create" exact component={TagCreate} />
+                    <Route path="/tags/update/:id" exact component={TagUpdate} />
+                    <Route path="/tags/delete/:id" exact component={TagDelete} />
+                </Switch>
+            </div>
         </div>
     )
 };

@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Table, ButtonGroup, Button } from 'react-bootstrap';
 import { fetchTags } from '../../actions/tag';
-import {Link} from "react-router-dom";
 
 class TagList extends React.Component {
     componentDidMount() {
@@ -12,32 +14,32 @@ class TagList extends React.Component {
         return this.props.tags.map(tag => {
             const { id, name } = tag;
             return (
-                <li key={id}>
-                    <div>
+                <tr key={id}>
+                    <td className="w-100">
                         <Link to={`/tags/${id}`}>
                             {name}
                         </Link>
-                    </div>
-                    <div>
-                        <Link to={`/tags/update/${id}`}>
-                            Update
-                        </Link>
-                        <Link to={`/tags/delete/${id}`}>
-                            Delete
-                        </Link>
-                    </div>
-                </li>
+                    </td>
+                    <td>
+                        <ButtonGroup>
+                            <LinkContainer to={`/tags/update/${id}`}>
+                                <Button variant="primary" size="small">Update</Button>
+                            </LinkContainer>
+                            <LinkContainer to={`/tags/delete/${id}`}>
+                                <Button variant="danger" size="small">Delete</Button>
+                            </LinkContainer>
+                        </ButtonGroup>
+                    </td>
+                </tr>
             )
         })
     }
 
     renderCreate() {
         return (
-            <div>
-                <Link to="/tags/create">
-                    Create Tag
-                </Link>
-            </div>
+            <LinkContainer to={`/tags/create`}>
+                <Button variant="primary">Create Tag</Button>
+            </LinkContainer>
         )
     }
 
@@ -45,7 +47,17 @@ class TagList extends React.Component {
         return (
             <div>
                 <h2>Tags</h2>
-                <ul>{this.renderList()}</ul>
+                <Table responsive striped bordered hover size="sm">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>{null}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderList()}
+                    </tbody>
+                </Table>
                 {this.renderCreate()}
             </div>
         )
