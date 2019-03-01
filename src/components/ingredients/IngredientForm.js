@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Button } from 'react-bootstrap';
 
-class TagForm extends React.Component {
+class IngredientForm extends React.Component {
     renderError({ error, touched }) {
         if (touched && error) {
             return (
@@ -64,6 +64,6 @@ const validate = formValues => {
 };
 
 export default reduxForm({
-    form: 'tagForm',
+    form: 'ingredientForm',
     validate
-})(TagForm);
+})(IngredientForm);

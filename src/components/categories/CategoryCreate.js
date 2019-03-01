@@ -1,7 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createCategory } from '../../actions/category';
+import CategoryForm from './CategoryForm';
 
-const CategoryCreate = () => {
-    return <div>CategoryCreate</div>
-};
+class CategoryCreate extends React.Component {
+    onSubmit = formValues => {
+        this.props.createCategory(formValues);
+    };
 
-export default CategoryCreate;
+    render() {
+        return (
+            <div>
+                <h3>Create a Category</h3>
+                <CategoryForm onSubmit={this.onSubmit} />
+            </div>
+        )
+    }
+}
+
+export default connect(
+    null,
+    { createCategory }
+)(CategoryCreate);
