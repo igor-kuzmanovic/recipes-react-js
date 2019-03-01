@@ -18,7 +18,11 @@ class IngredientCreate extends React.Component {
     }
 }
 
+const mapDispatchToProps = {
+    createIngredient
+}
+
 export default connect(
     null,
-    { createIngredient }
+    mapDispatchToProps
 )(IngredientCreate);

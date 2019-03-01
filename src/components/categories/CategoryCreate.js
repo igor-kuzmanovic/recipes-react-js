@@ -18,7 +18,11 @@ class CategoryCreate extends React.Component {
     }
 }
 
+const mapDispatchToProps = {
+    createCategory
+}
+
 export default connect(
     null,
-    { createCategory }
+    mapDispatchToProps
 )(CategoryCreate);
