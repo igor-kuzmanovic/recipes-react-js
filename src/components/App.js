@@ -8,7 +8,7 @@ import { TagList, TagShow, TagCreate, TagUpdate, TagDelete } from './tags';
 
 const App = () => {
     return (
-        <div>
+        <div className="container">
             <Header />
             <Switch>
                 <Route path="/" exact />
