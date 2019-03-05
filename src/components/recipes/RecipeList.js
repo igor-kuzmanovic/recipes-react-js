@@ -1,13 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchRecipes } from '../../actions/recipe';
-import {Link} from "react-router-dom";
-import {Button, ButtonGroup, Table} from "react-bootstrap";
-import {LinkContainer} from "react-router-bootstrap";
+import { Link } from 'react-router-dom';
+import { Button, ButtonGroup, Table } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { fetchRecipes, deleteRecipe } from '../../actions/recipe';
 
 class RecipeList extends React.Component {
     componentDidMount() {
         this.props.fetchRecipes();
+    }
+
+    onDeleteClick(id) {
+        if (window.confirm('Are you sure you want to delete this Recipe?')) {
+            this.props.deleteRecipe(id)
+        }
     }
 
     renderList() {
@@ -25,9 +31,7 @@ class RecipeList extends React.Component {
                             <LinkContainer to={`/recipes/update/${id}`}>
                                 <Button variant="primary" size="small">Update</Button>
                             </LinkContainer>
-                            <LinkContainer to={`/recipes/delete/${id}`}>
-                                <Button variant="danger" size="small">Delete</Button>
-                            </LinkContainer>
+                            <Button onClick={() => this.onDeleteClick(id)} variant="danger" size="small">Delete</Button>
                         </ButtonGroup>
                     </td>
                 </tr>
@@ -55,7 +59,7 @@ class RecipeList extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
-                        {this.renderList()}
+                    {this.renderList()}
                     </tbody>
                 </Table>
                 {this.renderCreate()}
@@ -71,7 +75,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    fetchRecipes
+    fetchRecipes,
+    deleteRecipe
 };
 
 export default connect(

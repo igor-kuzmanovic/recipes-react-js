@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Button } from 'react-bootstrap';
 
@@ -32,6 +33,7 @@ class TagForm extends React.Component {
 
     onSubmit = formValues => {
         this.props.onSubmit(formValues);
+        this.props.history.push('/tags');
     };
 
     render() {
@@ -66,4 +68,4 @@ const validate = formValues => {
 export default reduxForm({
     form: 'tagForm',
     validate
-})(TagForm);
+})(withRouter(TagForm));

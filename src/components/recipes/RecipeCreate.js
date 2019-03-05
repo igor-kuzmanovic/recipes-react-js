@@ -20,7 +20,7 @@ class RecipeCreate extends React.Component {
 
 const mapDispatchToProps = {
     createRecipe
-}
+};
 
 export default connect(
     null,

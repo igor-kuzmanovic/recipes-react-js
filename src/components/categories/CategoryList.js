@@ -1,13 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchCategories } from '../../actions/category';
-import {Button, ButtonGroup, Table} from "react-bootstrap";
-import {LinkContainer} from "react-router-bootstrap";
+import { Button, ButtonGroup, Table } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { fetchCategories, deleteCategory } from '../../actions/category';
 
 class CategoryList extends React.Component {
     componentDidMount() {
         this.props.fetchCategories();
+    }
+
+    onDeleteClick(id) {
+        if (window.confirm('Are you sure you want to delete this Category?')) {
+            this.props.deleteCategory(id)
+        }
     }
 
     renderList() {
@@ -25,9 +31,7 @@ class CategoryList extends React.Component {
                             <LinkContainer to={`/categories/update/${id}`}>
                                 <Button variant="primary" size="small">Update</Button>
                             </LinkContainer>
-                            <LinkContainer to={`/categories/delete/${id}`}>
-                                <Button variant="danger" size="small">Delete</Button>
-                            </LinkContainer>
+                            <Button onClick={() => this.onDeleteClick(id)} variant="danger" size="small">Delete</Button>
                         </ButtonGroup>
                     </td>
                 </tr>
@@ -71,7 +75,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    fetchCategories
+    fetchCategories,
+    deleteCategory
 };
 
 export default connect(

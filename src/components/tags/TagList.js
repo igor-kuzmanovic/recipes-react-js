@@ -1,13 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Button, ButtonGroup, Table } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Table, ButtonGroup, Button } from 'react-bootstrap';
-import { fetchTags } from '../../actions/tag';
+import { fetchTags, deleteTag } from '../../actions/tag';
 
 class TagList extends React.Component {
     componentDidMount() {
         this.props.fetchTags();
+    }
+
+    onDeleteClick(id) {
+        if (window.confirm('Are you sure you want to delete this Tag?')) {
+            this.props.deleteTag(id)
+        }
     }
 
     renderList() {
@@ -25,9 +31,7 @@ class TagList extends React.Component {
                             <LinkContainer to={`/tags/update/${id}`}>
                                 <Button variant="primary" size="small">Update</Button>
                             </LinkContainer>
-                            <LinkContainer to={`/tags/delete/${id}`}>
-                                <Button variant="danger" size="small">Delete</Button>
-                            </LinkContainer>
+                            <Button onClick={() => this.onDeleteClick(id)} variant="danger" size="small">Delete</Button>
                         </ButtonGroup>
                     </td>
                 </tr>
@@ -71,7 +75,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    fetchTags
+    fetchTags,
+    deleteTag
 };
 
 export default connect(

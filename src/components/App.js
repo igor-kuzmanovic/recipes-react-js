@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
+import Home from './Home';
 import { RecipeList, RecipeShow, RecipeCreate, RecipeUpdate, RecipeDelete } from './recipes';
 import { IngredientList, IngredientShow, IngredientCreate, IngredientUpdate, IngredientDelete } from './ingredients';
 import { CategoryList, CategoryShow, CategoryCreate, CategoryUpdate, CategoryDelete } from './categories';
@@ -12,7 +13,7 @@ const App = () => {
             <Header />
             <div className="container">
                 <Switch>
-                    <Route path="/" exact />
+                    <Route path="/" exact component={Home} />
 
                     <Route path="/recipes" exact component={RecipeList} />
                     <Route path="/recipes/create" exact component={RecipeCreate} />

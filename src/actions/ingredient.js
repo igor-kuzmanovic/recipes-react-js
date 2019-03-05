@@ -8,31 +8,56 @@ import {
 } from '../constants/actionTypes';
 
 export const fetchIngredients = () => async dispatch => {
-    const response = await api.get('/ingredients');
+    try {
+        const response = await api.get('/ingredients');
 
-    dispatch({ type: FETCH_INGREDIENTS, payload: response.data });
+        dispatch({ type: FETCH_INGREDIENTS, payload: response.data });
+    }
+    catch(error) {
+        window.alert(error.response.data.detail);
+    }
 };
 
 export const fetchIngredient = id => async dispatch => {
-    const response = await api.get(`/ingredients/${id}`);
+    try {
+        const response = await api.get(`/ingredients/${id}`);
 
-    dispatch({ type: FETCH_INGREDIENT, payload: response.data });
+        dispatch({ type: FETCH_INGREDIENT, payload: response.data });
+    }
+    catch(error) {
+        window.alert(error.response.data.detail);
+    }
 };
 
 export const createIngredient = formValues => async dispatch => {
-    const response = await api.post('/ingredients', { ...formValues });
+    try {
+        const response = await api.post('/ingredients', { ...formValues });
 
-    dispatch({ type: CREATE_INGREDIENT, payload: response.data });
+        dispatch({ type: CREATE_INGREDIENT, payload: response.data });
+    }
+    catch(error) {
+        window.alert(error.response.data.detail);
+    }
 };
 
 export const updateIngredient = (id, formValues) => async dispatch => {
-    const response = await api.put(`/ingredients/${id}`, formValues);
+    try {
+        const response = await api.put(`/ingredients/${id}`, formValues);
 
-    dispatch({ type: UPDATE_INGREDIENT, payload: response.data });
+        dispatch({ type: UPDATE_INGREDIENT, payload: response.data });
+    }
+    catch(error) {
+        window.alert(error.response.data.detail);
+    }
 };
 
 export const deleteIngredient = id => async dispatch => {
-    await api.delete(`/ingredients/${id}`);
+    try {
+        await api.delete(`/ingredients/${id}`);
 
-    dispatch({ type: DELETE_INGREDIENT, payload: id });
+        dispatch({ type: DELETE_INGREDIENT, payload: id });
+    }
+    catch(error) {
+        window.alert(error.response.data.detail);
+    }
 };

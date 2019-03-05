@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Button } from 'react-bootstrap';
 
@@ -32,6 +33,7 @@ class RecipeForm extends React.Component {
 
     onSubmit = formValues => {
         this.props.onSubmit(formValues);
+        this.props.history.push('/recipes');
     };
 
     render() {
@@ -126,4 +128,4 @@ const validate = formValues => {
 export default reduxForm({
     form: 'recipeForm',
     validate
-})(RecipeForm);
+})(withRouter(RecipeForm));
