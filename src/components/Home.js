@@ -20,7 +20,7 @@ class Home extends React.Component{
                         <Card.Title>{title}</Card.Title>
                         <Card.Text>{description}</Card.Text>
                         <LinkContainer to={`/recipes/${id}`}>
-                            <Button variant="primary">Details</Button>
+                            <Button variant="info">Details</Button>
                         </LinkContainer>
                     </Card.Body>
                     <Card.Footer className="text-muted">
@@ -34,7 +34,9 @@ class Home extends React.Component{
     renderCreate() {
         return (
             <LinkContainer to={`/recipes/create`}>
-                <Button variant="primary" size="lg">Create Recipe</Button>
+                <div className="text-center">
+                    <Button variant="primary" size="lg">Create Recipe</Button>
+                </div>
             </LinkContainer>
         )
     }
@@ -42,12 +44,10 @@ class Home extends React.Component{
     render() {
         return (
             <div>
-                <div className="text-center mt-3 mb-1">
-                    {this.renderCreate()}
-                </div>
                 <CardDeck>
                     {this.renderList()}
                 </CardDeck>
+                {this.renderCreate()}
             </div>
         )
     }
