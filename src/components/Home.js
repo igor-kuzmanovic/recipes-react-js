@@ -24,7 +24,7 @@ class Home extends React.Component{
                         </LinkContainer>
                     </Card.Body>
                     <Card.Footer className="text-muted">
-                        <small>{moment(creationDate).fromNow()}</small>
+                        {moment(creationDate).fromNow()}
                     </Card.Footer>
                 </Card>
             )
