@@ -78,7 +78,7 @@ const mapStateToProps = state => {
     return {
         loading: state.categories.list.loading,
         categories: Object.values(state.categories.list),
-        error: state.cateogires.list.error
+        error: state.categories.list.error
     }
 };
 

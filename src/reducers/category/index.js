@@ -6,9 +6,9 @@ import updateReducer from './update';
 import deleteReducer from './delete';
 
 export default combineReducers({
-    list: listReducer,
-    show: showReducer,
-    create: createReducer,
-    update: updateReducer,
-    delete: deleteReducer
+    listReducer,
+    showReducer,
+    createReducer,
+    updateReducer,
+    deleteReducer
 });
