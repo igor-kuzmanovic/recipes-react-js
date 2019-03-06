@@ -9,16 +9,26 @@ class CategoryShow extends React.Component {
         this.props.fetchCategory(this.props.match.params.id);
     }
 
+    renderLoading() {
+        if (this.props.isLoading) {
+            return <p>Loading...</p>
+        }
+    }
+
+    renderErrors() {
+        if (this.props.errors.length) {
+            return <p>{this.props.errors}</p>
+        }
+    }
+
     render() {
         return (
             <div>
-                {this.props.loading && (
-                    <p>Loading...</p>
+                {this.props.category && (
+                    <h2>{this.props.category.name}</h2>
                 )}
-                {this.props.error && (
-                    <p>{this.props.error}</p>
-                )}
-                <h2>{this.props.category.name}</h2>
+                {this.renderLoading()}
+                {this.renderErrors()}
                 <LinkContainer to=".">
                     <Button variant="primary">Back to list</Button>
                 </LinkContainer>
@@ -28,10 +38,11 @@ class CategoryShow extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    console.log(state);
     return {
-        loading: state.categories.show.loading,
-        category: state.categories.show[ownProps.match.params.id],
-        error: state.categories.show.error
+        isLoading: state.categories.isLoading,
+        errors: Object.values(state.categories.errors),
+        category: state.categories.items[ownProps.match.params.id]
     }
 };
 

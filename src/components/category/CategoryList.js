@@ -10,13 +10,33 @@ class CategoryList extends React.Component {
         this.props.fetchCategories();
     }
 
+    renderLoading() {
+        if (this.props.isLoading) {
+            return <p>Loading...</p>
+        }
+    }
+
+    renderErrors() {
+        if (this.props.errors.length) {
+            return <p>{this.props.errors}</p>
+        }
+    }
+
     renderList() {
+        if (!this.props.categories.length && !this.props.isLoading) {
+            return (
+                <tr>
+                    <td colSpan="2">Sorry, no categories available!</td>
+                </tr>
+            )
+        }
+
         return this.props.categories.map(category => {
             const { id, name } = category;
             return (
                 <tr key={id}>
                     <td className="w-100">
-                        <Link to={`/categories/show/${id}`}>
+                        <Link to={`/categories/${id}`}>
                             {name}
                         </Link>
                     </td>
@@ -47,12 +67,6 @@ class CategoryList extends React.Component {
         return (
             <div>
                 <h2>Categories</h2>
-                {this.props.loading && (
-                    <p>Loading...</p>
-                )}
-                {this.props.error && (
-                    <p>{this.props.error}</p>
-                )}
                 <Table responsive striped bordered hover size="sm">
                     <thead>
                     <tr>
@@ -64,21 +78,22 @@ class CategoryList extends React.Component {
                         {this.renderList()}
                     </tbody>
                 </Table>
-                {this.renderCreate()}
-                <LinkContainer to=".">
+                {this.renderLoading()}
+                {this.renderErrors()}         
+                <LinkContainer to="..">
                     <Button variant="primary">Back to home</Button>
                 </LinkContainer>
+                {this.renderCreate()}
             </div>
         )
     }
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
-        loading: state.categories.list.loading,
-        categories: Object.values(state.categories.list),
-        error: state.categories.list.error
+        isLoading: state.categories.isLoading,
+        errors: Object.values(state.categories.errors),
+        categories: Object.values(state.categories.items)
     }
 };
 

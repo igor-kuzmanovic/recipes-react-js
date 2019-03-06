@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { fetchCategory } from '../../actions/category/show';
-import { updateCategory } from '../../actions/category/update';
+import { fetchCategory, updateCategory } from '../../actions/category';
 import CategoryForm from "./CategoryForm";
 
 class CategoryUpdate extends React.Component {
@@ -14,20 +14,33 @@ class CategoryUpdate extends React.Component {
 
     onSubmit = formValues => {
         this.props.updateCategory(this.props.match.params.id, formValues);
+        this.props.history.push('/categories');
     };
+
+    renderLoading() {
+        if (this.props.isLoading) {
+            return <p>Loading...</p>
+        }
+    }
+
+    renderErrors() {
+        if (this.props.errors.length) {
+            return <p>{this.props.errors}</p>
+        }
+    }
 
     render() {
         return (
             <div>
-                <h3>Update a Category</h3>
-                {this.props.loading && (
-                    <p>Loading...</p>
+                {this.props.category && (
+                    <h3>Update '{this.props.category.name}'</h3>
                 )}
-                {this.props.error && (
-                    <p>{this.props.error}</p>
+                {this.renderLoading()}
+                {this.props.category && (
+                    <CategoryForm initialValues={_.pick(this.props.category, 'name')} onSubmit={this.onSubmit} />
                 )}
-                <CategoryForm initialValues={_.pick(this.props.category, 'name')} onSubmit={this.onSubmit} />
-                <LinkContainer to=".">
+                {this.renderErrors()}
+                <LinkContainer to="..">
                     <Button variant="primary">Back to list</Button>
                 </LinkContainer>
             </div>
@@ -37,9 +50,9 @@ class CategoryUpdate extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return { 
-        loading: state.categories.update.loading,
-        category: state.categories.update[ownProps.match.params.id],
-        error: state.categories.update.error
+        isLoading: state.categories.isLoading,
+        errors: Object.values(state.categories.errors),
+        category: state.categories.items[ownProps.match.params.id],
     };
 };
 
@@ -51,4 +64,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(CategoryUpdate);
+)(withRouter(CategoryUpdate));

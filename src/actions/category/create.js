@@ -5,30 +5,29 @@ import {
     CREATE_CATEGORY_ERROR
 } from '../../constants/actionTypes';
 
-export function loading(loading) {
-    return { type: CREATE_CATEGORY_LOADING, loading };
+export function loading() {
+    return { type: CREATE_CATEGORY_LOADING };
 }
   
 export function success(payload) {
     return { type: CREATE_CATEGORY_SUCCESS, payload };
 }
 
-export function error(error) {
-    return { type: CREATE_CATEGORY_ERROR, error };
+export function error(payload) {
+    return { type: CREATE_CATEGORY_ERROR, payload };
 }
 
 export const createCategory = formValues => async dispatch => {
-    dispatch(loading(true));
-    dispatch(error(''));
+    dispatch(loading());
 
     try {
         const response = await api.post('/categories', { ...formValues });
 
-        dispatch(loading(false));
         dispatch(success(response.data));
     }
-    catch(error) {
-        dispatch(loading(false));
-        dispatch(error(error.response.data.detail));
+    catch(err) {
+        console.log(err);
+        
+        dispatch(error(err.message));
     }
 };

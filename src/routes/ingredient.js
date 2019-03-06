@@ -10,8 +10,8 @@ import {
 
 export default [
     <Route path="/ingredients" component={IngredientList} exact key="list" />,
-    <Route path="/ingredients/:id" component={IngredientShow} exact key="show" />,
     <Route path="/ingredients/create" component={IngredientCreate} exact key="create" />,
+    <Route path="/ingredients/:id" component={IngredientShow} exact key="show" />,
     <Route path="/ingredients/update/:id" component={IngredientUpdate} exact key="update" />,
     <Route path="/ingredients/delete/:id" component={IngredientDelete} exact key="delete" />
 ];
