@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { fetchCategory } from '../../actions/category';
 
 class CategoryShow extends React.Component {
@@ -8,19 +10,28 @@ class CategoryShow extends React.Component {
     }
 
     render() {
-        if (!this.props.category) {
-            return <div>Loading...</div>
-        }
-
         return (
-            <h2>{this.props.category.name}</h2>
+            <div>
+                {this.props.loading && (
+                    <p>Loading...</p>
+                )}
+                {this.props.error && (
+                    <p>{this.props.error}</p>
+                )}
+                <h2>{this.props.category.name}</h2>
+                <LinkContainer to=".">
+                    <Button variant="primary">Back to list</Button>
+                </LinkContainer>
+            </div>
         )
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        category: state.categories[ownProps.match.params.id]
+        loading: state.categories.show.loading,
+        category: state.categories.show[ownProps.match.params.id],
+        error: stat.categories.error
     }
 };
 

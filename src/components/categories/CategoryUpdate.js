@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { fetchCategory, updateCategory } from '../../actions/category';
 import CategoryForm from "./CategoryForm";
 
@@ -14,14 +16,19 @@ class CategoryUpdate extends React.Component {
     };
 
     render() {
-        if (!this.props.category) {
-            return <div>Loading...</div>;
-        }
-
         return (
             <div>
                 <h3>Update a Category</h3>
+                {this.props.loading && (
+                    <p>Loading...</p>
+                )}
+                {this.props.error && (
+                    <p>{this.props.error}</p>
+                )}
                 <CategoryForm initialValues={_.pick(this.props.category, 'name')} onSubmit={this.onSubmit} />
+                <LinkContainer to=".">
+                    <Button variant="primary">Back to list</Button>
+                </LinkContainer>
             </div>
         );
     }
@@ -29,7 +36,9 @@ class CategoryUpdate extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return { 
-        category: state.categories[ownProps.match.params.id]
+        loading: state.categories.update.loading,
+        category: state.categories.update[ownProps.match.params.id],
+        error: state.categories.update.error
     };
 };
 

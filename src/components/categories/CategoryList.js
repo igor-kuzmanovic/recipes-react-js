@@ -3,17 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, Table } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { fetchCategories, deleteCategory } from '../../actions/category';
+import { fetchCategories } from '../../actions/category';
 
 class CategoryList extends React.Component {
     componentDidMount() {
         this.props.fetchCategories();
-    }
-
-    onDeleteClick(id) {
-        if (window.confirm('Are you sure you want to delete this Category?')) {
-            this.props.deleteCategory(id)
-        }
     }
 
     renderList() {
@@ -31,7 +25,9 @@ class CategoryList extends React.Component {
                             <LinkContainer to={`/categories/update/${id}`}>
                                 <Button variant="primary" size="small">Update</Button>
                             </LinkContainer>
-                            <Button onClick={() => this.onDeleteClick(id)} variant="danger" size="small">Delete</Button>
+                            <LinkContainer to={`/categories/delete/${id}`}>
+                                <Button variant="danger" size="small">Delete</Button>
+                            </LinkContainer>
                         </ButtonGroup>
                     </td>
                 </tr>
@@ -51,6 +47,12 @@ class CategoryList extends React.Component {
         return (
             <div>
                 <h2>Categories</h2>
+                {this.props.loading && (
+                    <p>Loading...</p>
+                )}
+                {this.props.error && (
+                    <p>{this.props.error}</p>
+                )}
                 <Table responsive striped bordered hover size="sm">
                     <thead>
                     <tr>
@@ -63,6 +65,9 @@ class CategoryList extends React.Component {
                     </tbody>
                 </Table>
                 {this.renderCreate()}
+                <LinkContainer to=".">
+                    <Button variant="primary">Back to home</Button>
+                </LinkContainer>
             </div>
         )
     }
@@ -70,13 +75,14 @@ class CategoryList extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        categories: Object.values(state.categories)
+        loading: state.categories.list.loading,
+        categories: Object.values(state.categories.list),
+        error: state.cateogires.list.error
     }
 };
 
 const mapDispatchToProps = {
-    fetchCategories,
-    deleteCategory
+    fetchCategories
 };
 
 export default connect(
