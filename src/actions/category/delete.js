@@ -3,7 +3,7 @@ import {
     DELETE_CATEGORY_LOADING,
     DELETE_CATEGORY_SUCCESS,
     DELETE_CATEGORY_ERROR
-} from '../constants/actionTypes';
+} from '../../constants/actionTypes';
 
 export function loading(loading) {
     return { type: DELETE_CATEGORY_LOADING, loading };

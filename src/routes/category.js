@@ -6,7 +6,7 @@ import {
     CategoryCreate, 
     CategoryUpdate, 
     CategoryDelete 
-} from '../components/categories';
+} from '../components/category';
 
 export default [
     <Route path="/categories" component={CategoryList} exact key="list" />,

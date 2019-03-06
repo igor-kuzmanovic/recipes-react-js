@@ -3,7 +3,7 @@ import {
     UPDATE_CATEGORY_LOADING,
     UPDATE_CATEGORY_SUCCESS,
     UPDATE_CATEGORY_ERROR
-} from '../constants/actionTypes';
+} from '../../constants/actionTypes';
 
 export function loading(loading) {
     return { type: UPDATE_CATEGORY_LOADING, loading };

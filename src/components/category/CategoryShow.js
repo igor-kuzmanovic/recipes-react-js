@@ -2,25 +2,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { createCategory } from '../../actions/category';
-import CategoryForm from './CategoryForm';
+import { fetchCategory } from '../../actions/category/show';
 
-class CategoryCreate extends React.Component {
-    onSubmit = formValues => {
-        this.props.createCategory(formValues);
-    };
+class CategoryShow extends React.Component {
+    componentDidMount() {
+        this.props.fetchCategory(this.props.match.params.id);
+    }
 
     render() {
         return (
             <div>
-                <h3>Create a Category</h3>
                 {this.props.loading && (
                     <p>Loading...</p>
                 )}
                 {this.props.error && (
                     <p>{this.props.error}</p>
                 )}
-                <CategoryForm onSubmit={this.onSubmit} />
+                <h2>{this.props.category.name}</h2>
                 <LinkContainer to=".">
                     <Button variant="primary">Back to list</Button>
                 </LinkContainer>
@@ -29,18 +27,19 @@ class CategoryCreate extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
     return {
-        loading: state.categories.create.loading,
-        error: state.categories.create.error
+        loading: state.categories.show.loading,
+        category: state.categories.show[ownProps.match.params.id],
+        error: state.categories.show.error
     }
-}
+};
 
 const mapDispatchToProps = {
-    createCategory
-}
+    fetchCategory
+};
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(CategoryCreate);
+)(CategoryShow);

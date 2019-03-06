@@ -6,7 +6,7 @@ import {
     TagCreate, 
     TagUpdate, 
     TagDelete 
-} from '../components/tags';
+} from '../components/tag';
 
 export default [
     <Route path="/tags" component={TagList} exact key="list" />,

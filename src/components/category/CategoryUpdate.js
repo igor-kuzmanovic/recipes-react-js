@@ -3,7 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { fetchCategory, updateCategory } from '../../actions/category';
+import { fetchCategory } from '../../actions/category/show';
+import { updateCategory } from '../../actions/category/update';
 import CategoryForm from "./CategoryForm";
 
 class CategoryUpdate extends React.Component {

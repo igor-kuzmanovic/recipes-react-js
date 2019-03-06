@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, Table } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { fetchCategories } from '../../actions/category';
+import { fetchCategories } from '../../actions/category/list';
 
 class CategoryList extends React.Component {
     componentDidMount() {
@@ -16,7 +16,7 @@ class CategoryList extends React.Component {
             return (
                 <tr key={id}>
                     <td className="w-100">
-                        <Link to={`/categories/${id}`}>
+                        <Link to={`/categories/show/${id}`}>
                             {name}
                         </Link>
                     </td>
@@ -74,6 +74,7 @@ class CategoryList extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state);
     return {
         loading: state.categories.list.loading,
         categories: Object.values(state.categories.list),

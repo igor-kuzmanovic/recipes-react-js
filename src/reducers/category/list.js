@@ -5,16 +5,19 @@ import {
     FETCH_CATEGORIES_ERROR
 } from '../../constants/actionTypes';
 
-const initialState = {};
+const initialState = {
+    loading: true,
+    error: null
+};
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case FETCH_CATEGORIES_LOADING:
-            return action.loading;
+            return { ...state, loading: action.loading };
         case FETCH_CATEGORIES_SUCCESS:
             return { ...state, ..._.mapKeys(action.payload, 'id')};
         case FETCH_CATEGORIES_ERROR:
-            return action.error;
+            return { ...state, error: action.error };
         default:
             return state;
     }

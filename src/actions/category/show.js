@@ -3,7 +3,7 @@ import {
     FETCH_CATEGORY_LOADING,
     FETCH_CATEGORY_SUCCESS,
     FETCH_CATEGORY_ERROR
-} from '../constants/actionTypes';
+} from '../../constants/actionTypes';
 
 export function loading(loading) {
     return { type: FETCH_CATEGORY_LOADING, loading };

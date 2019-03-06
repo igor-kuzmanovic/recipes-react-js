@@ -6,7 +6,7 @@ import {
     IngredientCreate, 
     IngredientUpdate, 
     IngredientDelete 
-} from '../components/ingredients';
+} from '../components/ingredient';
 
 export default [
     <Route path="/ingredients" component={IngredientList} exact key="list" />,

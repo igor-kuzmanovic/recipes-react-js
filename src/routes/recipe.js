@@ -6,7 +6,7 @@ import {
     RecipeCreate, 
     RecipeUpdate, 
     RecipeDelete 
-} from '../components/recipes';
+} from '../components/recipe';
 
 export default [
     <Route path="/recipes" component={RecipeList} exact key="list" />,

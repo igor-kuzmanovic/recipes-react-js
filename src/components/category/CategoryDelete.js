@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { fetchCategory } from '../../actions/category';
+import { deleteCategory } from '../../actions/category/delete';
 
-class CategoryShow extends React.Component {
-    componentDidMount() {
-        this.props.fetchCategory(this.props.match.params.id);
+class CategoryDelete extends React.Component {
+    onDeleteClick(id) {
+        this.props.deleteCategory(id)
     }
 
     render() {
@@ -18,28 +18,30 @@ class CategoryShow extends React.Component {
                 {this.props.error && (
                     <p>{this.props.error}</p>
                 )}
-                <h2>{this.props.category.name}</h2>
+                <h2>Are you sure you want to delete this category?</h2>
+                <Button onClick={() => this.onDeleteClick(this.props.match.params.id)} variant="danger">
+                    Delete
+                </Button>
                 <LinkContainer to=".">
                     <Button variant="primary">Back to list</Button>
                 </LinkContainer>
             </div>
         )
     }
-}
+};
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
     return {
         loading: state.categories.show.loading,
-        category: state.categories.show[ownProps.match.params.id],
-        error: stat.categories.error
+        error: state.categories.show.error
     }
 };
 
 const mapDispatchToProps = {
-    fetchCategory
+    deleteCategory
 };
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(CategoryShow);
+)(CategoryDelete);

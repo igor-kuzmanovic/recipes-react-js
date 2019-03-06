@@ -3,7 +3,7 @@ import {
     CREATE_CATEGORY_LOADING,
     CREATE_CATEGORY_SUCCESS,
     CREATE_CATEGORY_ERROR
-} from '../constants/actionTypes';
+} from '../../constants/actionTypes';
 
 export function loading(loading) {
     return { type: CREATE_CATEGORY_LOADING, loading };
