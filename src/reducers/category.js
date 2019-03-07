@@ -20,7 +20,7 @@ import {
 const initialState = {
     items: {},
     isLoading: false,
-    errors: {}
+    error: null
 };
 
 export default (state = initialState, action) => {
@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
             return { 
                 ...state, 
                 isLoading: true,
-                errors: {}
+                error: null
             };
         case FETCH_CATEGORIES_ERROR:
         case FETCH_CATEGORY_ERROR:
@@ -43,7 +43,7 @@ export default (state = initialState, action) => {
             return { 
                 ...state,
                 isLoading: false,
-                errors: action.payload
+                error: action.payload
             };
         case FETCH_CATEGORIES_SUCCESS:
             return { 
@@ -52,7 +52,7 @@ export default (state = initialState, action) => {
                     ..._.mapKeys(action.payload, 'id')
                 },
                 isLoading: false,
-                errors: {}
+                error: null
             };
         case FETCH_CATEGORY_SUCCESS:
         case CREATE_CATEGORY_SUCCESS:
@@ -63,7 +63,7 @@ export default (state = initialState, action) => {
                     [action.payload.id]: action.payload
                 },
                 isLoading: false,
-                errors: {}
+                error: null
             };
         case DELETE_CATEGORY_SUCCESS:
             return {
@@ -71,7 +71,7 @@ export default (state = initialState, action) => {
                     ..._.omit(state.items, action.payload)
                 },
                 isLoading: false,
-                errors: {}
+                error: null
             }
         default:
             return state;

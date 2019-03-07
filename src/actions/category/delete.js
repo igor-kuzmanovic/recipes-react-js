@@ -19,15 +19,18 @@ export function error(payload) {
 
 export const deleteCategory = id => async dispatch => {
     dispatch(loading());
-
     try {
         await api.delete(`/categories/${id}`);
-
         dispatch(success(id));
     }
     catch(err) {
         console.log(err);
-
         dispatch(error(err.message));
     }
 };
+
+export function reset() {
+    return dispatch => {
+        dispatch(error(null));
+    };
+}

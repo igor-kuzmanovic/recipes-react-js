@@ -2,23 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { fetchCategory } from '../../actions/category/show';
+import { fetchCategory, reset } from '../../actions/category/show';
 
 class CategoryShow extends React.Component {
     componentDidMount() {
         this.props.fetchCategory(this.props.match.params.id);
     }
 
-    renderLoading() {
-        if (this.props.isLoading) {
-            return <p>Loading...</p>
-        }
-    }
-
-    renderErrors() {
-        if (this.props.errors.length) {
-            return <p>{this.props.errors}</p>
-        }
+    componentWillUnmount() {
+        this.props.reset();
     }
 
     render() {
@@ -27,8 +19,12 @@ class CategoryShow extends React.Component {
                 {this.props.category && (
                     <h2>{this.props.category.name}</h2>
                 )}
-                {this.renderLoading()}
-                {this.renderErrors()}
+                {this.props.isLoading && (
+                    <p>Loading...</p>
+                )}
+                {this.props.error && (
+                    <p>{this.props.error}</p>
+                )}
                 <LinkContainer to=".">
                     <Button variant="primary">Back to list</Button>
                 </LinkContainer>
@@ -38,16 +34,16 @@ class CategoryShow extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state);
     return {
         isLoading: state.categories.isLoading,
-        errors: Object.values(state.categories.errors),
+        error: state.categories.error,
         category: state.categories.items[ownProps.match.params.id]
     }
 };
 
 const mapDispatchToProps = {
-    fetchCategory
+    fetchCategory,
+    reset
 };
 
 export default connect(

@@ -3,34 +3,18 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, Table } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { fetchCategories } from '../../actions/category/list';
+import { fetchCategories, reset } from '../../actions/category/list';
 
 class CategoryList extends React.Component {
     componentDidMount() {
         this.props.fetchCategories();
     }
 
-    renderLoading() {
-        if (this.props.isLoading) {
-            return <p>Loading...</p>
-        }
-    }
-
-    renderErrors() {
-        if (this.props.errors.length) {
-            return <p>{this.props.errors}</p>
-        }
+    componentWillUnmount() {
+        this.props.reset();
     }
 
     renderList() {
-        if (!this.props.categories.length && !this.props.isLoading) {
-            return (
-                <tr>
-                    <td colSpan="2">Sorry, no categories available!</td>
-                </tr>
-            )
-        }
-
         return this.props.categories.map(category => {
             const { id, name } = category;
             return (
@@ -55,18 +39,16 @@ class CategoryList extends React.Component {
         })
     }
 
-    renderCreate() {
-        return (
-            <LinkContainer to={`/categories/create`}>
-                <Button variant="primary">Create Category</Button>
-            </LinkContainer>
-        )
-    }
-
     render() {
         return (
             <div>
                 <h2>Categories</h2>
+                {this.props.isLoading && (
+                    <p>Loading...</p>
+                )}
+                {this.props.error && (
+                    <p>{this.props.error}</p>
+                )}
                 <Table responsive striped bordered hover size="sm">
                     <thead>
                     <tr>
@@ -75,15 +57,15 @@ class CategoryList extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
-                        {this.renderList()}
+                        {this.props.categories && (this.renderList())}
                     </tbody>
-                </Table>
-                {this.renderLoading()}
-                {this.renderErrors()}         
+                </Table>       
                 <LinkContainer to="..">
                     <Button variant="primary">Back to home</Button>
                 </LinkContainer>
-                {this.renderCreate()}
+                <LinkContainer to={`/categories/create`}>
+                    <Button variant="primary">Create Category</Button>
+                </LinkContainer>
             </div>
         )
     }
@@ -92,13 +74,14 @@ class CategoryList extends React.Component {
 const mapStateToProps = state => {
     return {
         isLoading: state.categories.isLoading,
-        errors: Object.values(state.categories.errors),
+        error: state.categories.error,
         categories: Object.values(state.categories.items)
     }
 };
 
 const mapDispatchToProps = {
-    fetchCategories
+    fetchCategories,
+    reset
 };
 
 export default connect(

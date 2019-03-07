@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { fetchCategory, updateCategory } from '../../actions/category';
+import { reset } from '../../actions/category/update';
 import CategoryForm from "./CategoryForm";
 
 class CategoryUpdate extends React.Component {
@@ -12,22 +13,14 @@ class CategoryUpdate extends React.Component {
         this.props.fetchCategory(this.props.match.params.id);
     }
 
+    componentWillUnmount() {
+        this.props.reset();
+    }
+
     onSubmit = formValues => {
         this.props.updateCategory(this.props.match.params.id, formValues);
         this.props.history.push('/categories');
     };
-
-    renderLoading() {
-        if (this.props.isLoading) {
-            return <p>Loading...</p>
-        }
-    }
-
-    renderErrors() {
-        if (this.props.errors.length) {
-            return <p>{this.props.errors}</p>
-        }
-    }
 
     render() {
         return (
@@ -35,11 +28,15 @@ class CategoryUpdate extends React.Component {
                 {this.props.category && (
                     <h3>Update '{this.props.category.name}'</h3>
                 )}
-                {this.renderLoading()}
+                {this.props.isLoading && (
+                    <p>Loading...</p>
+                )}
+                {this.props.error && (
+                    <p>{this.props.error}</p>
+                )}                
                 {this.props.category && (
                     <CategoryForm initialValues={_.pick(this.props.category, 'name')} onSubmit={this.onSubmit} />
                 )}
-                {this.renderErrors()}
                 <LinkContainer to="..">
                     <Button variant="primary">Back to list</Button>
                 </LinkContainer>
@@ -51,14 +48,15 @@ class CategoryUpdate extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return { 
         isLoading: state.categories.isLoading,
-        errors: Object.values(state.categories.errors),
+        error: state.categories.error,
         category: state.categories.items[ownProps.match.params.id],
     };
 };
 
 const mapDispatchToProps = {
     fetchCategory,
-    updateCategory
+    updateCategory,
+    reset
 }
 
 export default connect(

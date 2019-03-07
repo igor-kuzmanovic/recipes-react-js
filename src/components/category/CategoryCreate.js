@@ -3,34 +3,30 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { createCategory } from '../../actions/category/create';
+import { createCategory, reset } from '../../actions/category/create';
 import CategoryForm from './CategoryForm';
 
 class CategoryCreate extends React.Component {
+    componentWillUnmount() {
+        this.props.reset();
+    }
+
     onSubmit = formValues => {
         this.props.createCategory(formValues);
         this.props.history.push('/categories');
     };
 
-    renderLoading() {
-        if (this.props.isLoading) {
-            return <p>Loading...</p>
-        }
-    }
-
-    renderErrors() {
-        if (this.props.errors.length) {
-            return <p>{this.props.errors}</p>
-        }
-    }
-
     render() {
         return (
             <div>
                 <h3>Create a new Category</h3>
-                {this.renderLoading()}
+                {this.props.isLoading && (
+                    <p>Loading...</p>
+                )}
+                {this.props.error && (
+                    <p>{this.props.error}</p>
+                )}
                 <CategoryForm onSubmit={this.onSubmit} />
-                {this.renderErrors()}
                 <LinkContainer to=".">
                     <Button variant="primary">Back to list</Button>
                 </LinkContainer>
@@ -42,12 +38,13 @@ class CategoryCreate extends React.Component {
 const mapStateToProps = state => {
     return {
         isLoading: state.categories.isLoading,
-        errors: Object.values(state.categories.errors)
+        error: state.categories.error
     }
 }
 
 const mapDispatchToProps = {
-    createCategory
+    createCategory,
+    reset
 }
 
 export default connect(

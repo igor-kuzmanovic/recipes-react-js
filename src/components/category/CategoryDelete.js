@@ -4,10 +4,15 @@ import { withRouter } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { fetchCategory, deleteCategory } from '../../actions/category';
+import { reset } from '../../acctions/category/delete';
 
 class CategoryDelete extends React.Component {
     componentDidMount() {
         this.props.fetchCategory(this.props.match.params.id)
+    }
+
+    componentWillUnmount() {
+        this.props.reset();
     }
 
     onDeleteClick = () => {
@@ -15,34 +20,24 @@ class CategoryDelete extends React.Component {
         this.props.history.push('/categories');
     };
 
-    renderLoading() {
-        if (this.props.isLoading) {
-            return <p>Loading...</p>
-        }
-    }
-
-    renderErrors() {
-        if (this.props.errors.length) {
-            return <p>{this.props.errors}</p>
-        }
-    }
-
     render() {
         return (
             <div>
                 {this.props.category && (
                     <h2>Are you sure you want to delete '{this.props.category.name}'?</h2>
                 )}
-                {this.renderLoading()}
-                {this.renderErrors()}
+                {this.props.isLoading && (
+                    <p>Loading...</p>
+                )}
+                {this.props.error && (
+                    <p>{this.props.error}</p>
+                )}
                 <LinkContainer to="..">
                     <Button variant="primary">Back to list</Button>
                 </LinkContainer>
-                {this.props.category && (
-                    <Button onClick={this.onDeleteClick} variant="danger">
-                        Delete
-                    </Button>
-                )}
+                <Button onClick={this.onDeleteClick} variant="danger">
+                    Delete
+                </Button>
             </div>
         )
     }
@@ -51,14 +46,15 @@ class CategoryDelete extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         isLoading: state.categories.isLoading,
-        errors: Object.values(state.categories.errors),
+        error: state.categories.error,
         category: state.categories.items[ownProps.match.params.id],
     }
 };
 
 const mapDispatchToProps = {
     fetchCategory,
-    deleteCategory
+    deleteCategory,
+    reset
 };
 
 export default connect(

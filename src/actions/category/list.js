@@ -19,15 +19,18 @@ export function error(payload) {
 
 export const fetchCategories = () => async dispatch => {
     dispatch(loading());
-
     try {
         const response = await api.get('/categories');
-
         dispatch(success(response.data));
     }
     catch(err) {
         console.log(err);
-
         dispatch(error(err.message));
     }
 };
+
+export function reset() {
+    return dispatch => {
+        dispatch(error(null));
+    };
+}
