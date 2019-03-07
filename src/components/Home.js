@@ -1,11 +1,11 @@
-import moment from 'moment';
-import React from 'react';
-import { connect } from 'react-redux';
-import { Button, CardDeck, Card } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { fetchRecipes } from '../actions/recipe';
+import moment from "moment";
+import React from "react";
+import { connect } from "react-redux";
+import { Button, CardDeck, Card } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { fetchRecipes } from "../actions/recipe";
 
-class Home extends React.Component{
+class Home extends React.Component {
     componentDidMount() {
         this.props.fetchRecipes();
     }
@@ -27,36 +27,36 @@ class Home extends React.Component{
                         {moment(creationDate).fromNow()}
                     </Card.Footer>
                 </Card>
-            )
-        })
+            );
+        });
     }
 
     renderCreate() {
         return (
             <LinkContainer to={`/recipes/create`}>
                 <div className="text-center">
-                    <Button variant="primary" size="lg">Create Recipe</Button>
+                    <Button variant="primary" size="lg">
+                        Create a recipe
+                    </Button>
                 </div>
             </LinkContainer>
-        )
+        );
     }
 
     render() {
         return (
             <div>
-                <CardDeck>
-                    {this.renderList()}
-                </CardDeck>
+                <CardDeck>{this.renderList()}</CardDeck>
                 {this.renderCreate()}
             </div>
-        )
+        );
     }
 }
 
 const mapStateToProps = state => {
     return {
         recipes: Object.values(state.recipes)
-    }
+    };
 };
 
 const mapDispatchToProps = {

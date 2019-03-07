@@ -1,10 +1,10 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import App from './components/App';
-import store from './store/store';
+import "bootswatch/dist/flatly/bootstrap.css";
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import App from "./components/App";
+import store from "./store/store";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -14,5 +14,5 @@ ReactDOM.render(
             </Switch>
         </BrowserRouter>
     </Provider>,
-    document.querySelector('#root')
+    document.querySelector("#root")
 );
