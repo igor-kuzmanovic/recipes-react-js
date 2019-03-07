@@ -1,11 +1,11 @@
-import _ from 'lodash';
-import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { fetchCategory, updateCategory } from '../../actions/category';
-import { reset } from '../../actions/category/update';
+import _ from "lodash";
+import React from "react";
+import { connect } from "react-redux";
+import { Redirect, withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { fetchCategory, updateCategory } from "../../actions/category";
+import { reset } from "../../actions/category/update";
 import CategoryForm from "./CategoryForm";
 
 class CategoryUpdate extends React.Component {
@@ -19,37 +19,40 @@ class CategoryUpdate extends React.Component {
 
     onSubmit = formValues => {
         this.props.updateCategory(this.props.match.params.id, formValues);
-        this.props.history.push('/categories');
     };
 
     render() {
+        if (this.props.updated) {
+            return <Redirect to={`/categories/${this.props.updated}`} />;
+        }
+
         return (
             <div>
+                <h3>
+                    Update this category{" "}
+                    {this.props.isLoading && (
+                        <FontAwesomeIcon icon={faSpinner} spin />
+                    )}
+                </h3>
                 {this.props.category && (
-                    <h3>Update '{this.props.category.name}'</h3>
+                    <CategoryForm
+                        initialValues={_.pick(this.props.category, "name")}
+                        onSubmit={this.onSubmit}
+                        isSubmitDisabled={this.props.isLoading}
+                    />
                 )}
-                {this.props.isLoading && (
-                    <p>Loading...</p>
-                )}
-                {this.props.error && (
-                    <p>{this.props.error}</p>
-                )}                
-                {this.props.category && (
-                    <CategoryForm initialValues={_.pick(this.props.category, 'name')} onSubmit={this.onSubmit} />
-                )}
-                <LinkContainer to="..">
-                    <Button variant="primary">Back to list</Button>
-                </LinkContainer>
+                {this.props.error && <p>{this.props.error}</p>}
             </div>
         );
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return { 
+    return {
         isLoading: state.categories.isLoading,
         error: state.categories.error,
         category: state.categories.items[ownProps.match.params.id],
+        updated: state.categories.updated
     };
 };
 
@@ -57,7 +60,7 @@ const mapDispatchToProps = {
     fetchCategory,
     updateCategory,
     reset
-}
+};
 
 export default connect(
     mapStateToProps,

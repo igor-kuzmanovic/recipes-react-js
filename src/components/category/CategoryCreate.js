@@ -1,10 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { createCategory, reset } from '../../actions/category/create';
-import CategoryForm from './CategoryForm';
+import React from "react";
+import { connect } from "react-redux";
+import { Redirect, withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { createCategory, reset } from "../../actions/category/create";
+import CategoryForm from "./CategoryForm";
 
 class CategoryCreate extends React.Component {
     componentWillUnmount() {
@@ -13,39 +13,43 @@ class CategoryCreate extends React.Component {
 
     onSubmit = formValues => {
         this.props.createCategory(formValues);
-        this.props.history.push('/categories');
     };
 
     render() {
+        if (this.props.created) {
+            return <Redirect to={`/categories/${this.props.created}`} />;
+        }
+
         return (
             <div>
-                <h3>Create a new Category</h3>
-                {this.props.isLoading && (
-                    <p>Loading...</p>
-                )}
-                {this.props.error && (
-                    <p>{this.props.error}</p>
-                )}
-                <CategoryForm onSubmit={this.onSubmit} />
-                <LinkContainer to=".">
-                    <Button variant="primary">Back to list</Button>
-                </LinkContainer>
+                <h3>
+                    Create a new category{" "}
+                    {this.props.isLoading && (
+                        <FontAwesomeIcon icon={faSpinner} spin />
+                    )}
+                </h3>
+                <CategoryForm
+                    onSubmit={this.onSubmit}
+                    isSubmitDisabled={this.props.isLoading}
+                />
+                {this.props.error && <p>{this.props.error}</p>}
             </div>
-        )
+        );
     }
 }
 
 const mapStateToProps = state => {
     return {
         isLoading: state.categories.isLoading,
-        error: state.categories.error
-    }
-}
+        error: state.categories.error,
+        created: state.categories.created
+    };
+};
 
 const mapDispatchToProps = {
     createCategory,
     reset
-}
+};
 
 export default connect(
     mapStateToProps,

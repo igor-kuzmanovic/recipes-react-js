@@ -1,9 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Button, ButtonGroup, Table } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { fetchCategories, reset } from '../../actions/category/list';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { Button, ButtonGroup, Table } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { fetchCategories, reset } from "../../actions/category/list";
 
 class CategoryList extends React.Component {
     componentDidMount() {
@@ -20,54 +22,67 @@ class CategoryList extends React.Component {
             return (
                 <tr key={id}>
                     <td className="w-100">
-                        <Link to={`/categories/${id}`}>
-                            {name}
-                        </Link>
+                        <Link to={`/categories/${id}`}>{name}</Link>
                     </td>
-                    <td>
+                    <td className="p-0">
                         <ButtonGroup>
                             <LinkContainer to={`/categories/update/${id}`}>
-                                <Button variant="primary" size="small">Update</Button>
+                                <Button variant="primary">
+                                    <FontAwesomeIcon icon={faEdit} />
+                                </Button>
                             </LinkContainer>
                             <LinkContainer to={`/categories/delete/${id}`}>
-                                <Button variant="danger" size="small">Delete</Button>
+                                <Button variant="danger">
+                                    <FontAwesomeIcon icon={faTrash} />
+                                </Button>
                             </LinkContainer>
                         </ButtonGroup>
                     </td>
                 </tr>
-            )
-        })
+            );
+        });
     }
 
     render() {
         return (
             <div>
-                <h2>Categories</h2>
-                {this.props.isLoading && (
-                    <p>Loading...</p>
-                )}
-                {this.props.error && (
-                    <p>{this.props.error}</p>
-                )}
+                <h3>Categories</h3>
                 <Table responsive striped bordered hover size="sm">
                     <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>{null}</th>
-                    </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>{null}</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        {this.props.categories && (this.renderList())}
+                        {this.renderList()}
+                        {this.props.isLoading && (
+                            <tr>
+                                <td colSpan="2">
+                                    <FontAwesomeIcon icon={faSpinner} spin />
+                                </td>
+                            </tr>
+                        )}
                     </tbody>
-                </Table>       
-                <LinkContainer to="..">
-                    <Button variant="primary">Back to home</Button>
-                </LinkContainer>
-                <LinkContainer to={`/categories/create`}>
-                    <Button variant="primary">Create Category</Button>
-                </LinkContainer>
+                </Table>
+                <div className="row">
+                    <div className="col text-left">
+                        <LinkContainer to="/" activeClassName="">
+                            <Button variant="secondary">Back to home</Button>
+                        </LinkContainer>
+                    </div>
+                    <div className="col text-right">
+                        <LinkContainer
+                            to={"/categories/create"}
+                            activeClassName=""
+                        >
+                            <Button variant="primary">Create a category</Button>
+                        </LinkContainer>
+                    </div>
+                </div>
+                {this.props.error && <p>{this.props.error}</p>}
             </div>
-        )
+        );
     }
 }
 
@@ -76,7 +91,7 @@ const mapStateToProps = state => {
         isLoading: state.categories.isLoading,
         error: state.categories.error,
         categories: Object.values(state.categories.items)
-    }
+    };
 };
 
 const mapDispatchToProps = {

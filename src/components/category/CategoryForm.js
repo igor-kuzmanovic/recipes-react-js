@@ -1,6 +1,7 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { Form, Button } from 'react-bootstrap';
+import React from "react";
+import { Field, reduxForm } from "redux-form";
+import { Form, Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 class CategoryForm extends React.Component {
     renderError({ error, touched }) {
@@ -13,10 +14,10 @@ class CategoryForm extends React.Component {
         }
     }
 
-    renderInput = ({ label, type, input, placeholder, meta } ) => {
+    renderInput = ({ children, type, input, placeholder, meta }) => {
         return (
             <Form.Group>
-                <Form.Label>{label}</Form.Label>
+                <Form.Label>{children}</Form.Label>
                 <Form.Control
                     {...input}
                     type={type}
@@ -27,7 +28,7 @@ class CategoryForm extends React.Component {
                 />
                 {this.renderError(meta)}
             </Form.Group>
-        )
+        );
     };
 
     onSubmit = formValues => {
@@ -45,23 +46,36 @@ class CategoryForm extends React.Component {
                 >
                     Name
                 </Field>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                <div className="row">
+                    <div className="col text-left">
+                        <LinkContainer to="/categories" activeClassName="">
+                            <Button variant="secondary">Back to list</Button>
+                        </LinkContainer>
+                    </div>
+                    <div className="col text-right">
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            disabled={this.props.isSubmitDisabled}
+                        >
+                            Submit
+                        </Button>
+                    </div>
+                </div>
             </Form>
-        )
+        );
     }
 }
 
 const validate = formValues => {
     const errors = {};
-    if(!formValues.name) {
-        errors.name = 'You must enter a name';
+    if (!formValues.name) {
+        errors.name = "You must enter a name";
     }
     return errors;
 };
 
 export default reduxForm({
-    form: 'categoryForm',
+    form: "categoryForm",
     validate
 })(CategoryForm);

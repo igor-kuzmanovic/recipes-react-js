@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from "lodash";
 import {
     FETCH_CATEGORIES_LOADING,
     FETCH_CATEGORIES_SUCCESS,
@@ -15,10 +15,13 @@ import {
     DELETE_CATEGORY_LOADING,
     DELETE_CATEGORY_SUCCESS,
     DELETE_CATEGORY_ERROR
-} from '../constants/actionTypes';
+} from "../constants/actionTypes";
 
 const initialState = {
     items: {},
+    created: 0,
+    deleted: 0,
+    updated: 0,
     isLoading: false,
     error: null
 };
@@ -30,8 +33,8 @@ export default (state = initialState, action) => {
         case CREATE_CATEGORY_LOADING:
         case UPDATE_CATEGORY_LOADING:
         case DELETE_CATEGORY_LOADING:
-            return { 
-                ...state, 
+            return {
+                ...state,
                 isLoading: true,
                 error: null
             };
@@ -40,28 +43,49 @@ export default (state = initialState, action) => {
         case CREATE_CATEGORY_ERROR:
         case UPDATE_CATEGORY_ERROR:
         case DELETE_CATEGORY_ERROR:
-            return { 
+            return {
                 ...state,
+                created: 0,
+                deleted: 0,
+                updated: 0,
                 isLoading: false,
                 error: action.payload
             };
         case FETCH_CATEGORIES_SUCCESS:
-            return { 
+            return {
                 items: {
-                    ...state.items, 
-                    ..._.mapKeys(action.payload, 'id')
+                    ...state.items,
+                    ..._.mapKeys(action.payload, "id")
                 },
                 isLoading: false,
                 error: null
             };
         case FETCH_CATEGORY_SUCCESS:
-        case CREATE_CATEGORY_SUCCESS:
-        case UPDATE_CATEGORY_SUCCESS:
-            return { 
+            return {
                 items: {
-                    ...state.items, 
+                    ...state.items,
                     [action.payload.id]: action.payload
                 },
+                isLoading: false,
+                error: null
+            };
+        case CREATE_CATEGORY_SUCCESS:
+            return {
+                items: {
+                    ...state.items,
+                    [action.payload.id]: action.payload
+                },
+                created: action.payload.id,
+                isLoading: false,
+                error: null
+            };
+        case UPDATE_CATEGORY_SUCCESS:
+            return {
+                items: {
+                    ...state.items,
+                    [action.payload.id]: action.payload
+                },
+                updated: action.payload.id,
                 isLoading: false,
                 error: null
             };
@@ -70,10 +94,11 @@ export default (state = initialState, action) => {
                 items: {
                     ..._.omit(state.items, action.payload)
                 },
+                deleted: action.payload,
                 isLoading: false,
                 error: null
-            }
+            };
         default:
             return state;
     }
-}
+};

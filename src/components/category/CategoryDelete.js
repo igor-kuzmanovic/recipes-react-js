@@ -1,58 +1,65 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { fetchCategory, deleteCategory } from '../../actions/category';
-import { reset } from '../../acctions/category/delete';
+import React from "react";
+import { connect } from "react-redux";
+import { Redirect, withRouter } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { deleteCategory, reset } from "../../actions/category/delete";
 
 class CategoryDelete extends React.Component {
-    componentDidMount() {
-        this.props.fetchCategory(this.props.match.params.id)
-    }
-
     componentWillUnmount() {
         this.props.reset();
     }
 
     onDeleteClick = () => {
-        this.props.deleteCategory(this.props.category.id);
-        this.props.history.push('/categories');
+        this.props.deleteCategory(this.props.match.params.id);
     };
 
     render() {
+        if (this.props.deleted) {
+            return <Redirect to="/categories" />;
+        }
+
         return (
             <div>
-                {this.props.category && (
-                    <h2>Are you sure you want to delete '{this.props.category.name}'?</h2>
-                )}
-                {this.props.isLoading && (
-                    <p>Loading...</p>
-                )}
-                {this.props.error && (
-                    <p>{this.props.error}</p>
-                )}
-                <LinkContainer to="..">
-                    <Button variant="primary">Back to list</Button>
-                </LinkContainer>
-                <Button onClick={this.onDeleteClick} variant="danger">
-                    Delete
-                </Button>
+                <h3>
+                    Are you sure you want to delete this category?{" "}
+                    {this.props.isLoading && (
+                        <FontAwesomeIcon icon={faSpinner} spin />
+                    )}
+                </h3>
+                <div className="row">
+                    <div className="col text-left">
+                        <LinkContainer to="/categories" activeClassName="">
+                            <Button variant="secondary">Back to list</Button>
+                        </LinkContainer>
+                    </div>
+                    <div className="col text-right">
+                        <Button
+                            onClick={this.onDeleteClick}
+                            variant="danger"
+                            disabled={this.props.isLoading}
+                        >
+                            Confirm
+                        </Button>
+                    </div>
+                </div>
+                {this.props.error && <p>{this.props.error}</p>}
             </div>
-        )
+        );
     }
-};
+}
 
 const mapStateToProps = (state, ownProps) => {
     return {
         isLoading: state.categories.isLoading,
         error: state.categories.error,
-        category: state.categories.items[ownProps.match.params.id],
-    }
+        deleted: state.categories.deleted
+    };
 };
 
 const mapDispatchToProps = {
-    fetchCategory,
     deleteCategory,
     reset
 };
