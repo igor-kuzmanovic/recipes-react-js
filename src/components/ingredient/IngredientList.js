@@ -77,7 +77,7 @@ class IngredientList extends React.Component {
                             activeClassName=""
                         >
                             <Button variant="primary">
-                                Create a ingredient
+                                Create an ingredient
                             </Button>
                         </LinkContainer>
                     </div>
