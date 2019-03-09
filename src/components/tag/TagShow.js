@@ -19,7 +19,7 @@ class TagShow extends React.Component {
         return (
             <div>
                 {this.props.tag && (
-                    <h3>
+                    <h3 className="my-3">
                         {this.props.tag.name}{" "}
                         {this.props.isLoading && (
                             <FontAwesomeIcon icon={faSpinner} spin />

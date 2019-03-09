@@ -19,7 +19,7 @@ class CategoryShow extends React.Component {
         return (
             <div>
                 {this.props.category && (
-                    <h3>
+                    <h3 className="my-3">
                         {this.props.category.name}{" "}
                         {this.props.isLoading && (
                             <FontAwesomeIcon icon={faSpinner} spin />

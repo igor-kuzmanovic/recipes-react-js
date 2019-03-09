@@ -23,7 +23,7 @@ class CategoryCreate extends React.Component {
 
         return (
             <div>
-                <h3>
+                <h3 className="my-3">
                     Create a new category{" "}
                     {this.props.isLoading && (
                         <FontAwesomeIcon icon={faSpinner} spin />

@@ -29,7 +29,7 @@ class CategoryUpdate extends React.Component {
 
         return (
             <div>
-                <h3>
+                <h3 className="my-3">
                     Update this category{" "}
                     {this.props.isLoading && (
                         <FontAwesomeIcon icon={faSpinner} spin />

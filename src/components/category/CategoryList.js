@@ -46,7 +46,7 @@ class CategoryList extends React.Component {
     render() {
         return (
             <div>
-                <h3>Categories</h3>
+                <h3 className="my-3">Categories</h3>
                 <Table responsive striped bordered hover size="sm">
                     <thead>
                         <tr>

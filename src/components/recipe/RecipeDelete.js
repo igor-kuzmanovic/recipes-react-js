@@ -23,7 +23,7 @@ class RecipeDelete extends React.Component {
 
         return (
             <div>
-                <h3>
+                <h3 className="my-3">
                     Are you sure you want to delete this recipe?{" "}
                     {this.props.isLoading && (
                         <FontAwesomeIcon icon={faSpinner} spin />

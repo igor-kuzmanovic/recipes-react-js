@@ -46,7 +46,7 @@ class RecipeList extends React.Component {
     render() {
         return (
             <div>
-                <h3>Recipes</h3>
+                <h3 className="my-3">Recipes</h3>
                 <Table responsive striped bordered hover size="sm">
                     <thead>
                         <tr>

@@ -19,7 +19,7 @@ class RecipeShow extends React.Component {
         return (
             <div>
                 {this.props.recipe && (
-                    <h3>
+                    <h3 className="my-3">
                         {this.props.recipe.title}{" "}
                         {this.props.isLoading && (
                             <FontAwesomeIcon icon={faSpinner} spin />

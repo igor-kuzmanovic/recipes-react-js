@@ -46,7 +46,7 @@ class TagList extends React.Component {
     render() {
         return (
             <div>
-                <h3>Tags</h3>
+                <h3 className="my-3">Tags</h3>
                 <Table responsive striped bordered hover size="sm">
                     <thead>
                         <tr>

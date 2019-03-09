@@ -46,6 +46,7 @@ class Home extends React.Component {
     render() {
         return (
             <div>
+                <h3 className="my-3 text-center">Welcome</h3>
                 <CardDeck>{this.renderList()}</CardDeck>
                 {this.renderCreate()}
             </div>

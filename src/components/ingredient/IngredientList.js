@@ -46,7 +46,7 @@ class IngredientList extends React.Component {
     render() {
         return (
             <div>
-                <h3>Ingredients</h3>
+                <h3 className="my-3">Ingredients</h3>
                 <Table responsive striped bordered hover size="sm">
                     <thead>
                         <tr>

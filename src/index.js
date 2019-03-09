@@ -1,4 +1,4 @@
-import "bootswatch/dist/flatly/bootstrap.css";
+import "bootswatch/dist/cosmo/bootstrap.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";

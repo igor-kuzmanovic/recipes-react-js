@@ -17,7 +17,7 @@ class IngredientShow extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="my-3">
                 {this.props.ingredient && (
                     <h3>
                         {this.props.ingredient.name}{" "}
