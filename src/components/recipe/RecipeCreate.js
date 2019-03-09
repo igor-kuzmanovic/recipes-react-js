@@ -5,9 +5,18 @@ import { Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { createRecipe, reset } from "../../actions/recipe/create";
+import { fetchIngredients } from "../../actions/ingredient/list";
+import { fetchCategories } from "../../actions/category/list";
+import { fetchTags } from "../../actions/tag/list";
 import RecipeForm from "./RecipeForm";
 
 class RecipeCreate extends React.Component {
+    componentDidMount() {
+        this.props.fetchIngredients();
+        this.props.fetchCategories();
+        this.props.fetchTags();
+    }
+
     componentWillUnmount() {
         this.props.reset();
     }
@@ -32,6 +41,9 @@ class RecipeCreate extends React.Component {
                 <RecipeForm
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={this.props.isLoading}
+                    ingredients={this.props.ingredients}
+                    categories={this.props.categories}
+                    tags={this.props.tags}
                 />
                 {this.props.error && (
                     <Alert variant="danger" dismissible className="mt-3">
@@ -48,13 +60,19 @@ const mapStateToProps = state => {
     return {
         isLoading: state.recipes.isLoading,
         error: state.recipes.error,
-        created: state.recipes.created
+        created: state.recipes.created,
+        ingredients: Object.values(state.ingredients.items),
+        categories: Object.values(state.categories.items),
+        tags: Object.values(state.tags.items)
     };
 };
 
 const mapDispatchToProps = {
     createRecipe,
-    reset
+    reset,
+    fetchIngredients,
+    fetchCategories,
+    fetchTags
 };
 
 export default connect(

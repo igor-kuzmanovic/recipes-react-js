@@ -14,10 +14,9 @@ class TagForm extends React.Component {
         }
     }
 
-    renderInput = ({ children, type, input, placeholder, meta }) => {
+    renderInput = ({ type, input, placeholder, meta }) => {
         return (
-            <Form.Group>
-                <Form.Label>{children}</Form.Label>
+            <>
                 <Form.Control
                     {...input}
                     type={type}
@@ -27,7 +26,7 @@ class TagForm extends React.Component {
                     autoComplete="off"
                 />
                 {this.renderError(meta)}
-            </Form.Group>
+            </>
         );
     };
 
@@ -38,14 +37,15 @@ class TagForm extends React.Component {
     render() {
         return (
             <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <Field
-                    type="text"
-                    name="name"
-                    placeholder="Enter a name"
-                    component={this.renderInput}
-                >
-                    Name
-                </Field>
+                <Form.Group>
+                    <Form.Label>Name</Form.Label>
+                    <Field
+                        type="text"
+                        name="name"
+                        placeholder="Enter a name"
+                        component={this.renderInput}
+                    />
+                </Form.Group>
                 <div className="row">
                     <div className="col text-left">
                         <LinkContainer to="/tags" activeClassName="">

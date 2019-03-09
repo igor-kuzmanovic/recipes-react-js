@@ -20,7 +20,9 @@ export function error(payload) {
 export const createRecipe = formValues => async dispatch => {
     dispatch(loading());
     try {
-        const response = await api.post("/recipes", { ...formValues });
+        const response = await api.post("/recipes", {
+            ...parseFormValues(formValues)
+        });
         dispatch(success(response.data));
     } catch (err) {
         console.log(err);
@@ -31,5 +33,19 @@ export const createRecipe = formValues => async dispatch => {
 export function reset() {
     return dispatch => {
         dispatch(error(null));
+    };
+}
+
+function parseFormValues(formValues) {
+    return {
+        ...formValues,
+        ingredients: formValues.ingredients.map(ingredient => {
+            return `/api/ingredients/${ingredient}`;
+        }),
+        category: `/api/categories/${formValues.category}`,
+        tags: formValues.tags.map(tag => {
+            return `/api/tags/${tag}`;
+        }),
+        imageUrl: "http://localhost:8000/images/default.jpeg"
     };
 }

@@ -14,10 +14,9 @@ class RecipeForm extends React.Component {
         }
     }
 
-    renderInput = ({ children, type, input, placeholder, meta }) => {
+    renderInput = ({ type, input, placeholder, meta }) => {
         return (
-            <Form.Group>
-                <Form.Label>{children}</Form.Label>
+            <>
                 <Form.Control
                     {...input}
                     type={type}
@@ -27,7 +26,45 @@ class RecipeForm extends React.Component {
                     autoComplete="off"
                 />
                 {this.renderError(meta)}
-            </Form.Group>
+            </>
+        );
+    };
+
+    renderSingleSelect = ({ children, input, placeholder, meta }) => {
+        return (
+            <>
+                <Form.Control
+                    {...input}
+                    isValid={meta.touched && meta.valid}
+                    isInvalid={meta.touched && meta.invalid}
+                    autoComplete="off"
+                    as="select"
+                >
+                    <option value="" disabled>
+                        {placeholder}
+                    </option>
+                    {children}
+                </Form.Control>
+                {this.renderError(meta)}
+            </>
+        );
+    };
+
+    renderMultipleSelect = ({ children, input, meta }) => {
+        return (
+            <>
+                <Form.Control
+                    {...input}
+                    isValid={meta.touched && meta.valid}
+                    isInvalid={meta.touched && meta.invalid}
+                    autoComplete="off"
+                    as="select"
+                    multiple
+                >
+                    {children}
+                </Form.Control>
+                {this.renderError(meta)}
+            </>
         );
     };
 
@@ -38,14 +75,75 @@ class RecipeForm extends React.Component {
     render() {
         return (
             <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <Field
-                    type="text"
-                    name="title"
-                    placeholder="Enter a title"
-                    component={this.renderInput}
-                >
-                    Title
-                </Field>
+                <Form.Group>
+                    <Form.Label>Title</Form.Label>
+                    <Field
+                        type="text"
+                        name="title"
+                        placeholder="Enter a title"
+                        component={this.renderInput}
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Description</Form.Label>
+                    <Field
+                        type="text"
+                        name="description"
+                        placeholder="Enter a description"
+                        component={this.renderInput}
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Ingredients</Form.Label>
+                    <Field
+                        name="ingredients"
+                        component={this.renderMultipleSelect}
+                        format={value => (value ? value : [])}
+                    >
+                        {this.props.ingredients.map(ingredient => {
+                            return (
+                                <option
+                                    key={ingredient.id}
+                                    value={ingredient.id}
+                                >
+                                    {ingredient.name}
+                                </option>
+                            );
+                        })}
+                    </Field>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Category</Form.Label>
+                    <Field
+                        name="category"
+                        placeholder="Select a category"
+                        component={this.renderSingleSelect}
+                    >
+                        {this.props.categories.map(category => {
+                            return (
+                                <option key={category.id} value={category.id}>
+                                    {category.name}
+                                </option>
+                            );
+                        })}
+                    </Field>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Tags</Form.Label>
+                    <Field
+                        name="tags"
+                        component={this.renderMultipleSelect}
+                        format={value => (value ? value : [])}
+                    >
+                        {this.props.tags.map(tag => {
+                            return (
+                                <option key={tag.id} value={tag.id}>
+                                    {tag.name}
+                                </option>
+                            );
+                        })}
+                    </Field>
+                </Form.Group>
                 <div className="row">
                     <div className="col text-left">
                         <LinkContainer to="/recipes" activeClassName="">
@@ -71,6 +169,18 @@ const validate = formValues => {
     const errors = {};
     if (!formValues.title) {
         errors.title = "You must enter a title";
+    }
+    if (!formValues.description) {
+        errors.description = "You must enter a description";
+    }
+    if (!formValues.ingredients || !formValues.ingredients.length) {
+        errors.ingredients = "You must select at least one ingredient";
+    }
+    if (!formValues.category) {
+        errors.category = "You must select a category";
+    }
+    if (!formValues.tags || !formValues.tags.length) {
+        errors.tags = "You must select at least one tag";
     }
     return errors;
 };

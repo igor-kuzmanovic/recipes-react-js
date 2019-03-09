@@ -7,11 +7,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { fetchRecipe, updateRecipe } from "../../actions/recipe";
 import { reset } from "../../actions/recipe/update";
+import { fetchIngredients } from "../../actions/ingredient/list";
+import { fetchCategories } from "../../actions/category/list";
+import { fetchTags } from "../../actions/tag/list";
 import RecipeForm from "./RecipeForm";
 
 class RecipeUpdate extends React.Component {
     componentDidMount() {
         this.props.fetchRecipe(this.props.match.params.id);
+        this.props.fetchIngredients();
+        this.props.fetchCategories();
+        this.props.fetchTags();
     }
 
     componentWillUnmount() {
@@ -37,9 +43,20 @@ class RecipeUpdate extends React.Component {
                 </h3>
                 {this.props.recipe && (
                     <RecipeForm
-                        initialValues={_.pick(this.props.recipe, "title")}
+                        initialValues={_.pick(
+                            this.props.recipe,
+                            "title",
+                            "description",
+                            "ingredients",
+                            "category",
+                            "tags",
+                            "imageUrl"
+                        )}
                         onSubmit={this.onSubmit}
                         isSubmitDisabled={this.props.isLoading}
+                        ingredients={this.props.ingredients}
+                        categories={this.props.categories}
+                        tags={this.props.tags}
                     />
                 )}
                 {this.props.error && (
@@ -58,14 +75,20 @@ const mapStateToProps = (state, ownProps) => {
         isLoading: state.recipes.isLoading,
         error: state.recipes.error,
         recipe: state.recipes.items[ownProps.match.params.id],
-        updated: state.recipes.updated
+        updated: state.recipes.updated,
+        ingredients: Object.values(state.ingredients.items),
+        categories: Object.values(state.categories.items),
+        tags: Object.values(state.tags.items)
     };
 };
 
 const mapDispatchToProps = {
     fetchRecipe,
     updateRecipe,
-    reset
+    reset,
+    fetchIngredients,
+    fetchCategories,
+    fetchTags
 };
 
 export default connect(
