@@ -30,7 +30,7 @@ class RecipeShow extends React.Component {
                     <Button variant="secondary">Back to list</Button>
                 </LinkContainer>
                 {this.props.error && (
-                    <Alert variant="danger">
+                    <Alert variant="danger" dismissible className="mt-3">
                         <Alert.Heading>Error</Alert.Heading>
                         <p>{this.props.error}</p>
                     </Alert>

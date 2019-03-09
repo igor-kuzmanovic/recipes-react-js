@@ -46,7 +46,7 @@ class TagDelete extends React.Component {
                     </div>
                 </div>
                 {this.props.error && (
-                    <Alert variant="danger">
+                    <Alert variant="danger" dismissible className="mt-3">
                         <Alert.Heading>Error</Alert.Heading>
                         <p>{this.props.error}</p>
                     </Alert>
