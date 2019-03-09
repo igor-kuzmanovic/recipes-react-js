@@ -14,10 +14,10 @@ const App = () => {
             <div className="container">
                 <Switch>
                     <Route path="/" component={Home} exact />
-                    {/* {recipeRoutes} */}
-                    {/* {ingredientRoutes} */}
+                    {recipeRoutes}
+                    {ingredientRoutes}
                     {categoryRoutes}
-                    {/* {tagRoutes} */}
+                    {tagRoutes}
                     <Route
                         render={() => (
                             <h1 className="text-center">404: Page Not Found</h1>

@@ -1,27 +1,27 @@
 import api from "../../apis/recipes";
 import {
-    FETCH_CATEGORY_LOADING,
-    FETCH_CATEGORY_SUCCESS,
-    FETCH_CATEGORY_ERROR
+    DELETE_RECIPE_LOADING,
+    DELETE_RECIPE_SUCCESS,
+    DELETE_RECIPE_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: FETCH_CATEGORY_LOADING };
+    return { type: DELETE_RECIPE_LOADING };
 }
 
 export function success(payload) {
-    return { type: FETCH_CATEGORY_SUCCESS, payload };
+    return { type: DELETE_RECIPE_SUCCESS, payload };
 }
 
 export function error(payload) {
-    return { type: FETCH_CATEGORY_ERROR, payload };
+    return { type: DELETE_RECIPE_ERROR, payload };
 }
 
-export const fetchCategory = id => async dispatch => {
+export const deleteRecipe = id => async dispatch => {
     dispatch(loading());
     try {
-        const response = await api.get(`/categories/${id}`);
-        dispatch(success(response.data));
+        await api.delete(`/recipes/${id}`);
+        dispatch(success(id));
     } catch (err) {
         console.log(err);
         dispatch(error(err.message));

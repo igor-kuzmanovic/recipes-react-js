@@ -1,62 +1,56 @@
-import moment from 'moment';
-import React from 'react';
-import { connect } from 'react-redux';
-import { fetchRecipe } from '../../actions/recipe';
+import React from "react";
+import { connect } from "react-redux";
+import { Button, Alert } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { fetchRecipe, reset } from "../../actions/recipe/show";
 
 class RecipeShow extends React.Component {
     componentDidMount() {
         this.props.fetchRecipe(this.props.match.params.id);
     }
 
-    renderIngredients() {
-        if (!this.props.recipe.ingredients.length) {
-            return <h5>No Ingredients available</h5>
-        }
-
-        return this.props.recipe.ingredients.map(ingredient => {
-            return <h5 key={ingredient.name}> - {ingredient.name}</h5>;
-        })
-    };
-
-    renderTags() {
-        if (!this.props.recipe.tags.length) {
-            return <h5>No Tags available</h5>
-        }
-
-        return this.props.recipe.tags.map(tag => {
-            return <h5 key={tag.name}> - {tag.name}</h5>
-        })
-    };
+    componentWillUnmount() {
+        this.props.reset();
+    }
 
     render() {
-        if (!this.props.recipe) {
-            return <div>Loading...</div>
-        }
-
-        const { recipe } = this.props;
         return (
             <div>
-                <h2>{recipe.title}</h2>
-                <h4>{recipe.description}</h4>
-                <h4>Ingredients</h4>
-                {this.renderIngredients()}
-                <h4>{recipe.category.name}</h4>
-                <h4>Tags</h4>
-                {this.renderTags()}
-                <h4>{moment(recipe.creationDate).format('MMMM Do YYYY, h:mm:ss a')}</h4>
+                {this.props.recipe && (
+                    <h3>
+                        {this.props.recipe.title}{" "}
+                        {this.props.isLoading && (
+                            <FontAwesomeIcon icon={faSpinner} spin />
+                        )}
+                    </h3>
+                )}
+                <LinkContainer to="/recipes" activeClassName="">
+                    <Button variant="secondary">Back to list</Button>
+                </LinkContainer>
+                {this.props.error && (
+                    <Alert variant="danger">
+                        <Alert.Heading>Error</Alert.Heading>
+                        <p>{this.props.error}</p>
+                    </Alert>
+                )}
             </div>
-        )
+        );
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        recipe: state.recipes[ownProps.match.params.id]
-    }
+        isLoading: state.recipes.isLoading,
+        error: state.recipes.error,
+        recipe: state.recipes.items[ownProps.match.params.id]
+    };
 };
 
 const mapDispatchToProps = {
-    fetchRecipe
+    fetchRecipe,
+    reset
 };
 
 export default connect(

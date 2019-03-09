@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { combineReducers } from "redux";
+import { reducer as formReducer } from "redux-form";
 import recipeReducer from "./recipe";
 import ingredientReducer from "./ingredient";
 import categoryReducer from "./category";

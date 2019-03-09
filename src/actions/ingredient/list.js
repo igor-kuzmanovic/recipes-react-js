@@ -1,26 +1,26 @@
 import api from "../../apis/recipes";
 import {
-    UPDATE_CATEGORY_LOADING,
-    UPDATE_CATEGORY_SUCCESS,
-    UPDATE_CATEGORY_ERROR
+    FETCH_INGREDIENTS_LOADING,
+    FETCH_INGREDIENTS_SUCCESS,
+    FETCH_INGREDIENTS_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: UPDATE_CATEGORY_LOADING };
+    return { type: FETCH_INGREDIENTS_LOADING };
 }
 
 export function success(payload) {
-    return { type: UPDATE_CATEGORY_SUCCESS, payload };
+    return { type: FETCH_INGREDIENTS_SUCCESS, payload };
 }
 
 export function error(payload) {
-    return { type: UPDATE_CATEGORY_ERROR, payload };
+    return { type: FETCH_INGREDIENTS_ERROR, payload };
 }
 
-export const updateCategory = (id, formValues) => async dispatch => {
+export const fetchIngredients = () => async dispatch => {
     dispatch(loading());
     try {
-        const response = await api.put(`/categories/${id}`, formValues);
+        const response = await api.get("/ingredients");
         dispatch(success(response.data));
     } catch (err) {
         console.log(err);

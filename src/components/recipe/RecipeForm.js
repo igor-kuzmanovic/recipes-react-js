@@ -1,7 +1,7 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
-import { Form, Button } from 'react-bootstrap';
+import React from "react";
+import { Field, reduxForm } from "redux-form";
+import { Form, Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 class RecipeForm extends React.Component {
     renderError({ error, touched }) {
@@ -14,10 +14,10 @@ class RecipeForm extends React.Component {
         }
     }
 
-    renderInput = ({ label, type, input, placeholder, meta } ) => {
+    renderInput = ({ children, type, input, placeholder, meta }) => {
         return (
             <Form.Group>
-                <Form.Label>{label}</Form.Label>
+                <Form.Label>{children}</Form.Label>
                 <Form.Control
                     {...input}
                     type={type}
@@ -28,12 +28,11 @@ class RecipeForm extends React.Component {
                 />
                 {this.renderError(meta)}
             </Form.Group>
-        )
+        );
     };
 
     onSubmit = formValues => {
         this.props.onSubmit(formValues);
-        this.props.history.push('/recipes');
     };
 
     render() {
@@ -47,85 +46,36 @@ class RecipeForm extends React.Component {
                 >
                     Title
                 </Field>
-                <Field
-                    type="text"
-                    name="description"
-                    placeholder="Enter a description"
-                    component={this.renderInput}
-                >
-                    Description
-                </Field>
-                <Field
-                    type="text"
-                    name="ingredients"
-                    placeholder="Choose the ingredients"
-                    component={this.renderInput}
-                >
-                    Ingredients
-                </Field>
-                <Field
-                    type="text"
-                    name="category"
-                    placeholder="Choose a category"
-                    component={this.renderInput}
-                >
-                    Category
-                </Field>
-                <Field
-                    type="text"
-                    name="tags"
-                    placeholder="Choose the tags"
-                    component={this.renderInput}
-                >
-                    Tags
-                </Field>
-                <Field
-                    type="text"
-                    name="images"
-                    placeholder="Choose an image"
-                    component={this.renderInput}
-                >
-                    Image
-                </Field>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                <div className="row">
+                    <div className="col text-left">
+                        <LinkContainer to="/recipes" activeClassName="">
+                            <Button variant="secondary">Back to list</Button>
+                        </LinkContainer>
+                    </div>
+                    <div className="col text-right">
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            disabled={this.props.isSubmitDisabled}
+                        >
+                            Submit
+                        </Button>
+                    </div>
+                </div>
             </Form>
-        )
+        );
     }
 }
 
 const validate = formValues => {
     const errors = {};
-
-    if(!formValues.title) {
-        errors.name = 'You must enter a title';
+    if (!formValues.title) {
+        errors.title = "You must enter a title";
     }
-
-    if(!formValues.description) {
-        errors.description = 'You must enter a description'
-    }
-
-    if(!formValues.ingredients) {
-        errors.ingredients = 'You must choose the ingredients'
-    }
-
-    if(!formValues.category) {
-        errors.category = 'You must choose a category'
-    }
-
-    if(!formValues.tags) {
-        errors.tags = 'You must choose the tags'
-    }
-
-    if(!formValues.image) {
-        errors.image = 'You must choose an image'
-    }
-
     return errors;
 };
 
 export default reduxForm({
-    form: 'recipeForm',
+    form: "recipeForm",
     validate
-})(withRouter(RecipeForm));
+})(RecipeForm);

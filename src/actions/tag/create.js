@@ -1,26 +1,26 @@
 import api from "../../apis/recipes";
 import {
-    UPDATE_CATEGORY_LOADING,
-    UPDATE_CATEGORY_SUCCESS,
-    UPDATE_CATEGORY_ERROR
+    CREATE_TAG_LOADING,
+    CREATE_TAG_SUCCESS,
+    CREATE_TAG_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: UPDATE_CATEGORY_LOADING };
+    return { type: CREATE_TAG_LOADING };
 }
 
 export function success(payload) {
-    return { type: UPDATE_CATEGORY_SUCCESS, payload };
+    return { type: CREATE_TAG_SUCCESS, payload };
 }
 
 export function error(payload) {
-    return { type: UPDATE_CATEGORY_ERROR, payload };
+    return { type: CREATE_TAG_ERROR, payload };
 }
 
-export const updateCategory = (id, formValues) => async dispatch => {
+export const createTag = formValues => async dispatch => {
     dispatch(loading());
     try {
-        const response = await api.put(`/categories/${id}`, formValues);
+        const response = await api.post("/tags", { ...formValues });
         dispatch(success(response.data));
     } catch (err) {
         console.log(err);

@@ -1,19 +1,19 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Button, ButtonGroup, Table } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { fetchIngredients, deleteIngredient } from '../../actions/ingredient';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { Button, ButtonGroup, Table, Alert } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { fetchIngredients, reset } from "../../actions/ingredient/list";
 
 class IngredientList extends React.Component {
     componentDidMount() {
         this.props.fetchIngredients();
     }
 
-    onDeleteClick(id) {
-        if (window.confirm('Are you sure you want to delete this Ingredient?')) {
-            this.props.deleteIngredient(id)
-        }
+    componentWillUnmount() {
+        this.props.reset();
     }
 
     renderList() {
@@ -22,61 +22,88 @@ class IngredientList extends React.Component {
             return (
                 <tr key={id}>
                     <td className="w-100">
-                        <Link to={`/ingredients/${id}`}>
-                            {name}
-                        </Link>
+                        <Link to={`/ingredients/${id}`}>{name}</Link>
                     </td>
-                    <td>
+                    <td className="p-0">
                         <ButtonGroup>
                             <LinkContainer to={`/ingredients/update/${id}`}>
-                                <Button variant="primary" size="small">Update</Button>
+                                <Button variant="primary">
+                                    <FontAwesomeIcon icon={faEdit} />
+                                </Button>
                             </LinkContainer>
-                            <Button onClick={() => this.onDeleteClick(id)} variant="danger" size="small">Delete</Button>
+                            <LinkContainer to={`/ingredients/delete/${id}`}>
+                                <Button variant="danger">
+                                    <FontAwesomeIcon icon={faTrash} />
+                                </Button>
+                            </LinkContainer>
                         </ButtonGroup>
                     </td>
                 </tr>
-            )
-        })
-    }
-
-    renderCreate() {
-        return (
-            <LinkContainer to={`/ingredients/create`}>
-                <Button variant="primary">Create Ingredient</Button>
-            </LinkContainer>
-        )
+            );
+        });
     }
 
     render() {
         return (
             <div>
-                <h2>Ingredients</h2>
+                <h3>Ingredients</h3>
                 <Table responsive striped bordered hover size="sm">
                     <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>{null}</th>
-                    </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>{null}</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {this.renderList()}
+                        {this.props.isLoading && (
+                            <tr>
+                                <td colSpan="2">
+                                    <FontAwesomeIcon icon={faSpinner} spin />
+                                </td>
+                            </tr>
+                        )}
                     </tbody>
                 </Table>
-                {this.renderCreate()}
+                <div className="row">
+                    <div className="col text-left">
+                        <LinkContainer to="/" activeClassName="">
+                            <Button variant="secondary">Back to home</Button>
+                        </LinkContainer>
+                    </div>
+                    <div className="col text-right">
+                        <LinkContainer
+                            to={"/ingredients/create"}
+                            activeClassName=""
+                        >
+                            <Button variant="primary">
+                                Create a ingredient
+                            </Button>
+                        </LinkContainer>
+                    </div>
+                </div>
+                {this.props.error && (
+                    <Alert variant="danger">
+                        <Alert.Heading>Error</Alert.Heading>
+                        <p>{this.props.error}</p>
+                    </Alert>
+                )}
             </div>
-        )
+        );
     }
 }
 
 const mapStateToProps = state => {
     return {
-        ingredients: Object.values(state.ingredients)
-    }
+        isLoading: state.ingredients.isLoading,
+        error: state.ingredients.error,
+        ingredients: Object.values(state.ingredients.items)
+    };
 };
 
 const mapDispatchToProps = {
     fetchIngredients,
-    deleteIngredient
+    reset
 };
 
 export default connect(

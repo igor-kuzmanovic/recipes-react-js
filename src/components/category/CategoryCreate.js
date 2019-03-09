@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { createCategory, reset } from "../../actions/category/create";
@@ -32,7 +33,12 @@ class CategoryCreate extends React.Component {
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={this.props.isLoading}
                 />
-                {this.props.error && <p>{this.props.error}</p>}
+                {this.props.error && (
+                    <Alert variant="danger">
+                        <Alert.Heading>Error</Alert.Heading>
+                        <p>{this.props.error}</p>
+                    </Alert>
+                )}
             </div>
         );
     }

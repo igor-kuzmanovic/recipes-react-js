@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Alert } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -45,7 +45,12 @@ class CategoryDelete extends React.Component {
                         </Button>
                     </div>
                 </div>
-                {this.props.error && <p>{this.props.error}</p>}
+                {this.props.error && (
+                    <Alert variant="danger">
+                        <Alert.Heading>Error</Alert.Heading>
+                        <p>{this.props.error}</p>
+                    </Alert>
+                )}
             </div>
         );
     }

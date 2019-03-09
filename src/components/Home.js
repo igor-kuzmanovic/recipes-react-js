@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Button, CardDeck, Card } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { fetchRecipes } from "../actions/recipe";
+import { fetchRecipes } from "../actions/recipe/list";
 
 class Home extends React.Component {
     componentDidMount() {
@@ -33,7 +33,7 @@ class Home extends React.Component {
 
     renderCreate() {
         return (
-            <LinkContainer to={`/recipes/create`}>
+            <LinkContainer to={"/recipes/create"}>
                 <div className="text-center">
                     <Button variant="primary" size="lg">
                         Create a recipe
@@ -55,7 +55,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        recipes: Object.values(state.recipes)
+        recipes: Object.values(state.recipes.items)
     };
 };
 

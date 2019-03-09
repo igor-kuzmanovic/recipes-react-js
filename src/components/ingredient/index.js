@@ -1,8 +1,8 @@
-import IngredientList from './IngredientList';
-import IngredientShow from './IngredientShow';
-import IngredientCreate from './IngredientCreate';
-import IngredientUpdate from './IngredientUpdate';
-import IngredientDelete from './IngredientDelete';
+import IngredientList from "./IngredientList";
+import IngredientShow from "./IngredientShow";
+import IngredientCreate from "./IngredientCreate";
+import IngredientUpdate from "./IngredientUpdate";
+import IngredientDelete from "./IngredientDelete";
 
 export {
     IngredientList,
@@ -10,4 +10,4 @@ export {
     IngredientCreate,
     IngredientUpdate,
     IngredientDelete
-}
+};

@@ -1,25 +1,104 @@
-import _ from 'lodash';
+import _ from "lodash";
 import {
-    FETCH_TAGS,
-    FETCH_TAG,
-    CREATE_TAG,
-    UPDATE_TAG,
-    DELETE_TAG
-} from '../constants/actionTypes';
+    FETCH_TAGS_LOADING,
+    FETCH_TAGS_SUCCESS,
+    FETCH_TAGS_ERROR,
+    FETCH_TAG_LOADING,
+    FETCH_TAG_SUCCESS,
+    FETCH_TAG_ERROR,
+    CREATE_TAG_LOADING,
+    CREATE_TAG_SUCCESS,
+    CREATE_TAG_ERROR,
+    UPDATE_TAG_LOADING,
+    UPDATE_TAG_SUCCESS,
+    UPDATE_TAG_ERROR,
+    DELETE_TAG_LOADING,
+    DELETE_TAG_SUCCESS,
+    DELETE_TAG_ERROR
+} from "../constants/actionTypes";
 
-const initialState = {};
+const initialState = {
+    items: {},
+    created: 0,
+    deleted: 0,
+    updated: 0,
+    isLoading: false,
+    error: null
+};
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_TAGS:
-            return { ...state, ..._.mapKeys(action.payload, 'id')};
-        case FETCH_TAG:
-        case CREATE_TAG:
-        case UPDATE_TAG:
-            return { ...state, [action.payload.id]: action.payload };
-        case DELETE_TAG:
-            return _.omit(state, action.payload);
+        case FETCH_TAGS_LOADING:
+        case FETCH_TAG_LOADING:
+        case CREATE_TAG_LOADING:
+        case UPDATE_TAG_LOADING:
+        case DELETE_TAG_LOADING:
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+        case FETCH_TAGS_ERROR:
+        case FETCH_TAG_ERROR:
+        case CREATE_TAG_ERROR:
+        case UPDATE_TAG_ERROR:
+        case DELETE_TAG_ERROR:
+            return {
+                ...state,
+                created: 0,
+                deleted: 0,
+                updated: 0,
+                isLoading: false,
+                error: action.payload
+            };
+        case FETCH_TAGS_SUCCESS:
+            return {
+                items: {
+                    ...state.items,
+                    ..._.mapKeys(action.payload, "id")
+                },
+                isLoading: false,
+                error: null
+            };
+        case FETCH_TAG_SUCCESS:
+            return {
+                items: {
+                    ...state.items,
+                    [action.payload.id]: action.payload
+                },
+                isLoading: false,
+                error: null
+            };
+        case CREATE_TAG_SUCCESS:
+            return {
+                items: {
+                    ...state.items,
+                    [action.payload.id]: action.payload
+                },
+                created: action.payload.id,
+                isLoading: false,
+                error: null
+            };
+        case UPDATE_TAG_SUCCESS:
+            return {
+                items: {
+                    ...state.items,
+                    [action.payload.id]: action.payload
+                },
+                updated: action.payload.id,
+                isLoading: false,
+                error: null
+            };
+        case DELETE_TAG_SUCCESS:
+            return {
+                items: {
+                    ..._.omit(state.items, action.payload)
+                },
+                deleted: action.payload,
+                isLoading: false,
+                error: null
+            };
         default:
             return state;
     }
-}
+};

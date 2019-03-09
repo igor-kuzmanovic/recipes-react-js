@@ -1,12 +1,12 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import { 
-    TagList, 
-    TagShow, 
-    TagCreate, 
-    TagUpdate, 
-    TagDelete 
-} from '../components/tag';
+import React from "react";
+import { Route } from "react-router-dom";
+import {
+    TagList,
+    TagShow,
+    TagCreate,
+    TagUpdate,
+    TagDelete
+} from "../components/tag";
 
 export default [
     <Route path="/tags" component={TagList} exact key="list" />,

@@ -1,25 +1,104 @@
-import _ from 'lodash';
+import _ from "lodash";
 import {
-    FETCH_INGREDIENTS,
-    FETCH_INGREDIENT,
-    CREATE_INGREDIENT,
-    UPDATE_INGREDIENT,
-    DELETE_INGREDIENT
-} from '../constants/actionTypes';
+    FETCH_INGREDIENTS_LOADING,
+    FETCH_INGREDIENTS_SUCCESS,
+    FETCH_INGREDIENTS_ERROR,
+    FETCH_INGREDIENT_LOADING,
+    FETCH_INGREDIENT_SUCCESS,
+    FETCH_INGREDIENT_ERROR,
+    CREATE_INGREDIENT_LOADING,
+    CREATE_INGREDIENT_SUCCESS,
+    CREATE_INGREDIENT_ERROR,
+    UPDATE_INGREDIENT_LOADING,
+    UPDATE_INGREDIENT_SUCCESS,
+    UPDATE_INGREDIENT_ERROR,
+    DELETE_INGREDIENT_LOADING,
+    DELETE_INGREDIENT_SUCCESS,
+    DELETE_INGREDIENT_ERROR
+} from "../constants/actionTypes";
 
-const initialState = {};
+const initialState = {
+    items: {},
+    created: 0,
+    deleted: 0,
+    updated: 0,
+    isLoading: false,
+    error: null
+};
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_INGREDIENTS:
-            return { ...state, ..._.mapKeys(action.payload, 'id')};
-        case FETCH_INGREDIENT:
-        case CREATE_INGREDIENT:
-        case UPDATE_INGREDIENT:
-            return { ...state, [action.payload.id]: action.payload };
-        case DELETE_INGREDIENT:
-            return _.omit(state, action.payload);
+        case FETCH_INGREDIENTS_LOADING:
+        case FETCH_INGREDIENT_LOADING:
+        case CREATE_INGREDIENT_LOADING:
+        case UPDATE_INGREDIENT_LOADING:
+        case DELETE_INGREDIENT_LOADING:
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+        case FETCH_INGREDIENTS_ERROR:
+        case FETCH_INGREDIENT_ERROR:
+        case CREATE_INGREDIENT_ERROR:
+        case UPDATE_INGREDIENT_ERROR:
+        case DELETE_INGREDIENT_ERROR:
+            return {
+                ...state,
+                created: 0,
+                deleted: 0,
+                updated: 0,
+                isLoading: false,
+                error: action.payload
+            };
+        case FETCH_INGREDIENTS_SUCCESS:
+            return {
+                items: {
+                    ...state.items,
+                    ..._.mapKeys(action.payload, "id")
+                },
+                isLoading: false,
+                error: null
+            };
+        case FETCH_INGREDIENT_SUCCESS:
+            return {
+                items: {
+                    ...state.items,
+                    [action.payload.id]: action.payload
+                },
+                isLoading: false,
+                error: null
+            };
+        case CREATE_INGREDIENT_SUCCESS:
+            return {
+                items: {
+                    ...state.items,
+                    [action.payload.id]: action.payload
+                },
+                created: action.payload.id,
+                isLoading: false,
+                error: null
+            };
+        case UPDATE_INGREDIENT_SUCCESS:
+            return {
+                items: {
+                    ...state.items,
+                    [action.payload.id]: action.payload
+                },
+                updated: action.payload.id,
+                isLoading: false,
+                error: null
+            };
+        case DELETE_INGREDIENT_SUCCESS:
+            return {
+                items: {
+                    ..._.omit(state.items, action.payload)
+                },
+                deleted: action.payload,
+                isLoading: false,
+                error: null
+            };
         default:
             return state;
     }
-}
+};

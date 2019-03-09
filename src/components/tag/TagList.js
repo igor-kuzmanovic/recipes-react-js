@@ -1,19 +1,19 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Button, ButtonGroup, Table } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { fetchTags, deleteTag } from '../../actions/tag';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { Button, ButtonGroup, Table, Alert } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { fetchTags, reset } from "../../actions/tag/list";
 
 class TagList extends React.Component {
     componentDidMount() {
         this.props.fetchTags();
     }
 
-    onDeleteClick(id) {
-        if (window.confirm('Are you sure you want to delete this Tag?')) {
-            this.props.deleteTag(id)
-        }
+    componentWillUnmount() {
+        this.props.reset();
     }
 
     renderList() {
@@ -22,35 +22,31 @@ class TagList extends React.Component {
             return (
                 <tr key={id}>
                     <td className="w-100">
-                        <Link to={`/tags/${id}`}>
-                            {name}
-                        </Link>
+                        <Link to={`/tags/${id}`}>{name}</Link>
                     </td>
-                    <td>
+                    <td className="p-0">
                         <ButtonGroup>
                             <LinkContainer to={`/tags/update/${id}`}>
-                                <Button variant="primary" size="small">Update</Button>
+                                <Button variant="primary">
+                                    <FontAwesomeIcon icon={faEdit} />
+                                </Button>
                             </LinkContainer>
-                            <Button onClick={() => this.onDeleteClick(id)} variant="danger" size="small">Delete</Button>
+                            <LinkContainer to={`/tags/delete/${id}`}>
+                                <Button variant="danger">
+                                    <FontAwesomeIcon icon={faTrash} />
+                                </Button>
+                            </LinkContainer>
                         </ButtonGroup>
                     </td>
                 </tr>
-            )
-        })
-    }
-
-    renderCreate() {
-        return (
-            <LinkContainer to={`/tags/create`}>
-                <Button variant="primary">Create Tag</Button>
-            </LinkContainer>
-        )
+            );
+        });
     }
 
     render() {
         return (
             <div>
-                <h2>Tags</h2>
+                <h3>Tags</h3>
                 <Table responsive striped bordered hover size="sm">
                     <thead>
                         <tr>
@@ -60,23 +56,49 @@ class TagList extends React.Component {
                     </thead>
                     <tbody>
                         {this.renderList()}
+                        {this.props.isLoading && (
+                            <tr>
+                                <td colSpan="2">
+                                    <FontAwesomeIcon icon={faSpinner} spin />
+                                </td>
+                            </tr>
+                        )}
                     </tbody>
                 </Table>
-                {this.renderCreate()}
+                <div className="row">
+                    <div className="col text-left">
+                        <LinkContainer to="/" activeClassName="">
+                            <Button variant="secondary">Back to home</Button>
+                        </LinkContainer>
+                    </div>
+                    <div className="col text-right">
+                        <LinkContainer to={"/tags/create"} activeClassName="">
+                            <Button variant="primary">Create a tag</Button>
+                        </LinkContainer>
+                    </div>
+                </div>
+                {this.props.error && (
+                    <Alert variant="danger">
+                        <Alert.Heading>Error</Alert.Heading>
+                        <p>{this.props.error}</p>
+                    </Alert>
+                )}
             </div>
-        )
+        );
     }
 }
 
 const mapStateToProps = state => {
     return {
-        tags: Object.values(state.tags)
-    }
+        isLoading: state.tags.isLoading,
+        error: state.tags.error,
+        tags: Object.values(state.tags.items)
+    };
 };
 
 const mapDispatchToProps = {
     fetchTags,
-    deleteTag
+    reset
 };
 
 export default connect(

@@ -1,7 +1,12 @@
-import _ from 'lodash';
-import React from 'react';
-import { connect } from 'react-redux';
-import { fetchTag, updateTag } from '../../actions/tag';
+import _ from "lodash";
+import React from "react";
+import { connect } from "react-redux";
+import { Redirect, withRouter } from "react-router-dom";
+import { Alert } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { fetchTag, updateTag } from "../../actions/tag";
+import { reset } from "../../actions/tag/update";
 import TagForm from "./TagForm";
 
 class TagUpdate extends React.Component {
@@ -9,36 +14,61 @@ class TagUpdate extends React.Component {
         this.props.fetchTag(this.props.match.params.id);
     }
 
+    componentWillUnmount() {
+        this.props.reset();
+    }
+
     onSubmit = formValues => {
         this.props.updateTag(this.props.match.params.id, formValues);
     };
 
     render() {
-        if (!this.props.tag) {
-            return <div>Loading...</div>;
+        if (this.props.updated) {
+            return <Redirect to={`/tags/${this.props.updated}`} />;
         }
 
         return (
             <div>
-                <h3>Update a Tag</h3>
-                <TagForm initialValues={_.pick(this.props.tag, 'name')} onSubmit={this.onSubmit} />
+                <h3>
+                    Update this tag{" "}
+                    {this.props.isLoading && (
+                        <FontAwesomeIcon icon={faSpinner} spin />
+                    )}
+                </h3>
+                {this.props.tag && (
+                    <TagForm
+                        initialValues={_.pick(this.props.tag, "name")}
+                        onSubmit={this.onSubmit}
+                        isSubmitDisabled={this.props.isLoading}
+                    />
+                )}
+                {this.props.error && (
+                    <Alert variant="danger">
+                        <Alert.Heading>Error</Alert.Heading>
+                        <p>{this.props.error}</p>
+                    </Alert>
+                )}
             </div>
         );
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return { 
-        tag: state.tags[ownProps.match.params.id]
+    return {
+        isLoading: state.tags.isLoading,
+        error: state.tags.error,
+        tag: state.tags.items[ownProps.match.params.id],
+        updated: state.tags.updated
     };
 };
 
 const mapDispatchToProps = {
     fetchTag,
-    updateTag
-}
+    updateTag,
+    reset
+};
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TagUpdate);
+)(withRouter(TagUpdate));

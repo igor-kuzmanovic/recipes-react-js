@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, ButtonGroup, Table } from "react-bootstrap";
+import { Button, ButtonGroup, Table, Alert } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -80,7 +80,12 @@ class CategoryList extends React.Component {
                         </LinkContainer>
                     </div>
                 </div>
-                {this.props.error && <p>{this.props.error}</p>}
+                {this.props.error && (
+                    <Alert variant="danger">
+                        <Alert.Heading>Error</Alert.Heading>
+                        <p>{this.props.error}</p>
+                    </Alert>
+                )}
             </div>
         );
     }
