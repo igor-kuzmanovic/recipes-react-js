@@ -29,7 +29,7 @@ class CategoryUpdate extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3">
+                <h3 className="my-3 text-center">
                     Update this category{" "}
                     {this.props.isLoading && (
                         <FontAwesomeIcon icon={faSpinner} spin />
@@ -43,7 +43,7 @@ class CategoryUpdate extends React.Component {
                     />
                 )}
                 {this.props.error && (
-                    <Alert variant="danger" dismissible className="mt-3">
+                    <Alert variant="danger" dismissible>
                         <Alert.Heading>Error</Alert.Heading>
                         <p>{this.props.error}</p>
                     </Alert>

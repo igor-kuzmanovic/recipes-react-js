@@ -1,18 +1,18 @@
 import _ from "lodash";
 import {
-    FETCH_TAGS_LOADING,
+    FETCH_TAGS_REQUEST,
     FETCH_TAGS_SUCCESS,
     FETCH_TAGS_ERROR,
-    FETCH_TAG_LOADING,
+    FETCH_TAG_REQUEST,
     FETCH_TAG_SUCCESS,
     FETCH_TAG_ERROR,
-    CREATE_TAG_LOADING,
+    CREATE_TAG_REQUEST,
     CREATE_TAG_SUCCESS,
     CREATE_TAG_ERROR,
-    UPDATE_TAG_LOADING,
+    UPDATE_TAG_REQUEST,
     UPDATE_TAG_SUCCESS,
     UPDATE_TAG_ERROR,
-    DELETE_TAG_LOADING,
+    DELETE_TAG_REQUEST,
     DELETE_TAG_SUCCESS,
     DELETE_TAG_ERROR
 } from "../constants/actionTypes";
@@ -28,11 +28,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_TAGS_LOADING:
-        case FETCH_TAG_LOADING:
-        case CREATE_TAG_LOADING:
-        case UPDATE_TAG_LOADING:
-        case DELETE_TAG_LOADING:
+        case FETCH_TAGS_REQUEST:
+        case FETCH_TAG_REQUEST:
+        case CREATE_TAG_REQUEST:
+        case UPDATE_TAG_REQUEST:
+        case DELETE_TAG_REQUEST:
             return {
                 ...state,
                 isLoading: true,

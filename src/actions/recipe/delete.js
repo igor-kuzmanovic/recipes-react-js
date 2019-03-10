@@ -1,12 +1,12 @@
 import api from "../../apis/recipes";
 import {
-    DELETE_RECIPE_LOADING,
+    DELETE_RECIPE_REQUEST,
     DELETE_RECIPE_SUCCESS,
     DELETE_RECIPE_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: DELETE_RECIPE_LOADING };
+    return { type: DELETE_RECIPE_REQUEST };
 }
 
 export function success(payload) {

@@ -1,12 +1,12 @@
 import api from "../../apis/recipes";
 import {
-    DELETE_CATEGORY_LOADING,
+    DELETE_CATEGORY_REQUEST,
     DELETE_CATEGORY_SUCCESS,
     DELETE_CATEGORY_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: DELETE_CATEGORY_LOADING };
+    return { type: DELETE_CATEGORY_REQUEST };
 }
 
 export function success(payload) {

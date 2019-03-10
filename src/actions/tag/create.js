@@ -1,12 +1,12 @@
 import api from "../../apis/recipes";
 import {
-    CREATE_TAG_LOADING,
+    CREATE_TAG_REQUEST,
     CREATE_TAG_SUCCESS,
     CREATE_TAG_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: CREATE_TAG_LOADING };
+    return { type: CREATE_TAG_REQUEST };
 }
 
 export function success(payload) {

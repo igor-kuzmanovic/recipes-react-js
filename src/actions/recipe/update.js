@@ -1,12 +1,13 @@
 import api from "../../apis/recipes";
 import {
-    UPDATE_RECIPE_LOADING,
+    UPDATE_RECIPE_REQUEST,
     UPDATE_RECIPE_SUCCESS,
     UPDATE_RECIPE_ERROR
 } from "../../constants/actionTypes";
+import { serverURL } from "../../constants/server";
 
 export function loading() {
-    return { type: UPDATE_RECIPE_LOADING };
+    return { type: UPDATE_RECIPE_REQUEST };
 }
 
 export function success(payload) {
@@ -22,7 +23,7 @@ export const updateRecipe = (id, formValues) => async dispatch => {
     try {
         const response = await api.put(
             `/recipes/${id}`,
-            ...parseFormValues(formValues)
+            parseFormValues(formValues)
         );
         dispatch(success(response.data));
     } catch (err) {
@@ -47,6 +48,6 @@ function parseFormValues(formValues) {
         tags: formValues.tags.map(tag => {
             return `/api/tags/${tag}`;
         }),
-        imageUrl: "http://localhost:8000/images/default.jpeg"
+        imageUrl: `${serverURL}/images/default.jpeg`
     };
 }

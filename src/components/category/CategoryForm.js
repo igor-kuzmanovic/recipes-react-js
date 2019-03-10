@@ -46,7 +46,7 @@ class CategoryForm extends React.Component {
                         component={this.renderInput}
                     />
                 </Form.Group>
-                <div className="row">
+                <div className="row mb-3">
                     <div className="col text-left">
                         <LinkContainer to="/categories" activeClassName="">
                             <Button variant="secondary">Back to list</Button>

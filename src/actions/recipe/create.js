@@ -1,12 +1,13 @@
 import api from "../../apis/recipes";
 import {
-    CREATE_RECIPE_LOADING,
+    CREATE_RECIPE_REQUEST,
     CREATE_RECIPE_SUCCESS,
     CREATE_RECIPE_ERROR
 } from "../../constants/actionTypes";
+import { serverURL } from "../../constants/server";
 
 export function loading() {
-    return { type: CREATE_RECIPE_LOADING };
+    return { type: CREATE_RECIPE_REQUEST };
 }
 
 export function success(payload) {
@@ -20,9 +21,10 @@ export function error(payload) {
 export const createRecipe = formValues => async dispatch => {
     dispatch(loading());
     try {
-        const response = await api.post("/recipes", {
-            ...parseFormValues(formValues)
-        });
+        const response = await api.post(
+            "/recipes",
+            parseFormValues(formValues)
+        );
         dispatch(success(response.data));
     } catch (err) {
         console.log(err);
@@ -39,13 +41,11 @@ export function reset() {
 function parseFormValues(formValues) {
     return {
         ...formValues,
-        ingredients: formValues.ingredients.map(ingredient => {
-            return `/api/ingredients/${ingredient}`;
-        }),
+        ingredients: formValues.ingredients.map(
+            ingredient => `/api/ingredients/${ingredient}`
+        ),
         category: `/api/categories/${formValues.category}`,
-        tags: formValues.tags.map(tag => {
-            return `/api/tags/${tag}`;
-        }),
-        imageUrl: "http://localhost:8000/images/default.jpeg"
+        tags: formValues.tags.map(tag => `/api/tags/${tag}`),
+        imageUrl: `${serverURL}/images/default.jpeg`
     };
 }

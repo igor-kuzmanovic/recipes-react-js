@@ -1,12 +1,12 @@
 import api from "../../apis/recipes";
 import {
-    CREATE_CATEGORY_LOADING,
+    CREATE_CATEGORY_REQUEST,
     CREATE_CATEGORY_SUCCESS,
     CREATE_CATEGORY_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: CREATE_CATEGORY_LOADING };
+    return { type: CREATE_CATEGORY_REQUEST };
 }
 
 export function success(payload) {

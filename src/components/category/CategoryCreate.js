@@ -23,7 +23,7 @@ class CategoryCreate extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3">
+                <h3 className="my-3 text-center">
                     Create a new category{" "}
                     {this.props.isLoading && (
                         <FontAwesomeIcon icon={faSpinner} spin />
@@ -34,7 +34,7 @@ class CategoryCreate extends React.Component {
                     isSubmitDisabled={this.props.isLoading}
                 />
                 {this.props.error && (
-                    <Alert variant="danger" dismissible className="mt-3">
+                    <Alert variant="danger" dismissible>
                         <Alert.Heading>Error</Alert.Heading>
                         <p>{this.props.error}</p>
                     </Alert>

@@ -46,7 +46,7 @@ class IngredientList extends React.Component {
     render() {
         return (
             <div>
-                <h3 className="my-3">Ingredients</h3>
+                <h3 className="my-3 text-center">Ingredients</h3>
                 <Table responsive striped bordered hover size="sm">
                     <thead>
                         <tr>
@@ -65,7 +65,7 @@ class IngredientList extends React.Component {
                         )}
                     </tbody>
                 </Table>
-                <div className="row">
+                <div className="row mb-3">
                     <div className="col text-left">
                         <LinkContainer to="/" activeClassName="">
                             <Button variant="secondary">Back to home</Button>
@@ -83,7 +83,7 @@ class IngredientList extends React.Component {
                     </div>
                 </div>
                 {this.props.error && (
-                    <Alert variant="danger" dismissible className="mt-3">
+                    <Alert variant="danger" dismissible>
                         <Alert.Heading>Error</Alert.Heading>
                         <p>{this.props.error}</p>
                     </Alert>

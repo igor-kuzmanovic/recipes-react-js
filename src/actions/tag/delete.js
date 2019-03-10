@@ -1,12 +1,12 @@
 import api from "../../apis/recipes";
 import {
-    DELETE_TAG_LOADING,
+    DELETE_TAG_REQUEST,
     DELETE_TAG_SUCCESS,
     DELETE_TAG_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: DELETE_TAG_LOADING };
+    return { type: DELETE_TAG_REQUEST };
 }
 
 export function success(payload) {

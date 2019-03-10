@@ -1,12 +1,12 @@
 import api from "../../apis/recipes";
 import {
-    FETCH_TAGS_LOADING,
+    FETCH_TAGS_REQUEST,
     FETCH_TAGS_SUCCESS,
     FETCH_TAGS_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: FETCH_TAGS_LOADING };
+    return { type: FETCH_TAGS_REQUEST };
 }
 
 export function success(payload) {

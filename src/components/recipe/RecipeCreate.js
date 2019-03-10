@@ -32,7 +32,7 @@ class RecipeCreate extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3">
+                <h3 className="my-3 text-center">
                     Create a new recipe{" "}
                     {this.props.isLoading && (
                         <FontAwesomeIcon icon={faSpinner} spin />
@@ -46,7 +46,7 @@ class RecipeCreate extends React.Component {
                     tags={this.props.tags}
                 />
                 {this.props.error && (
-                    <Alert variant="danger" dismissible className="mt-3">
+                    <Alert variant="danger" dismissible>
                         <Alert.Heading>Error</Alert.Heading>
                         <p>{this.props.error}</p>
                     </Alert>

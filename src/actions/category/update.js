@@ -1,12 +1,12 @@
 import api from "../../apis/recipes";
 import {
-    UPDATE_CATEGORY_LOADING,
+    UPDATE_CATEGORY_REQUEST,
     UPDATE_CATEGORY_SUCCESS,
     UPDATE_CATEGORY_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: UPDATE_CATEGORY_LOADING };
+    return { type: UPDATE_CATEGORY_REQUEST };
 }
 
 export function success(payload) {

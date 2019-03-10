@@ -1,12 +1,12 @@
 import api from "../../apis/recipes";
 import {
-    UPDATE_INGREDIENT_LOADING,
+    UPDATE_INGREDIENT_REQUEST,
     UPDATE_INGREDIENT_SUCCESS,
     UPDATE_INGREDIENT_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: UPDATE_INGREDIENT_LOADING };
+    return { type: UPDATE_INGREDIENT_REQUEST };
 }
 
 export function success(payload) {

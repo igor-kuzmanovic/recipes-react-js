@@ -17,20 +17,24 @@ class IngredientShow extends React.Component {
 
     render() {
         return (
-            <div className="my-3">
+            <div>
                 {this.props.ingredient && (
-                    <h3>
+                    <h3 className="my-3 text-center">
                         {this.props.ingredient.name}{" "}
                         {this.props.isLoading && (
                             <FontAwesomeIcon icon={faSpinner} spin />
                         )}
                     </h3>
                 )}
-                <LinkContainer to="/ingredients" activeClassName="">
+                <LinkContainer
+                    to="/ingredients"
+                    activeClassName=""
+                    className="mb-3"
+                >
                     <Button variant="secondary">Back to list</Button>
                 </LinkContainer>
                 {this.props.error && (
-                    <Alert variant="danger" dismissible className="mt-3">
+                    <Alert variant="danger" dismissible>
                         <Alert.Heading>Error</Alert.Heading>
                         <p>{this.props.error}</p>
                     </Alert>

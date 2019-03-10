@@ -1,12 +1,12 @@
 import api from "../../apis/recipes";
 import {
-    CREATE_INGREDIENT_LOADING,
+    CREATE_INGREDIENT_REQUEST,
     CREATE_INGREDIENT_SUCCESS,
     CREATE_INGREDIENT_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: CREATE_INGREDIENT_LOADING };
+    return { type: CREATE_INGREDIENT_REQUEST };
 }
 
 export function success(payload) {

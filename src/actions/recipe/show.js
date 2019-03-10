@@ -1,12 +1,12 @@
 import api from "../../apis/recipes";
 import {
-    FETCH_RECIPE_LOADING,
+    FETCH_RECIPE_REQUEST,
     FETCH_RECIPE_SUCCESS,
     FETCH_RECIPE_ERROR
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: FETCH_RECIPE_LOADING };
+    return { type: FETCH_RECIPE_REQUEST };
 }
 
 export function success(payload) {

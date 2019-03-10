@@ -20,7 +20,9 @@ const App = () => {
                     {tagRoutes}
                     <Route
                         render={() => (
-                            <h1 className="text-center">404: Page Not Found</h1>
+                            <h1 className="text-center mt-5">
+                                404: Page Not Found
+                            </h1>
                         )}
                     />
                 </Switch>

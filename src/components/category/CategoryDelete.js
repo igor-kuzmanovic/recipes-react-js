@@ -23,13 +23,13 @@ class CategoryDelete extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3">
+                <h3 className="my-3 text-center">
                     Are you sure you want to delete this category?{" "}
                     {this.props.isLoading && (
                         <FontAwesomeIcon icon={faSpinner} spin />
                     )}
                 </h3>
-                <div className="row">
+                <div className="row mb-3">
                     <div className="col text-left">
                         <LinkContainer to="/categories" activeClassName="">
                             <Button variant="secondary">Back to list</Button>
@@ -46,7 +46,7 @@ class CategoryDelete extends React.Component {
                     </div>
                 </div>
                 {this.props.error && (
-                    <Alert variant="danger" dismissible className="mt-3">
+                    <Alert variant="danger" dismissible>
                         <Alert.Heading>Error</Alert.Heading>
                         <p>{this.props.error}</p>
                     </Alert>

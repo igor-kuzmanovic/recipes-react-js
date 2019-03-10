@@ -19,18 +19,22 @@ class RecipeShow extends React.Component {
         return (
             <div>
                 {this.props.recipe && (
-                    <h3 className="my-3">
+                    <h3 className="my-3 text-center">
                         {this.props.recipe.title}{" "}
                         {this.props.isLoading && (
                             <FontAwesomeIcon icon={faSpinner} spin />
                         )}
                     </h3>
                 )}
-                <LinkContainer to="/recipes" activeClassName="">
+                <LinkContainer
+                    to="/recipes"
+                    activeClassName=""
+                    className="mb-3"
+                >
                     <Button variant="secondary">Back to list</Button>
                 </LinkContainer>
                 {this.props.error && (
-                    <Alert variant="danger" dismissible className="mt-3">
+                    <Alert variant="danger" dismissible>
                         <Alert.Heading>Error</Alert.Heading>
                         <p>{this.props.error}</p>
                     </Alert>

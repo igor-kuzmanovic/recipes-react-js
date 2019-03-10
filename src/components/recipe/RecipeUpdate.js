@@ -24,6 +24,15 @@ class RecipeUpdate extends React.Component {
         this.props.reset();
     }
 
+    parseRecipe(recipe) {
+        return {
+            ...recipe,
+            ingredients: recipe.ingredients.map(ingredient => ingredient.id),
+            category: recipe.category.id,
+            tags: recipe.tags.map(tag => tag.id)
+        };
+    }
+
     onSubmit = formValues => {
         this.props.updateRecipe(this.props.match.params.id, formValues);
     };
@@ -35,7 +44,7 @@ class RecipeUpdate extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3">
+                <h3 className="my-3 text-center">
                     Update this recipe{" "}
                     {this.props.isLoading && (
                         <FontAwesomeIcon icon={faSpinner} spin />
@@ -44,7 +53,7 @@ class RecipeUpdate extends React.Component {
                 {this.props.recipe && (
                     <RecipeForm
                         initialValues={_.pick(
-                            this.props.recipe,
+                            this.parseRecipe(this.props.recipe),
                             "title",
                             "description",
                             "ingredients",
@@ -60,7 +69,7 @@ class RecipeUpdate extends React.Component {
                     />
                 )}
                 {this.props.error && (
-                    <Alert variant="danger" dismissible className="mt-3">
+                    <Alert variant="danger" dismissible>
                         <Alert.Heading>Error</Alert.Heading>
                         <p>{this.props.error}</p>
                     </Alert>

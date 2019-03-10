@@ -144,7 +144,7 @@ class RecipeForm extends React.Component {
                         })}
                     </Field>
                 </Form.Group>
-                <div className="row">
+                <div className="row mb-3">
                     <div className="col text-left">
                         <LinkContainer to="/recipes" activeClassName="">
                             <Button variant="secondary">Back to list</Button>

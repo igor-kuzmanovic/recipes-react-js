@@ -1,18 +1,18 @@
 import _ from "lodash";
 import {
-    FETCH_RECIPES_LOADING,
+    FETCH_RECIPES_REQUEST,
     FETCH_RECIPES_SUCCESS,
     FETCH_RECIPES_ERROR,
-    FETCH_RECIPE_LOADING,
+    FETCH_RECIPE_REQUEST,
     FETCH_RECIPE_SUCCESS,
     FETCH_RECIPE_ERROR,
-    CREATE_RECIPE_LOADING,
+    CREATE_RECIPE_REQUEST,
     CREATE_RECIPE_SUCCESS,
     CREATE_RECIPE_ERROR,
-    UPDATE_RECIPE_LOADING,
+    UPDATE_RECIPE_REQUEST,
     UPDATE_RECIPE_SUCCESS,
     UPDATE_RECIPE_ERROR,
-    DELETE_RECIPE_LOADING,
+    DELETE_RECIPE_REQUEST,
     DELETE_RECIPE_SUCCESS,
     DELETE_RECIPE_ERROR
 } from "../constants/actionTypes";
@@ -28,11 +28,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_RECIPES_LOADING:
-        case FETCH_RECIPE_LOADING:
-        case CREATE_RECIPE_LOADING:
-        case UPDATE_RECIPE_LOADING:
-        case DELETE_RECIPE_LOADING:
+        case FETCH_RECIPES_REQUEST:
+        case FETCH_RECIPE_REQUEST:
+        case CREATE_RECIPE_REQUEST:
+        case UPDATE_RECIPE_REQUEST:
+        case DELETE_RECIPE_REQUEST:
             return {
                 ...state,
                 isLoading: true,
