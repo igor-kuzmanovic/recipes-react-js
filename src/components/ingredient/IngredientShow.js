@@ -20,7 +20,8 @@ class IngredientShow extends React.Component {
             <div>
                 {ingredient && (
                     <h3 className="my-3 text-center">
-                        {ingredient.name} <Spinner isLoading={isLoading} />
+                        <strong>{ingredient.name}</strong>{" "}
+                        <Spinner isLoading={isLoading} />
                     </h3>
                 )}
                 <BackButton link="/ingredients" />

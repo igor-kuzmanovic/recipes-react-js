@@ -20,7 +20,8 @@ class CategoryShow extends React.Component {
             <div>
                 {category && (
                     <h3 className="my-3 text-center">
-                        {category.name} <Spinner isLoading={isLoading} />
+                        <strong>{category.name}</strong>{" "}
+                        <Spinner isLoading={isLoading} />
                     </h3>
                 )}
                 <BackButton link="/categories" />

@@ -22,11 +22,6 @@ class Home extends React.Component {
             const { id, title, description, creationDate, image } = recipe;
             return (
                 <Card key={id} className="text-center m-2">
-                    <Card.Img
-                        variant="top"
-                        src={`${serverURL}\\${image.contentUrl}`}
-                        alt={description}
-                    />
                     <Card.Body>
                         <Card.Title>{title}</Card.Title>
                         <Card.Text>{description}</Card.Text>

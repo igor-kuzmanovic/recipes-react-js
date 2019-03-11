@@ -1,5 +1,4 @@
 import Input from "./Input";
-import FileInput from "./FileInput";
 import InputError from "./InputError";
 import SelectSingle from "./SelectSingle";
 import SelectMultiple from "./SelectMultiple";
@@ -12,7 +11,6 @@ import DeleteButton from "./DeleteButton";
 
 export {
     Input,
-    FileInput,
     InputError,
     SelectSingle,
     SelectMultiple,
