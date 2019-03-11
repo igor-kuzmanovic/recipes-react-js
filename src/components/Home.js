@@ -51,7 +51,7 @@ class Home extends React.Component {
                     Welcome <Spinner isLoading={isLoading} />
                 </h3>
                 <CardDeck>{this.renderList()}</CardDeck>
-                <div className="text-center">
+                <div className="text-center mb-3">
                     <CreateButton link="/recipes/create" />
                 </div>
                 <ErrorAlert error={error} />
