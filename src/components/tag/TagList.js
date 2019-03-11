@@ -1,11 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, ButtonGroup, Table, Alert } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { ButtonGroup, Table } from "react-bootstrap";
 import { fetchTags, reset } from "../../actions/tag/list";
+import { UpdateButton, DeleteButton, BackButton, CreateButton } from "../form";
+import { ErrorAlert, Spinner } from "../misc";
 
 class TagList extends React.Component {
     componentDidMount() {
@@ -26,16 +25,8 @@ class TagList extends React.Component {
                     </td>
                     <td className="p-0">
                         <ButtonGroup>
-                            <LinkContainer to={`/tags/update/${id}`}>
-                                <Button variant="primary">
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </Button>
-                            </LinkContainer>
-                            <LinkContainer to={`/tags/delete/${id}`}>
-                                <Button variant="danger">
-                                    <FontAwesomeIcon icon={faTrash} />
-                                </Button>
-                            </LinkContainer>
+                            <UpdateButton link={`/tags/update/${id}`} />
+                            <DeleteButton link={`/tags/delete/${id}`} />
                         </ButtonGroup>
                     </td>
                 </tr>
@@ -44,6 +35,8 @@ class TagList extends React.Component {
     }
 
     render() {
+        const { isLoading, error } = this.props;
+
         return (
             <div>
                 <h3 className="my-3 text-center">Tags</h3>
@@ -56,10 +49,10 @@ class TagList extends React.Component {
                     </thead>
                     <tbody>
                         {this.renderList()}
-                        {this.props.isLoading && (
+                        {isLoading && (
                             <tr>
                                 <td colSpan="2">
-                                    <FontAwesomeIcon icon={faSpinner} spin />
+                                    <Spinner isLoading={isLoading} />
                                 </td>
                             </tr>
                         )}
@@ -67,22 +60,13 @@ class TagList extends React.Component {
                 </Table>
                 <div className="row mb-3">
                     <div className="col text-left">
-                        <LinkContainer to="/" activeClassName="">
-                            <Button variant="secondary">Back to home</Button>
-                        </LinkContainer>
+                        <BackButton link="/" />
                     </div>
                     <div className="col text-right">
-                        <LinkContainer to={"/tags/create"} activeClassName="">
-                            <Button variant="primary">Create a tag</Button>
-                        </LinkContainer>
+                        <CreateButton link="/tags/create" />
                     </div>
                 </div>
-                {this.props.error && (
-                    <Alert variant="danger" dismissible>
-                        <Alert.Heading>Error</Alert.Heading>
-                        <p>{this.props.error}</p>
-                    </Alert>
-                )}
+                <ErrorAlert error={error} />
             </div>
         );
     }

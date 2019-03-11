@@ -3,11 +3,18 @@ import React from "react";
 import { connect } from "react-redux";
 import { Button, CardDeck, Card } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { fetchRecipes } from "../actions/recipe/list";
+import { fetchRecipes, reset } from "../actions/recipe/list";
+import { serverURL } from "../constants/server";
+import { CreateButton } from "./form";
+import { ErrorAlert, Spinner } from "./misc";
 
 class Home extends React.Component {
     componentDidMount() {
         this.props.fetchRecipes();
+    }
+
+    componentWillUnmount() {
+        this.props.reset();
     }
 
     renderList() {
@@ -15,7 +22,11 @@ class Home extends React.Component {
             const { id, title, description, creationDate, image } = recipe;
             return (
                 <Card key={id} className="text-center m-2">
-                    <Card.Img variant="top" src={image} alt={description} />
+                    <Card.Img
+                        variant="top"
+                        src={`${serverURL}\\${image.contentUrl}`}
+                        alt={description}
+                    />
                     <Card.Body>
                         <Card.Title>{title}</Card.Title>
                         <Card.Text>{description}</Card.Text>
@@ -31,24 +42,19 @@ class Home extends React.Component {
         });
     }
 
-    renderCreate() {
-        return (
-            <LinkContainer to={"/recipes/create"}>
-                <div className="text-center">
-                    <Button variant="primary" size="lg">
-                        Create a recipe
-                    </Button>
-                </div>
-            </LinkContainer>
-        );
-    }
-
     render() {
+        const { isLoading, error } = this.props;
+
         return (
             <div>
-                <h3 className="my-3 text-center">Welcome</h3>
+                <h3 className="my-3 text-center">
+                    Welcome <Spinner isLoading={isLoading} />
+                </h3>
                 <CardDeck>{this.renderList()}</CardDeck>
-                {this.renderCreate()}
+                <div className="text-center">
+                    <CreateButton link="/recipes/create" />
+                </div>
+                <ErrorAlert error={error} />
             </div>
         );
     }
@@ -56,12 +62,15 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
     return {
+        isLoading: state.recipes.isLoading,
+        error: state.recipes.error,
         recipes: Object.values(state.recipes.items)
     };
 };
 
 const mapDispatchToProps = {
-    fetchRecipes
+    fetchRecipes,
+    reset
 };
 
 export default connect(

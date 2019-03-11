@@ -1,11 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
-import { Alert } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { createCategory, reset } from "../../actions/category/create";
 import CategoryForm from "./CategoryForm";
+import { ErrorAlert, Spinner } from "../misc";
 
 class CategoryCreate extends React.Component {
     componentWillUnmount() {
@@ -17,28 +15,22 @@ class CategoryCreate extends React.Component {
     };
 
     render() {
-        if (this.props.created) {
-            return <Redirect to={`/categories/${this.props.created}`} />;
+        const { created, isLoading, error } = this.props;
+
+        if (created) {
+            return <Redirect to={`/categories/${created}`} />;
         }
 
         return (
             <div>
                 <h3 className="my-3 text-center">
-                    Create a new category{" "}
-                    {this.props.isLoading && (
-                        <FontAwesomeIcon icon={faSpinner} spin />
-                    )}
+                    Create a new category <Spinner isLoading={isLoading} />
                 </h3>
                 <CategoryForm
                     onSubmit={this.onSubmit}
-                    isSubmitDisabled={this.props.isLoading}
+                    isSubmitDisabled={isLoading}
                 />
-                {this.props.error && (
-                    <Alert variant="danger" dismissible>
-                        <Alert.Heading>Error</Alert.Heading>
-                        <p>{this.props.error}</p>
-                    </Alert>
-                )}
+                <ErrorAlert error={error} />
             </div>
         );
     }

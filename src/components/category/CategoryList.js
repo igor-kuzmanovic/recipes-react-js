@@ -1,11 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, ButtonGroup, Table, Alert } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { ButtonGroup, Table } from "react-bootstrap";
 import { fetchCategories, reset } from "../../actions/category/list";
+import { UpdateButton, DeleteButton, BackButton, CreateButton } from "../form";
+import { ErrorAlert, Spinner } from "../misc";
 
 class CategoryList extends React.Component {
     componentDidMount() {
@@ -26,16 +25,8 @@ class CategoryList extends React.Component {
                     </td>
                     <td className="p-0">
                         <ButtonGroup>
-                            <LinkContainer to={`/categories/update/${id}`}>
-                                <Button variant="primary">
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </Button>
-                            </LinkContainer>
-                            <LinkContainer to={`/categories/delete/${id}`}>
-                                <Button variant="danger">
-                                    <FontAwesomeIcon icon={faTrash} />
-                                </Button>
-                            </LinkContainer>
+                            <UpdateButton link={`/categories/update/${id}`} />
+                            <DeleteButton link={`/categories/delete/${id}`} />
                         </ButtonGroup>
                     </td>
                 </tr>
@@ -44,6 +35,8 @@ class CategoryList extends React.Component {
     }
 
     render() {
+        const { isLoading, error } = this.props;
+
         return (
             <div>
                 <h3 className="my-3 text-center">Categories</h3>
@@ -56,10 +49,10 @@ class CategoryList extends React.Component {
                     </thead>
                     <tbody>
                         {this.renderList()}
-                        {this.props.isLoading && (
+                        {isLoading && (
                             <tr>
                                 <td colSpan="2">
-                                    <FontAwesomeIcon icon={faSpinner} spin />
+                                    <Spinner isLoading={isLoading} />
                                 </td>
                             </tr>
                         )}
@@ -67,25 +60,13 @@ class CategoryList extends React.Component {
                 </Table>
                 <div className="row mb-3">
                     <div className="col text-left">
-                        <LinkContainer to="/" activeClassName="">
-                            <Button variant="secondary">Back to home</Button>
-                        </LinkContainer>
+                        <BackButton link="/" />
                     </div>
                     <div className="col text-right">
-                        <LinkContainer
-                            to={"/categories/create"}
-                            activeClassName=""
-                        >
-                            <Button variant="primary">Create a category</Button>
-                        </LinkContainer>
+                        <CreateButton link="/categories/create" />
                     </div>
                 </div>
-                {this.props.error && (
-                    <Alert variant="danger" dismissible>
-                        <Alert.Heading>Error</Alert.Heading>
-                        <p>{this.props.error}</p>
-                    </Alert>
-                )}
+                <ErrorAlert error={error} />
             </div>
         );
     }

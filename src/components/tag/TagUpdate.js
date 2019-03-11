@@ -2,12 +2,10 @@ import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
-import { Alert } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { fetchTag, updateTag } from "../../actions/tag";
 import { reset } from "../../actions/tag/update";
 import TagForm from "./TagForm";
+import { ErrorAlert, Spinner } from "../misc";
 
 class TagUpdate extends React.Component {
     componentDidMount() {
@@ -23,31 +21,25 @@ class TagUpdate extends React.Component {
     };
 
     render() {
-        if (this.props.updated) {
-            return <Redirect to={`/tags/${this.props.updated}`} />;
+        const { tag, updated, isLoading, error } = this.props;
+
+        if (updated) {
+            return <Redirect to={`/tags/${updated}`} />;
         }
 
         return (
             <div>
                 <h3 className="my-3 text-center">
-                    Update this tag{" "}
-                    {this.props.isLoading && (
-                        <FontAwesomeIcon icon={faSpinner} spin />
-                    )}
+                    Update this tag <Spinner isLoading={isLoading} />
                 </h3>
-                {this.props.tag && (
+                {tag && (
                     <TagForm
-                        initialValues={_.pick(this.props.tag, "name")}
+                        initialValues={_.pick(tag, "name")}
                         onSubmit={this.onSubmit}
-                        isSubmitDisabled={this.props.isLoading}
+                        isSubmitDisabled={isLoading}
                     />
                 )}
-                {this.props.error && (
-                    <Alert variant="danger" dismissible>
-                        <Alert.Heading>Error</Alert.Heading>
-                        <p>{this.props.error}</p>
-                    </Alert>
-                )}
+                <ErrorAlert error={error} />
             </div>
         );
     }

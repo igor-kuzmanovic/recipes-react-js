@@ -2,12 +2,10 @@ import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
-import { Alert } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { fetchIngredient, updateIngredient } from "../../actions/ingredient";
 import { reset } from "../../actions/ingredient/update";
 import IngredientForm from "./IngredientForm";
+import { ErrorAlert, Spinner } from "../misc";
 
 class IngredientUpdate extends React.Component {
     componentDidMount() {
@@ -23,31 +21,25 @@ class IngredientUpdate extends React.Component {
     };
 
     render() {
-        if (this.props.updated) {
-            return <Redirect to={`/ingredients/${this.props.updated}`} />;
+        const { ingredient, updated, isLoading, error } = this.props;
+
+        if (updated) {
+            return <Redirect to={`/ingredients/${updated}`} />;
         }
 
         return (
             <div>
                 <h3 className="my-3 text-center">
-                    Update this ingredient{" "}
-                    {this.props.isLoading && (
-                        <FontAwesomeIcon icon={faSpinner} spin />
-                    )}
+                    Update this ingredient <Spinner isLoading={isLoading} />
                 </h3>
-                {this.props.ingredient && (
+                {ingredient && (
                     <IngredientForm
-                        initialValues={_.pick(this.props.ingredient, "name")}
+                        initialValues={_.pick(ingredient, "name")}
                         onSubmit={this.onSubmit}
-                        isSubmitDisabled={this.props.isLoading}
+                        isSubmitDisabled={isLoading}
                     />
                 )}
-                {this.props.error && (
-                    <Alert variant="danger" dismissible>
-                        <Alert.Heading>Error</Alert.Heading>
-                        <p>{this.props.error}</p>
-                    </Alert>
-                )}
+                <ErrorAlert error={error} />
             </div>
         );
     }

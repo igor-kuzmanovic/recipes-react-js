@@ -1,10 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button, Alert } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { fetchCategory, reset } from "../../actions/category/show";
+import { BackButton } from "../form";
+import { ErrorAlert, Spinner } from "../misc";
 
 class CategoryShow extends React.Component {
     componentDidMount() {
@@ -16,29 +14,17 @@ class CategoryShow extends React.Component {
     }
 
     render() {
+        const { category, isLoading, error } = this.props;
+
         return (
             <div>
-                {this.props.category && (
+                {category && (
                     <h3 className="my-3 text-center">
-                        {this.props.category.name}{" "}
-                        {this.props.isLoading && (
-                            <FontAwesomeIcon icon={faSpinner} spin />
-                        )}
+                        {category.name} <Spinner isLoading={isLoading} />
                     </h3>
                 )}
-                <LinkContainer
-                    to="/categories"
-                    activeClassName=""
-                    className="mb-3"
-                >
-                    <Button variant="secondary">Back to list</Button>
-                </LinkContainer>
-                {this.props.error && (
-                    <Alert variant="danger" dismissible>
-                        <Alert.Heading>Error</Alert.Heading>
-                        <p>{this.props.error}</p>
-                    </Alert>
-                )}
+                <BackButton link="/categories" />
+                <ErrorAlert error={error} />
             </div>
         );
     }

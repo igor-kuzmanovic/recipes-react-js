@@ -2,12 +2,10 @@ import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
-import { Alert } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { fetchCategory, updateCategory } from "../../actions/category";
 import { reset } from "../../actions/category/update";
 import CategoryForm from "./CategoryForm";
+import { ErrorAlert, Spinner } from "../misc";
 
 class CategoryUpdate extends React.Component {
     componentDidMount() {
@@ -23,31 +21,25 @@ class CategoryUpdate extends React.Component {
     };
 
     render() {
-        if (this.props.updated) {
-            return <Redirect to={`/categories/${this.props.updated}`} />;
+        const { category, updated, isLoading, error } = this.props;
+
+        if (updated) {
+            return <Redirect to={`/categories/${updated}`} />;
         }
 
         return (
             <div>
                 <h3 className="my-3 text-center">
-                    Update this category{" "}
-                    {this.props.isLoading && (
-                        <FontAwesomeIcon icon={faSpinner} spin />
-                    )}
+                    Update this category <Spinner isLoading={isLoading} />
                 </h3>
-                {this.props.category && (
+                {category && (
                     <CategoryForm
-                        initialValues={_.pick(this.props.category, "name")}
+                        initialValues={_.pick(category, "name")}
                         onSubmit={this.onSubmit}
-                        isSubmitDisabled={this.props.isLoading}
+                        isSubmitDisabled={isLoading}
                     />
                 )}
-                {this.props.error && (
-                    <Alert variant="danger" dismissible>
-                        <Alert.Heading>Error</Alert.Heading>
-                        <p>{this.props.error}</p>
-                    </Alert>
-                )}
+                <ErrorAlert error={error} />
             </div>
         );
     }

@@ -4,7 +4,6 @@ import {
     UPDATE_RECIPE_SUCCESS,
     UPDATE_RECIPE_ERROR
 } from "../../constants/actionTypes";
-import { serverURL } from "../../constants/server";
 
 export function loading() {
     return { type: UPDATE_RECIPE_REQUEST };
@@ -48,6 +47,6 @@ function parseFormValues(formValues) {
         tags: formValues.tags.map(tag => {
             return `/api/tags/${tag}`;
         }),
-        imageUrl: `${serverURL}/images/default.jpeg`
+        image: `/api/media_objects/1`
     };
 }

@@ -2,15 +2,13 @@ import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
-import { Alert } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { fetchRecipe, updateRecipe } from "../../actions/recipe";
 import { reset } from "../../actions/recipe/update";
 import { fetchIngredients } from "../../actions/ingredient/list";
 import { fetchCategories } from "../../actions/category/list";
 import { fetchTags } from "../../actions/tag/list";
 import RecipeForm from "./RecipeForm";
+import { ErrorAlert, Spinner } from "../misc";
 
 class RecipeUpdate extends React.Component {
     componentDidMount() {
@@ -24,7 +22,8 @@ class RecipeUpdate extends React.Component {
         this.props.reset();
     }
 
-    parseRecipe(recipe) {
+    parseRecipe() {
+        const recipe = this.props.recipe;
         return {
             ...recipe,
             ingredients: recipe.ingredients.map(ingredient => ingredient.id),
@@ -38,22 +37,29 @@ class RecipeUpdate extends React.Component {
     };
 
     render() {
-        if (this.props.updated) {
-            return <Redirect to={`/recipes/${this.props.updated}`} />;
+        const {
+            recipe,
+            ingredients,
+            categories,
+            tags,
+            updated,
+            isLoading,
+            error
+        } = this.props;
+
+        if (updated) {
+            return <Redirect to={`/recipes/${updated}`} />;
         }
 
         return (
             <div>
                 <h3 className="my-3 text-center">
-                    Update this recipe{" "}
-                    {this.props.isLoading && (
-                        <FontAwesomeIcon icon={faSpinner} spin />
-                    )}
+                    Update this recipe <Spinner isLoading={isLoading} />
                 </h3>
-                {this.props.recipe && (
+                {recipe && (
                     <RecipeForm
                         initialValues={_.pick(
-                            this.parseRecipe(this.props.recipe),
+                            this.parseRecipe(),
                             "title",
                             "description",
                             "ingredients",
@@ -62,18 +68,13 @@ class RecipeUpdate extends React.Component {
                             "imageUrl"
                         )}
                         onSubmit={this.onSubmit}
-                        isSubmitDisabled={this.props.isLoading}
-                        ingredients={this.props.ingredients}
-                        categories={this.props.categories}
-                        tags={this.props.tags}
+                        isSubmitDisabled={isLoading}
+                        ingredients={ingredients}
+                        categories={categories}
+                        tags={tags}
                     />
                 )}
-                {this.props.error && (
-                    <Alert variant="danger" dismissible>
-                        <Alert.Heading>Error</Alert.Heading>
-                        <p>{this.props.error}</p>
-                    </Alert>
-                )}
+                <ErrorAlert error={error} />
             </div>
         );
     }

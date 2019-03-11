@@ -1,11 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
-import { Alert } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { createIngredient, reset } from "../../actions/ingredient/create";
 import IngredientForm from "./IngredientForm";
+import { ErrorAlert, Spinner } from "../misc";
 
 class IngredientCreate extends React.Component {
     componentWillUnmount() {
@@ -17,28 +15,22 @@ class IngredientCreate extends React.Component {
     };
 
     render() {
-        if (this.props.created) {
-            return <Redirect to={`/categories/${this.props.created}`} />;
+        const { created, isLoading, error } = this.props;
+
+        if (created) {
+            return <Redirect to={`/ingredients/${created}`} />;
         }
 
         return (
             <div>
                 <h3 className="my-3 text-center">
-                    Create a new ingredient{" "}
-                    {this.props.isLoading && (
-                        <FontAwesomeIcon icon={faSpinner} spin />
-                    )}
+                    Create a new ingredient <Spinner isLoading={isLoading} />
                 </h3>
                 <IngredientForm
                     onSubmit={this.onSubmit}
-                    isSubmitDisabled={this.props.isLoading}
+                    isSubmitDisabled={isLoading}
                 />
-                {this.props.error && (
-                    <Alert variant="danger" dismissible>
-                        <Alert.Heading>Error</Alert.Heading>
-                        <p>{this.props.error}</p>
-                    </Alert>
-                )}
+                <ErrorAlert error={error} />
             </div>
         );
     }
@@ -46,9 +38,9 @@ class IngredientCreate extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isLoading: state.categories.isLoading,
-        error: state.categories.error,
-        created: state.categories.created
+        isLoading: state.ingredients.isLoading,
+        error: state.ingredients.error,
+        created: state.ingredients.created
     };
 };
 

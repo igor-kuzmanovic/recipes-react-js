@@ -1,14 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
-import { Alert } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { createRecipe, reset } from "../../actions/recipe/create";
 import { fetchIngredients } from "../../actions/ingredient/list";
 import { fetchCategories } from "../../actions/category/list";
 import { fetchTags } from "../../actions/tag/list";
 import RecipeForm from "./RecipeForm";
+import { ErrorAlert, Spinner } from "../misc";
 
 class RecipeCreate extends React.Component {
     componentDidMount() {
@@ -26,31 +24,32 @@ class RecipeCreate extends React.Component {
     };
 
     render() {
-        if (this.props.created) {
-            return <Redirect to={`/recipes/${this.props.created}`} />;
+        const {
+            ingredients,
+            categories,
+            tags,
+            created,
+            isLoading,
+            error
+        } = this.props;
+
+        if (created) {
+            return <Redirect to={`/recipes/${created}`} />;
         }
 
         return (
             <div>
                 <h3 className="my-3 text-center">
-                    Create a new recipe{" "}
-                    {this.props.isLoading && (
-                        <FontAwesomeIcon icon={faSpinner} spin />
-                    )}
+                    Create a new recipe <Spinner isLoading={isLoading} />
                 </h3>
                 <RecipeForm
                     onSubmit={this.onSubmit}
-                    isSubmitDisabled={this.props.isLoading}
-                    ingredients={this.props.ingredients}
-                    categories={this.props.categories}
-                    tags={this.props.tags}
+                    isSubmitDisabled={isLoading}
+                    ingredients={ingredients}
+                    categories={categories}
+                    tags={tags}
                 />
-                {this.props.error && (
-                    <Alert variant="danger" dismissible>
-                        <Alert.Heading>Error</Alert.Heading>
-                        <p>{this.props.error}</p>
-                    </Alert>
-                )}
+                <ErrorAlert error={error} />
             </div>
         );
     }

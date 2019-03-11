@@ -1,11 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
-import { Button, Alert } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { deleteIngredient, reset } from "../../actions/ingredient/delete";
+import { ConfirmButton, BackButton } from "../form";
+import { ErrorAlert, Spinner } from "../misc";
 
 class IngredientDelete extends React.Component {
     componentWillUnmount() {
@@ -17,7 +15,9 @@ class IngredientDelete extends React.Component {
     };
 
     render() {
-        if (this.props.deleted) {
+        const { deleted, isLoading, error } = this.props;
+
+        if (deleted) {
             return <Redirect to="/ingredients" />;
         }
 
@@ -25,38 +25,26 @@ class IngredientDelete extends React.Component {
             <div>
                 <h3 className="my-3 text-center">
                     Are you sure you want to delete this ingredient?{" "}
-                    {this.props.isLoading && (
-                        <FontAwesomeIcon icon={faSpinner} spin />
-                    )}
+                    <Spinner isLoading={isLoading} />
                 </h3>
                 <div className="row mb-3">
                     <div className="col text-left">
-                        <LinkContainer to="/ingredients" activeClassName="">
-                            <Button variant="secondary">Back to list</Button>
-                        </LinkContainer>
+                        <BackButton link="/ingredients" />
                     </div>
                     <div className="col text-right">
-                        <Button
+                        <ConfirmButton
                             onClick={this.onDeleteClick}
-                            variant="danger"
-                            disabled={this.props.isLoading}
-                        >
-                            Confirm
-                        </Button>
+                            disabled={isLoading}
+                        />
                     </div>
                 </div>
-                {this.props.error && (
-                    <Alert variant="danger" dismissible>
-                        <Alert.Heading>Error</Alert.Heading>
-                        <p>{this.props.error}</p>
-                    </Alert>
-                )}
+                <ErrorAlert error={error} />
             </div>
         );
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
     return {
         isLoading: state.ingredients.isLoading,
         error: state.ingredients.error,
