@@ -1,8 +1,13 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { Form, Button } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { Input, SelectSingle, SelectMultiple, SubmitButton } from "../form";
+import { Form } from "react-bootstrap";
+import {
+    Input,
+    SelectSingle,
+    SelectMultiple,
+    SubmitButton,
+    BackButton
+} from "../form";
 
 class RecipeForm extends React.Component {
     onSubmit = formValues => {
@@ -70,9 +75,7 @@ class RecipeForm extends React.Component {
                 </Field>
                 <div className="row mb-3">
                     <div className="col text-left">
-                        <LinkContainer to="/recipes" activeClassName="">
-                            <Button variant="secondary">Back to list</Button>
-                        </LinkContainer>
+                        <BackButton link="/recipes" />
                     </div>
                     <div className="col text-right">
                         <SubmitButton disabled={this.props.isSubmitDisabled} />
