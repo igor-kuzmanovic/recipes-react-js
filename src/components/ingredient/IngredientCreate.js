@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import { createIngredient, reset } from "../../actions/ingredient/create";
+import requireAuth from "../requireAuth";
 import IngredientForm from "./IngredientForm";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -49,7 +50,9 @@ const mapDispatchToProps = {
     reset
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withRouter(IngredientCreate));
+export default requireAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(withRouter(IngredientCreate))
+);

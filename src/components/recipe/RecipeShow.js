@@ -2,6 +2,7 @@ import moment from "moment";
 import React from "react";
 import { connect } from "react-redux";
 import { fetchRecipe, reset } from "../../actions/recipe/show";
+import requireAuth from "../requireAuth";
 import { BackButton } from "../form";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -74,7 +75,9 @@ const mapDispatchToProps = {
     reset
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(RecipeShow);
+export default requireAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(RecipeShow)
+);

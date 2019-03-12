@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCategory, reset } from "../../actions/category/show";
+import requireAuth from "../requireAuth";
 import { BackButton } from "../form";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -44,7 +45,9 @@ const mapDispatchToProps = {
     reset
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CategoryShow);
+export default requireAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(CategoryShow)
+);

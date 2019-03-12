@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import { fetchIngredient, updateIngredient } from "../../actions/ingredient";
 import { reset } from "../../actions/ingredient/update";
+import requireAuth from "../requireAuth";
 import IngredientForm from "./IngredientForm";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -60,7 +61,9 @@ const mapDispatchToProps = {
     reset
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withRouter(IngredientUpdate));
+export default requireAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(withRouter(IngredientUpdate))
+);

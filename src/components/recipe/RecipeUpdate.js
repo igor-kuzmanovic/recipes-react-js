@@ -7,6 +7,7 @@ import { reset } from "../../actions/recipe/update";
 import { fetchIngredients } from "../../actions/ingredient/list";
 import { fetchCategories } from "../../actions/category/list";
 import { fetchTags } from "../../actions/tag/list";
+import requireAuth from "../requireAuth";
 import RecipeForm from "./RecipeForm";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -101,7 +102,9 @@ const mapDispatchToProps = {
     fetchTags
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withRouter(RecipeUpdate));
+export default requireAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(withRouter(RecipeUpdate))
+);

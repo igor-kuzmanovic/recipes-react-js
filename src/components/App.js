@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import Home from "./Home";
+import authRoutes from "../routes/auth";
 import recipeRoutes from "../routes/recipe";
 import ingredientRoutes from "../routes/ingredient";
 import categoryRoutes from "../routes/category";
@@ -14,6 +15,7 @@ const App = () => {
             <div className="container">
                 <Switch>
                     <Route path="/" component={Home} exact />
+                    {authRoutes}
                     {recipeRoutes}
                     {ingredientRoutes}
                     {categoryRoutes}

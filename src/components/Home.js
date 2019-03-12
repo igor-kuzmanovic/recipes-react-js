@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Button, CardDeck, Card } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { fetchRecipes, reset } from "../actions/recipe/list";
-import { serverURL } from "../constants/server";
+import requireAuth from "./requireAuth";
 import { CreateButton } from "./form";
 import { ErrorAlert, Spinner } from "./misc";
 
@@ -19,7 +19,7 @@ class Home extends React.Component {
 
     renderList() {
         return this.props.recipes.map(recipe => {
-            const { id, title, description, creationDate, image } = recipe;
+            const { id, title, description, creationDate } = recipe;
             return (
                 <Card key={id} className="text-center m-2">
                     <Card.Body>
@@ -68,7 +68,9 @@ const mapDispatchToProps = {
     reset
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Home);
+export default requireAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(Home)
+);

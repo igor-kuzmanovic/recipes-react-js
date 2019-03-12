@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import { createCategory, reset } from "../../actions/category/create";
+import requireAuth from "../requireAuth";
 import CategoryForm from "./CategoryForm";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -49,7 +50,9 @@ const mapDispatchToProps = {
     reset
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withRouter(CategoryCreate));
+export default requireAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(withRouter(CategoryCreate))
+);

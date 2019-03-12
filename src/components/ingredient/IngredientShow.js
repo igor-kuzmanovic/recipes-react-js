@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchIngredient, reset } from "../../actions/ingredient/show";
+import requireAuth from "../requireAuth";
 import { BackButton } from "../form";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -44,7 +45,9 @@ const mapDispatchToProps = {
     reset
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(IngredientShow);
+export default requireAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(IngredientShow)
+);

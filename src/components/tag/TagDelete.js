@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import { deleteTag, reset } from "../../actions/tag/delete";
+import requireAuth from "../requireAuth";
 import { ConfirmButton, BackButton } from "../form";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -57,7 +58,9 @@ const mapDispatchToProps = {
     reset
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withRouter(TagDelete));
+export default requireAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(withRouter(TagDelete))
+);

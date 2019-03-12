@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import { fetchTag, updateTag } from "../../actions/tag";
 import { reset } from "../../actions/tag/update";
+import requireAuth from "../requireAuth";
 import TagForm from "./TagForm";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -60,7 +61,9 @@ const mapDispatchToProps = {
     reset
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withRouter(TagUpdate));
+export default requireAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(withRouter(TagUpdate))
+);
