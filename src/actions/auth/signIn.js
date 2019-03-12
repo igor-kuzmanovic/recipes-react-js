@@ -29,3 +29,9 @@ export const signIn = (formValues, callback) => async dispatch => {
         dispatch({ type: AUTH_FAILURE, payload: "Invalid login credentials" });
     }
 };
+
+export function reset() {
+    return dispatch => {
+        dispatch(error(null));
+    };
+}

@@ -29,3 +29,9 @@ export const signUp = (formValues, callback) => async dispatch => {
         dispatch({ type: AUTH_FAILURE, payload: err });
     }
 };
+
+export function reset() {
+    return dispatch => {
+        dispatch(error(null));
+    };
+}

@@ -103,9 +103,6 @@ const validate = formValues => {
     if (!formValues.tags || !formValues.tags.length) {
         errors.tags = "You must select at least one tag";
     }
-    if (!formValues.image) {
-        errors.image = "You must upload an image";
-    }
     return errors;
 };
 
