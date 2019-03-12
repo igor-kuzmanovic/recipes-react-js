@@ -24,7 +24,7 @@ export const signUp = (formValues, callback) => async dispatch => {
         dispatch({ type: AUTH_SUCCESS, payload: response.data.token });
         localStorage.setItem("token", response.data.token);
         callback();
-    } catch (e) {
+    } catch (err) {
         console.log(err);
         dispatch({ type: AUTH_FAILURE, payload: err });
     }

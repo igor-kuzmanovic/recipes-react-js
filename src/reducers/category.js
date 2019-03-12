@@ -35,8 +35,7 @@ export default (state = initialState, action) => {
         case DELETE_CATEGORY_REQUEST:
             return {
                 ...state,
-                isLoading: true,
-                error: null
+                isLoading: true
             };
         case FETCH_CATEGORIES_ERROR:
         case FETCH_CATEGORY_ERROR:
@@ -45,9 +44,6 @@ export default (state = initialState, action) => {
         case DELETE_CATEGORY_ERROR:
             return {
                 ...state,
-                created: 0,
-                deleted: 0,
-                updated: 0,
                 isLoading: false,
                 error: action.payload
             };
@@ -57,8 +53,7 @@ export default (state = initialState, action) => {
                     ...state.items,
                     ..._.mapKeys(action.payload, "id")
                 },
-                isLoading: false,
-                error: null
+                isLoading: false
             };
         case FETCH_CATEGORY_SUCCESS:
             return {
@@ -66,8 +61,7 @@ export default (state = initialState, action) => {
                     ...state.items,
                     [action.payload.id]: action.payload
                 },
-                isLoading: false,
-                error: null
+                isLoading: false
             };
         case CREATE_CATEGORY_SUCCESS:
             return {
@@ -76,8 +70,7 @@ export default (state = initialState, action) => {
                     [action.payload.id]: action.payload
                 },
                 created: action.payload.id,
-                isLoading: false,
-                error: null
+                isLoading: false
             };
         case UPDATE_CATEGORY_SUCCESS:
             return {
@@ -86,8 +79,7 @@ export default (state = initialState, action) => {
                     [action.payload.id]: action.payload
                 },
                 updated: action.payload.id,
-                isLoading: false,
-                error: null
+                isLoading: false
             };
         case DELETE_CATEGORY_SUCCESS:
             return {
@@ -95,8 +87,7 @@ export default (state = initialState, action) => {
                     ..._.omit(state.items, action.payload)
                 },
                 deleted: action.payload,
-                isLoading: false,
-                error: null
+                isLoading: false
             };
         default:
             return state;

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { signOut } from "../../actions/auth/signOut";
 import { Spinner } from "../misc";
 
@@ -17,7 +18,7 @@ class SignOut extends React.Component {
 
         return (
             <h3 className="my-3 text-center">
-                Signing out... <Spinner isLoading={true} />
+                Logging out... <Spinner isLoading={true} />
             </h3>
         );
     }

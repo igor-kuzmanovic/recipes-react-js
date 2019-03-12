@@ -17,7 +17,6 @@ export default (state = initialState, action) => {
         case AUTH_FAILURE:
             return {
                 ...state,
-                token: null,
                 isLoading: false,
                 error: action.payload
             };
@@ -25,8 +24,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                token: action.payload,
-                error: null
+                token: action.payload
             };
         default:
             return state;

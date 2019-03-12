@@ -20,7 +20,7 @@ export function error(payload) {
 export const signIn = (formValues, callback) => async dispatch => {
     dispatch(loading());
     try {
-        const response = await authApi.post("/login", formValues);
+        const response = await authApi.post("/login_check", formValues);
         dispatch({ type: AUTH_SUCCESS, payload: response.data.token });
         localStorage.setItem("token", response.data.token);
         callback();

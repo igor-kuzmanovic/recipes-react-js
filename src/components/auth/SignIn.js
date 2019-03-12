@@ -11,9 +11,7 @@ class SignIn extends React.Component {
     }
 
     onSubmit = formValues => {
-        this.props.signIn(formValues, () => {
-            this.props.history.push("/");
-        });
+        this.props.signIn(formValues, () => this.props.history.push("/"));
     };
 
     render() {
@@ -26,7 +24,7 @@ class SignIn extends React.Component {
         return (
             <div>
                 <h3 className="my-3 text-center">
-                    Sign In <Spinner isLoading={isLoading} />
+                    Log In <Spinner isLoading={isLoading} />
                 </h3>
                 <AuthForm
                     onSubmit={this.onSubmit}
