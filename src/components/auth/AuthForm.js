@@ -39,7 +39,7 @@ const validate = formValues => {
         errors.email = "You must enter your email";
     }
     if (!formValues.password) {
-        errors.description = "You must enter your password";
+        errors.password = "You must enter your password";
     }
     return errors;
 };
