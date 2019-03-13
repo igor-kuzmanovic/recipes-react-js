@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
 import { signUp, reset } from "../../actions/auth/signUp";
 import AuthForm from "./AuthForm";
 import { ErrorAlert, Spinner } from "../misc";
@@ -15,11 +14,7 @@ class SignUp extends React.Component {
     };
 
     render() {
-        const { token, isLoading, error } = this.props;
-
-        if (token) {
-            return <Redirect to="/" />;
-        }
+        const { isLoading, error } = this.props;
 
         return (
             <div>
@@ -39,8 +34,7 @@ class SignUp extends React.Component {
 const mapStateToProps = state => {
     return {
         isLoading: state.auth.isLoading,
-        error: state.auth.error,
-        token: state.auth.token
+        error: state.auth.error
     };
 };
 
@@ -52,4 +46,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withRouter(SignUp));
+)(SignUp);

@@ -53,7 +53,8 @@ export default (state = initialState, action) => {
                     ...state.items,
                     ..._.mapKeys(action.payload, "id")
                 },
-                isLoading: false
+                isLoading: false,
+                error: null
             };
         case FETCH_INGREDIENT_SUCCESS:
             return {
@@ -61,7 +62,8 @@ export default (state = initialState, action) => {
                     ...state.items,
                     [action.payload.id]: action.payload
                 },
-                isLoading: false
+                isLoading: false,
+                error: null
             };
         case CREATE_INGREDIENT_SUCCESS:
             return {
@@ -70,7 +72,8 @@ export default (state = initialState, action) => {
                     [action.payload.id]: action.payload
                 },
                 created: action.payload.id,
-                isLoading: false
+                isLoading: false,
+                error: null
             };
         case UPDATE_INGREDIENT_SUCCESS:
             return {
@@ -79,7 +82,8 @@ export default (state = initialState, action) => {
                     [action.payload.id]: action.payload
                 },
                 updated: action.payload.id,
-                isLoading: false
+                isLoading: false,
+                error: null
             };
         case DELETE_INGREDIENT_SUCCESS:
             return {
@@ -87,7 +91,8 @@ export default (state = initialState, action) => {
                     ..._.omit(state.items, action.payload)
                 },
                 deleted: action.payload,
-                isLoading: false
+                isLoading: false,
+                error: null
             };
         default:
             return state;

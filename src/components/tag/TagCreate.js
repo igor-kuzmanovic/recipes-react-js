@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { createTag, reset } from "../../actions/tag/create";
-import requireAuth from "../requireAuth";
 import TagForm from "./TagForm";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -50,9 +49,7 @@ const mapDispatchToProps = {
     reset
 };
 
-export default requireAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(withRouter(TagCreate))
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TagCreate);

@@ -1,4 +1,4 @@
-import api from "../../apis/recipes";
+import api from "../../apis/api";
 import {
     CREATE_RECIPE_REQUEST,
     CREATE_RECIPE_SUCCESS,

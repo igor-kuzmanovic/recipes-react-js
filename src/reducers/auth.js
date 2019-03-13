@@ -5,7 +5,7 @@ import {
 } from "../constants/actionTypes";
 
 const initialState = {
-    token: null,
+    isLoggedIn: false,
     isLoading: false,
     error: null
 };
@@ -13,7 +13,10 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case AUTH_REQUEST:
-            return { ...state, isLoading: true, error: null };
+            return {
+                ...state,
+                isLoading: true
+            };
         case AUTH_FAILURE:
             return {
                 ...state,
@@ -24,7 +27,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                token: action.payload
+                isLoggedIn: action.payload,
+                error: null
             };
         default:
             return state;

@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchTag, reset } from "../../actions/tag/show";
-import requireAuth from "../requireAuth";
 import { BackButton } from "../form";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -25,7 +24,9 @@ class TagShow extends React.Component {
                         <Spinner isLoading={isLoading} />
                     </h3>
                 )}
-                <BackButton link="/tags" />
+                <div className="mb-3">
+                    <BackButton link="/tags" />
+                </div>
                 <ErrorAlert error={error} />
             </div>
         );
@@ -45,9 +46,7 @@ const mapDispatchToProps = {
     reset
 };
 
-export default requireAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(TagShow)
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TagShow);

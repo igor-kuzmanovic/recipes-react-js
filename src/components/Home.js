@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { Button, CardDeck, Card } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { fetchRecipes, reset } from "../actions/recipe/list";
-import requireAuth from "./requireAuth";
 import { CreateButton } from "./form";
 import { ErrorAlert, Spinner } from "./misc";
 
@@ -68,9 +67,7 @@ const mapDispatchToProps = {
     reset
 };
 
-export default requireAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(Home)
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Home);

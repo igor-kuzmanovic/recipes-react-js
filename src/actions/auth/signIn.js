@@ -21,7 +21,7 @@ export const signIn = (formValues, callback) => async dispatch => {
     dispatch(loading());
     try {
         const response = await authApi.post("/login_check", formValues);
-        dispatch({ type: AUTH_SUCCESS, payload: response.data.token });
+        dispatch({ type: AUTH_SUCCESS, payload: true });
         localStorage.setItem("token", response.data.token);
         callback();
     } catch (err) {

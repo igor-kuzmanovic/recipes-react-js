@@ -1,4 +1,4 @@
-import api from "../../apis/recipes";
+import api from "../../apis/api";
 import {
     DELETE_CATEGORY_REQUEST,
     DELETE_CATEGORY_SUCCESS,

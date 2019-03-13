@@ -14,7 +14,7 @@ class Header extends React.Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">
-                            {this.props.token && (
+                            {this.props.isLoggedIn && (
                                 <>
                                     <LinkContainer to="/">
                                         <Nav.Link>Home</Nav.Link>
@@ -36,7 +36,7 @@ class Header extends React.Component {
                                     </LinkContainer>
                                 </>
                             )}
-                            {!this.props.token && (
+                            {!this.props.isLoggedIn && (
                                 <>
                                     <LinkContainer to="/register">
                                         <Nav.Link>Sign Up</Nav.Link>
@@ -56,7 +56,7 @@ class Header extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        token: state.auth.token
+        isLoggedIn: state.auth.isLoggedIn
     };
 };
 

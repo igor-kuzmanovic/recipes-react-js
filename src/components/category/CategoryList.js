@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { ButtonGroup, Table } from "react-bootstrap";
 import { fetchCategories, reset } from "../../actions/category/list";
-import requireAuth from "../requireAuth";
 import { UpdateButton, DeleteButton, BackButton, CreateButton } from "../form";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -86,9 +85,7 @@ const mapDispatchToProps = {
     reset
 };
 
-export default requireAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(CategoryList)
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CategoryList);

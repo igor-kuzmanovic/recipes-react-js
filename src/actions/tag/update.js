@@ -1,4 +1,4 @@
-import api from "../../apis/recipes";
+import api from "../../apis/api";
 import {
     UPDATE_TAG_REQUEST,
     UPDATE_TAG_SUCCESS,

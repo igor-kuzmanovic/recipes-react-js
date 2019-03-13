@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCategory, reset } from "../../actions/category/show";
-import requireAuth from "../requireAuth";
 import { BackButton } from "../form";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -25,7 +24,9 @@ class CategoryShow extends React.Component {
                         <Spinner isLoading={isLoading} />
                     </h3>
                 )}
-                <BackButton link="/categories" />
+                <div className="mb-3">
+                    <BackButton link="/categories" />
+                </div>
                 <ErrorAlert error={error} />
             </div>
         );
@@ -45,9 +46,7 @@ const mapDispatchToProps = {
     reset
 };
 
-export default requireAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(CategoryShow)
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CategoryShow);

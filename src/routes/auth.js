@@ -1,9 +1,25 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import { requireAuth, requireNoAuth } from "../components/hoc";
 import { SignUp, SignIn, SignOut } from "../components/auth";
 
 export default [
-    <Route path="/register" component={SignUp} exact key="signup" />,
-    <Route path="/login" component={SignIn} exact key="signin" />,
-    <Route path="/logout" component={SignOut} exact key="signout" />
+    <Route
+        path="/register"
+        component={requireNoAuth(SignUp)}
+        exact
+        key="signup"
+    />,
+    <Route
+        path="/login"
+        component={requireNoAuth(SignIn)}
+        exact
+        key="signin"
+    />,
+    <Route
+        path="/logout"
+        component={requireAuth(SignOut)}
+        exact
+        key="signout"
+    />
 ];

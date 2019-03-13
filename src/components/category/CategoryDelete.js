@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { deleteCategory, reset } from "../../actions/category/delete";
-import requireAuth from "../requireAuth";
 import { ConfirmButton, BackButton } from "../form";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -58,9 +57,7 @@ const mapDispatchToProps = {
     reset
 };
 
-export default requireAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(withRouter(CategoryDelete))
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CategoryDelete);

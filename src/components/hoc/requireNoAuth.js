@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 export default ChildComponent => {
-    class ComposedComponent extends React.Component {
+    class RequiresNoAuthentication extends React.Component {
         componentDidMount() {
             this.shouldNavigateAway();
         }
@@ -12,8 +12,8 @@ export default ChildComponent => {
         }
 
         shouldNavigateAway() {
-            if (!this.props.token) {
-                this.props.history.push("/register");
+            if (this.props.isLoggedIn) {
+                this.props.history.push("/");
             }
         }
 
@@ -23,8 +23,8 @@ export default ChildComponent => {
     }
 
     const mapStateToProps = state => {
-        return { token: state.auth.token };
+        return { isLoggedIn: state.auth.isLoggedIn };
     };
 
-    return connect(mapStateToProps)(ComposedComponent);
+    return connect(mapStateToProps)(RequiresNoAuthentication);
 };

@@ -1,4 +1,4 @@
-import api from "../../apis/recipes";
+import api from "../../apis/api";
 import {
     UPDATE_CATEGORY_REQUEST,
     UPDATE_CATEGORY_SUCCESS,

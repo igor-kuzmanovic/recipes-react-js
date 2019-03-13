@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import Home from "./Home";
+import requireAuth from "./hoc/requireAuth";
 import authRoutes from "../routes/auth";
 import recipeRoutes from "../routes/recipe";
 import ingredientRoutes from "../routes/ingredient";
@@ -14,7 +15,7 @@ const App = () => {
             <Header />
             <div className="container">
                 <Switch>
-                    <Route path="/" component={Home} exact />
+                    <Route path="/" component={requireAuth(Home)} exact />
                     {authRoutes}
                     {recipeRoutes}
                     {ingredientRoutes}

@@ -1,13 +1,12 @@
 import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { fetchRecipe, updateRecipe } from "../../actions/recipe";
 import { reset } from "../../actions/recipe/update";
 import { fetchIngredients } from "../../actions/ingredient/list";
 import { fetchCategories } from "../../actions/category/list";
 import { fetchTags } from "../../actions/tag/list";
-import requireAuth from "../requireAuth";
 import RecipeForm from "./RecipeForm";
 import { ErrorAlert, Spinner } from "../misc";
 
@@ -102,9 +101,7 @@ const mapDispatchToProps = {
     fetchTags
 };
 
-export default requireAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(withRouter(RecipeUpdate))
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(RecipeUpdate);
