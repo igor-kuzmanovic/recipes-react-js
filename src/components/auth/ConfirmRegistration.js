@@ -1,16 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import { signUp, reset } from "../../actions/auth/signUp";
-import AuthForm from "./AuthForm";
+import { confirmRegistration, reset } from "../../actions/auth/confirmRegistration";
+import ConfirmationForm from "./ConfirmationForm";
 import { ErrorAlert, Spinner } from "../misc";
 
-class SignUp extends React.Component {
+class ConfirmRegistration extends React.Component {
     componentWillUnmount() {
         this.props.reset();
     }
 
     onSubmit = formValues => {
-        this.props.signUp(formValues, () => this.props.history.push("/confirm_registration"));
+        this.props.confirmRegistration(formValues, () => this.props.history.push("/"));
     };
 
     render() {
@@ -19,9 +19,12 @@ class SignUp extends React.Component {
         return (
             <div>
                 <h3 className="my-3 text-center">
-                    Sign Up <Spinner isLoading={isLoading} />
+                    Confirm your registration <Spinner isLoading={isLoading} />
                 </h3>
-                <AuthForm
+                <h4 className="text-center">
+                    Please check your email
+                </h4>
+                <ConfirmationForm
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={isLoading}
                 />
@@ -39,11 +42,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    signUp,
+    confirmRegistration,
     reset
 };
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(SignUp);
+)(ConfirmRegistration);

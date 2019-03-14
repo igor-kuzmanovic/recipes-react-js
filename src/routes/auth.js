@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { requireAuth, requireNoAuth } from "../components/hoc";
-import { SignUp, SignIn, SignOut } from "../components/auth";
+import { SignUp, ConfirmRegistration, SignIn, SignOut } from "../components/auth";
 
 export default [
     <Route
@@ -9,6 +9,12 @@ export default [
         component={requireNoAuth(SignUp)}
         exact
         key="signup"
+    />,
+    <Route
+        path="/confirm_registration"
+        component={requireNoAuth(ConfirmRegistration)}
+        exact
+        key="confirmregistration"
     />,
     <Route
         path="/login"

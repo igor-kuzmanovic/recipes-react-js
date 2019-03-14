@@ -1,32 +1,31 @@
 import authApi from "../../apis/auth";
 import {
-    AUTH_REQUEST,
-    AUTH_SUCCESS,
-    AUTH_FAILURE
+    SIGNUP_REQUEST,
+    SIGNUP_SUCCESS,
+    SIGNUP_FAILURE
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: AUTH_REQUEST };
+    return { type: SIGNUP_REQUEST };
 }
 
 export function success(payload) {
-    return { type: AUTH_SUCCESS, payload };
+    return { type: SIGNUP_SUCCESS, payload };
 }
 
 export function error(payload) {
-    return { type: AUTH_FAILURE, payload };
+    return { type: SIGNUP_FAILURE, payload };
 }
 
 export const signUp = (formValues, callback) => async dispatch => {
     dispatch(loading());
     try {
-        const response = await authApi.post("/register", formValues);
-        dispatch({ type: AUTH_SUCCESS, payload: true });
-        localStorage.setItem("token", response.data.token);
+        await authApi.post("/register", formValues);
+        dispatch({ type: SIGNUP_SUCCESS, payload: true });
         callback();
     } catch (err) {
         console.log(err);
-        dispatch({ type: AUTH_FAILURE, payload: err });
+        dispatch({ type: SIGNUP_FAILURE, payload: err });
     }
 };
 

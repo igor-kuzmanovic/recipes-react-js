@@ -1,32 +1,32 @@
 import authApi from "../../apis/auth";
 import {
-    AUTH_REQUEST,
-    AUTH_SUCCESS,
-    AUTH_FAILURE
+    SIGNIN_REQUEST,
+    SIGNIN_SUCCESS,
+    SIGNIN_FAILURE
 } from "../../constants/actionTypes";
 
 export function loading() {
-    return { type: AUTH_REQUEST };
+    return { type: SIGNIN_REQUEST };
 }
 
 export function success(payload) {
-    return { type: AUTH_SUCCESS, payload };
+    return { type: SIGNIN_SUCCESS, payload };
 }
 
 export function error(payload) {
-    return { type: AUTH_FAILURE, payload };
+    return { type: SIGNIN_FAILURE, payload };
 }
 
 export const signIn = (formValues, callback) => async dispatch => {
     dispatch(loading());
     try {
-        const response = await authApi.post("/login_check", formValues);
-        dispatch({ type: AUTH_SUCCESS, payload: true });
+        const response = await authApi.post("/login", formValues);
+        dispatch({ type: SIGNIN_SUCCESS, payload: true });
         localStorage.setItem("token", response.data.token);
         callback();
     } catch (err) {
         console.log(err);
-        dispatch({ type: AUTH_FAILURE, payload: "Invalid login credentials" });
+        dispatch({ type: SIGNIN_FAILURE, payload: err });
     }
 };
 

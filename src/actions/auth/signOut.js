@@ -1,9 +1,9 @@
-import { AUTH_SUCCESS } from "../../constants/actionTypes";
+import { SIGNOUT } from "../../constants/actionTypes";
 
 export const signOut = () => {
     localStorage.removeItem("token");
     return {
-        type: AUTH_SUCCESS,
+        type: SIGNOUT,
         payload: false
     };
 };
