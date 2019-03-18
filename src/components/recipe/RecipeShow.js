@@ -57,7 +57,7 @@ class RecipeShow extends React.Component {
                         )}
                     <Spinner isLoading={isLoading && !recipe} />
                 </h4>
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                     <BackButton link="/recipes" />
                 </div>
                 <ErrorAlert error={error} />

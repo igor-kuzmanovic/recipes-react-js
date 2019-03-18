@@ -22,7 +22,7 @@ class TagShow extends React.Component {
                     {tag && <strong>{tag.name}</strong>}{" "}
                     <Spinner isLoading={isLoading && !tag} />
                 </h3>
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                     <BackButton link="/tags" />
                 </div>
                 <ErrorAlert error={error} />
