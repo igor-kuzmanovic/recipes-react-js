@@ -22,7 +22,7 @@ class IngredientCreate extends React.Component {
         }
 
         return (
-            <div>
+            <div className="mx-auto col-md-6 col-lg-4">
                 <h3 className="my-3 text-center">Create a new ingredient</h3>
                 <IngredientForm
                     onSubmit={this.onSubmit}

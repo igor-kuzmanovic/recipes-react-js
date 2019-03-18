@@ -18,7 +18,7 @@ class RecipeShow extends React.Component {
         const { recipe, isLoading, error } = this.props;
 
         return (
-            <div>
+            <div className="mx-auto col-md-6 col-lg-4">
                 <h3 className="my-3 text-center">
                     {recipe && <strong>{recipe.title}</strong>}{" "}
                     <Spinner isLoading={isLoading && !recipe} />

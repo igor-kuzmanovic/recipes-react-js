@@ -17,7 +17,7 @@ class IngredientShow extends React.Component {
         const { ingredient, isLoading, error } = this.props;
 
         return (
-            <div>
+            <div className="mx-auto col-md-6 col-lg-4">
                 <h3 className="my-3 text-center">
                     {ingredient && <strong>{ingredient.name}</strong>}{" "}
                     <Spinner isLoading={isLoading && !ingredient} />

@@ -28,7 +28,7 @@ class CategoryUpdate extends React.Component {
         }
 
         return (
-            <div>
+            <div className="mx-auto col-md-6 col-lg-4">
                 <h3 className="my-3 text-center">Update this category</h3>
                 {category && (
                     <CategoryForm

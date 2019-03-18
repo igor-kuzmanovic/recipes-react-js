@@ -35,7 +35,7 @@ class ConfirmRegistration extends React.Component {
         const { isLoading, error } = this.props;
 
         return (
-            <div>
+            <div className="mx-auto col-md-6 col-lg-4">
                 <h3 className="my-3 text-center">Confirm your registration</h3>
                 <h4 className="text-center">Please check your email</h4>
                 <ConfirmationForm

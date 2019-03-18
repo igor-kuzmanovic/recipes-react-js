@@ -22,7 +22,7 @@ class CategoryCreate extends React.Component {
         }
 
         return (
-            <div>
+            <div className="mx-auto col-md-6 col-lg-4">
                 <h3 className="my-3 text-center">Create a new category</h3>
                 <CategoryForm
                     onSubmit={this.onSubmit}

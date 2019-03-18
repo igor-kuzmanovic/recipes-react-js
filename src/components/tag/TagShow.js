@@ -17,7 +17,7 @@ class TagShow extends React.Component {
         const { tag, isLoading, error } = this.props;
 
         return (
-            <div>
+            <div className="mx-auto col-md-6 col-lg-4">
                 <h3 className="my-3 text-center">
                     {tag && <strong>{tag.name}</strong>}{" "}
                     <Spinner isLoading={isLoading && !tag} />

@@ -10,9 +10,11 @@ class SignOut extends React.Component {
 
     render() {
         return (
-            <h3 className="my-3 text-center">
-                Logging out... <Spinner isLoading={true} />
-            </h3>
+            <div className="mx-auto col-md-6 col-lg-4">
+                <h3 className="my-3 text-center">
+                    Logging out... <Spinner isLoading={true} />
+                </h3>
+            </div>
         );
     }
 }

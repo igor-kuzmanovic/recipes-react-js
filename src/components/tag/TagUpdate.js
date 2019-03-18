@@ -28,7 +28,7 @@ class TagUpdate extends React.Component {
         }
 
         return (
-            <div>
+            <div className="mx-auto col-md-6 col-lg-4">
                 <h3 className="my-3 text-center">Update this tag</h3>
                 {tag && (
                     <TagForm

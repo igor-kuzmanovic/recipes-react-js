@@ -22,7 +22,7 @@ class RecipeDelete extends React.Component {
         }
 
         return (
-            <div>
+            <div className="mx-auto col-md-6 col-lg-4">
                 <h3 className="my-3 text-center">
                     Are you sure you want to delete this recipe?
                 </h3>
