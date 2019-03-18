@@ -24,7 +24,7 @@ class CategoryList extends React.Component {
         return this.props.categories.map(category => {
             const { id, name } = category;
             return (
-                <ListGroup.Item key={id}>
+                <ListGroup.Item key={id} className="p-0">
                     <ButtonGroup className="d-flex justify-content-between">
                         <LinkButton link={`/categories/${id}`}>
                             {name}

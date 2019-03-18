@@ -24,7 +24,7 @@ class IngredientList extends React.Component {
         return this.props.ingredients.map(ingredient => {
             const { id, name } = ingredient;
             return (
-                <ListGroup.Item key={id}>
+                <ListGroup.Item key={id} className="p-0">
                     <ButtonGroup className="d-flex justify-content-between">
                         <LinkButton link={`/ingredients/${id}`}>
                             {name}

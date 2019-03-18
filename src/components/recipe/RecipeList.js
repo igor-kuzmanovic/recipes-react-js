@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { ButtonGroup, ListGroup } from "react-bootstrap";
+import { ROLE_ADMIN } from "../../constants/auth";
 import { fetchRecipes, reset } from "../../actions/recipe/list";
 import {
     LinkButton,
@@ -24,10 +25,10 @@ class RecipeList extends React.Component {
         return this.props.recipes.map(recipe => {
             const { id, title } = recipe;
             return (
-                <ListGroup.Item key={id}>
+                <ListGroup.Item key={id} className="p-0">
                     <ButtonGroup className="d-flex justify-content-between">
                         <LinkButton link={`/recipes/${id}`}>{title}</LinkButton>
-                        {this.props.user.roles.includes("ROLE_ADMIN") && (
+                        {this.props.user.roles.includes(ROLE_ADMIN) && (
                             <>
                                 <UpdateButton link={`/recipes/update/${id}`} />
                                 <DeleteButton link={`/recipes/delete/${id}`} />

@@ -24,7 +24,7 @@ class TagList extends React.Component {
         return this.props.tags.map(tag => {
             const { id, name } = tag;
             return (
-                <ListGroup.Item key={id}>
+                <ListGroup.Item key={id} className="p-0">
                     <ButtonGroup className="d-flex justify-content-between">
                         <LinkButton link={`/tags/${id}`}>{name}</LinkButton>
                         <UpdateButton link={`/tags/update/${id}`} />

@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { ROLE_ADMIN } from "../constants/auth";
 
 class Header extends React.Component {
     render() {
@@ -20,7 +21,7 @@ class Header extends React.Component {
                                     <LinkContainer to="/recipes">
                                         <Nav.Link>Recipes</Nav.Link>
                                     </LinkContainer>
-                                    {user.roles.includes("ROLE_ADMIN") && (
+                                    {user.roles.includes(ROLE_ADMIN) && (
                                         <>
                                             <LinkContainer to="/ingredients">
                                                 <Nav.Link>Ingredients</Nav.Link>
