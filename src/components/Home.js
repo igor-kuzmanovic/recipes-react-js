@@ -20,18 +20,20 @@ class Home extends React.Component {
         return this.props.recipes.map(recipe => {
             const { id, title, description, creationDate } = recipe;
             return (
-                <Card key={id} className="text-center m-2">
-                    <Card.Body>
-                        <Card.Title>{title}</Card.Title>
-                        <Card.Text>{description}</Card.Text>
-                        <LinkContainer to={`/recipes/${id}`}>
-                            <Button variant="info">Details</Button>
-                        </LinkContainer>
-                    </Card.Body>
-                    <Card.Footer className="text-muted">
-                        {moment(creationDate).fromNow()}
-                    </Card.Footer>
-                </Card>
+                <div key={id} className="col-4">
+                    <Card className="text-center m-2">
+                        <Card.Body>
+                            <Card.Title>{title}</Card.Title>
+                            <Card.Text>{description}</Card.Text>
+                            <LinkContainer to={`/recipes/${id}`}>
+                                <Button variant="info">Details</Button>
+                            </LinkContainer>
+                        </Card.Body>
+                        <Card.Footer className="text-muted">
+                            {moment(creationDate).fromNow()}
+                        </Card.Footer>
+                    </Card>
+                </div>
             );
         });
     }

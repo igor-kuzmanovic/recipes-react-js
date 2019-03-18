@@ -41,7 +41,7 @@ class IngredientList extends React.Component {
         const { isLoading, error } = this.props;
 
         return (
-            <div>
+            <div className="mx-auto col-md-10 col-lg-8">
                 <h3 className="my-3 text-center">Ingredients</h3>
                 <ListGroup className="mb-3">
                     {this.renderList()}
