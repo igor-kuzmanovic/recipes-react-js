@@ -23,8 +23,7 @@ export const fetchIngredient = id => async dispatch => {
         const response = await api.get(`/ingredients/${id}`);
         dispatch(success(response.data));
     } catch (err) {
-        console.log(err);
-        dispatch(error(err.message));
+        dispatch(error(err));
     }
 };
 

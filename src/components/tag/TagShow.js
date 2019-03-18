@@ -18,12 +18,10 @@ class TagShow extends React.Component {
 
         return (
             <div>
-                {tag && (
-                    <h3 className="my-3 text-center">
-                        <strong>{tag.name}</strong>{" "}
-                        <Spinner isLoading={isLoading} />
-                    </h3>
-                )}
+                <h3 className="my-3 text-center">
+                    {tag && <strong>{tag.name}</strong>}{" "}
+                    <Spinner isLoading={isLoading && !tag} />
+                </h3>
                 <div className="mb-3">
                     <BackButton link="/tags" />
                 </div>

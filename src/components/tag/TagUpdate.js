@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import { fetchTag, updateTag } from "../../actions/tag";
 import { reset } from "../../actions/tag/update";
 import TagForm from "./TagForm";
-import { ErrorAlert, Spinner } from "../misc";
+import ErrorAlert from "../misc/ErrorAlert";
 
 class TagUpdate extends React.Component {
     componentDidMount() {
@@ -29,9 +29,7 @@ class TagUpdate extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3 text-center">
-                    Update this tag <Spinner isLoading={isLoading} />
-                </h3>
+                <h3 className="my-3 text-center">Update this tag</h3>
                 {tag && (
                     <TagForm
                         initialValues={_.pick(tag, "name")}

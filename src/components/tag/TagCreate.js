@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createTag, reset } from "../../actions/tag/create";
 import TagForm from "./TagForm";
-import { ErrorAlert, Spinner } from "../misc";
+import ErrorAlert from "../misc/ErrorAlert";
 
 class TagCreate extends React.Component {
     componentWillUnmount() {
@@ -23,9 +23,7 @@ class TagCreate extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3 text-center">
-                    Create a new tag <Spinner isLoading={isLoading} />
-                </h3>
+                <h3 className="my-3 text-center">Create a new tag</h3>
                 <TagForm
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={isLoading}

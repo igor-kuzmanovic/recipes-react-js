@@ -23,8 +23,7 @@ export const fetchCategories = () => async dispatch => {
         const response = await api.get("/categories");
         dispatch(success(response.data));
     } catch (err) {
-        console.log(err);
-        dispatch(error(err.message));
+        dispatch(error(err));
     }
 };
 

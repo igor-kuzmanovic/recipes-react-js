@@ -5,8 +5,7 @@ const ErrorAlert = ({ error }) => {
     if (error) {
         return (
             <Alert variant="danger" dismissible>
-                <Alert.Heading>Oops, an error has occured!</Alert.Heading>
-                <p>{JSON.stringify(error)}</p>
+                <span>Oops, an error has occured!</span>
             </Alert>
         );
     }

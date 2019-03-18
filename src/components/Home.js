@@ -37,14 +37,17 @@ class Home extends React.Component {
     }
 
     render() {
-        const { isLoading, error } = this.props;
+        const { recipes, isLoading, error } = this.props;
 
         return (
             <div>
-                <h3 className="my-3 text-center">
-                    Welcome <Spinner isLoading={isLoading} />
-                </h3>
-                <CardDeck>{this.renderList()}</CardDeck>
+                <h3 className="mt-3 text-center">Welcome</h3>
+                {isLoading && !recipes.length && (
+                    <h1 className="text-center my-5">
+                        <Spinner isLoading={true} />
+                    </h1>
+                )}
+                <CardDeck className="my-2">{this.renderList()}</CardDeck>
                 <div className="text-center mb-3">
                     <CreateButton link="/recipes/create" />
                 </div>

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { deleteRecipe, reset } from "../../actions/recipe/delete";
 import { ConfirmButton, BackButton } from "../form";
-import { ErrorAlert, Spinner } from "../misc";
+import { ErrorAlert } from "../misc";
 
 class RecipeDelete extends React.Component {
     componentWillUnmount() {
@@ -24,8 +24,7 @@ class RecipeDelete extends React.Component {
         return (
             <div>
                 <h3 className="my-3 text-center">
-                    Are you sure you want to delete this recipe?{" "}
-                    <Spinner isLoading={isLoading} />
+                    Are you sure you want to delete this recipe?
                 </h3>
                 <div className="row mb-3">
                     <div className="col text-left">

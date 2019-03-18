@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import { fetchIngredient, updateIngredient } from "../../actions/ingredient";
 import { reset } from "../../actions/ingredient/update";
 import IngredientForm from "./IngredientForm";
-import { ErrorAlert, Spinner } from "../misc";
+import ErrorAlert from "../misc/ErrorAlert";
 
 class IngredientUpdate extends React.Component {
     componentDidMount() {
@@ -29,9 +29,7 @@ class IngredientUpdate extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3 text-center">
-                    Update this ingredient <Spinner isLoading={isLoading} />
-                </h3>
+                <h3 className="my-3 text-center">Update this ingredient</h3>
                 {ingredient && (
                     <IngredientForm
                         initialValues={_.pick(ingredient, "name")}

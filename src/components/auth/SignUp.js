@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { signUp, reset } from "../../actions/auth/signUp";
 import AuthForm from "./AuthForm";
-import { ErrorAlert, Spinner } from "../misc";
+import ErrorAlert from "../misc/ErrorAlert";
 
 class SignUp extends React.Component {
     componentWillUnmount() {
@@ -10,7 +11,9 @@ class SignUp extends React.Component {
     }
 
     onSubmit = formValues => {
-        this.props.signUp(formValues, () => this.props.history.push("/confirm_registration"));
+        this.props.signUp(formValues, () =>
+            this.props.history.push("/confirm_registration")
+        );
     };
 
     render() {
@@ -18,13 +21,14 @@ class SignUp extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3 text-center">
-                    Sign Up <Spinner isLoading={isLoading} />
-                </h3>
+                <h3 className="my-3 text-center">Sign Up</h3>
                 <AuthForm
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={isLoading}
                 />
+                <h6 className="text-center">
+                    Already have an account? <Link to="/login">Log In!</Link>
+                </h6>
                 <ErrorAlert error={error} />
             </div>
         );

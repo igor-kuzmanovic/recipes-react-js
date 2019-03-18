@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import { fetchCategory, updateCategory } from "../../actions/category";
 import { reset } from "../../actions/category/update";
 import CategoryForm from "./CategoryForm";
-import { ErrorAlert, Spinner } from "../misc";
+import ErrorAlert from "../misc/ErrorAlert";
 
 class CategoryUpdate extends React.Component {
     componentDidMount() {
@@ -29,9 +29,7 @@ class CategoryUpdate extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3 text-center">
-                    Update this category <Spinner isLoading={isLoading} />
-                </h3>
+                <h3 className="my-3 text-center">Update this category</h3>
                 {category && (
                     <CategoryForm
                         initialValues={_.pick(category, "name")}

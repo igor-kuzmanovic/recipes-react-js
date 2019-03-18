@@ -23,8 +23,7 @@ export const updateTag = (id, formValues) => async dispatch => {
         const response = await api.put(`/tags/${id}`, formValues);
         dispatch(success(response.data));
     } catch (err) {
-        console.log(err);
-        dispatch(error(err.message));
+        dispatch(error(err));
     }
 };
 

@@ -18,12 +18,10 @@ class IngredientShow extends React.Component {
 
         return (
             <div>
-                {ingredient && (
-                    <h3 className="my-3 text-center">
-                        <strong>{ingredient.name}</strong>{" "}
-                        <Spinner isLoading={isLoading} />
-                    </h3>
-                )}
+                <h3 className="my-3 text-center">
+                    {ingredient && <strong>{ingredient.name}</strong>}{" "}
+                    <Spinner isLoading={isLoading && !ingredient} />
+                </h3>
                 <div className="mb-3">
                     <BackButton link="/ingredients" />
                 </div>

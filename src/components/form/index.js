@@ -8,6 +8,7 @@ import BackButton from "./BackButton";
 import CreateButton from "./CreateButton";
 import UpdateButton from "./UpdateButton";
 import DeleteButton from "./DeleteButton";
+import LinkButton from "./LinkButton";
 
 export {
     Input,
@@ -19,5 +20,6 @@ export {
     BackButton,
     CreateButton,
     UpdateButton,
-    DeleteButton
+    DeleteButton,
+    LinkButton
 };

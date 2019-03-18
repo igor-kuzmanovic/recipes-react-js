@@ -23,8 +23,7 @@ export const deleteRecipe = id => async dispatch => {
         await api.delete(`/recipes/${id}`);
         dispatch(success(id));
     } catch (err) {
-        console.log(err);
-        dispatch(error(err.message));
+        dispatch(error(err));
     }
 };
 

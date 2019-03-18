@@ -23,8 +23,7 @@ export const updateIngredient = (id, formValues) => async dispatch => {
         const response = await api.put(`/ingredients/${id}`, formValues);
         dispatch(success(response.data));
     } catch (err) {
-        console.log(err);
-        dispatch(error(err.message));
+        dispatch(error(err));
     }
 };
 

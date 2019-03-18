@@ -26,8 +26,7 @@ export const createRecipe = formValues => async dispatch => {
         );
         dispatch(success(response.data));
     } catch (err) {
-        console.log(err);
-        dispatch(error(err.message));
+        dispatch(error(err));
     }
 };
 

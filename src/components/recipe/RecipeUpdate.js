@@ -8,7 +8,7 @@ import { fetchIngredients } from "../../actions/ingredient/list";
 import { fetchCategories } from "../../actions/category/list";
 import { fetchTags } from "../../actions/tag/list";
 import RecipeForm from "./RecipeForm";
-import { ErrorAlert, Spinner } from "../misc";
+import ErrorAlert from "../misc/ErrorAlert";
 
 class RecipeUpdate extends React.Component {
     componentDidMount() {
@@ -53,9 +53,7 @@ class RecipeUpdate extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3 text-center">
-                    Update this recipe <Spinner isLoading={isLoading} />
-                </h3>
+                <h3 className="my-3 text-center">Update this recipe</h3>
                 {recipe && (
                     <RecipeForm
                         initialValues={_.pick(

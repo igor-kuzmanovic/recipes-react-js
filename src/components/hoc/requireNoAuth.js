@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Spinner from "../misc/Spinner";
 
 export default ChildComponent => {
     class RequiresNoAuthentication extends React.Component {
@@ -18,7 +19,11 @@ export default ChildComponent => {
         }
 
         render() {
-            return <ChildComponent {...this.props} />;
+            if (!this.props.isLoggedIn) {
+                return <ChildComponent {...this.props} />;
+            }
+
+            return <Spinner isLoading={true} />;
         }
     }
 

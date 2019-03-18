@@ -23,8 +23,7 @@ export const fetchTags = () => async dispatch => {
         const response = await api.get("/tags");
         dispatch(success(response.data));
     } catch (err) {
-        console.log(err);
-        dispatch(error(err.message));
+        dispatch(error(err));
     }
 };
 

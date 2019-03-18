@@ -23,8 +23,7 @@ export const deleteCategory = id => async dispatch => {
         await api.delete(`/categories/${id}`);
         dispatch(success(id));
     } catch (err) {
-        console.log(err);
-        dispatch(error(err.message));
+        dispatch(error(err));
     }
 };
 

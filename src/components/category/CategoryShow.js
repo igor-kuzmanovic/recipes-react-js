@@ -18,12 +18,10 @@ class CategoryShow extends React.Component {
 
         return (
             <div>
-                {category && (
-                    <h3 className="my-3 text-center">
-                        <strong>{category.name}</strong>{" "}
-                        <Spinner isLoading={isLoading} />
-                    </h3>
-                )}
+                <h3 className="my-3 text-center">
+                    {category && <strong>{category.name}</strong>}{" "}
+                    <Spinner isLoading={isLoading && !category} />
+                </h3>
                 <div className="mb-3">
                     <BackButton link="/categories" />
                 </div>

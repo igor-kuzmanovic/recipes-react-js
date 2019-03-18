@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createCategory, reset } from "../../actions/category/create";
 import CategoryForm from "./CategoryForm";
-import { ErrorAlert, Spinner } from "../misc";
+import ErrorAlert from "../misc/ErrorAlert";
 
 class CategoryCreate extends React.Component {
     componentWillUnmount() {
@@ -23,9 +23,7 @@ class CategoryCreate extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3 text-center">
-                    Create a new category <Spinner isLoading={isLoading} />
-                </h3>
+                <h3 className="my-3 text-center">Create a new category</h3>
                 <CategoryForm
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={isLoading}

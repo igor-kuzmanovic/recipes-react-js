@@ -1,4 +1,4 @@
-import authApi from "../../apis/auth";
+import api from "../../apis/api";
 import {
     SIGNUP_REQUEST,
     SIGNUP_SUCCESS,
@@ -9,8 +9,8 @@ export function loading() {
     return { type: SIGNUP_REQUEST };
 }
 
-export function success(payload) {
-    return { type: SIGNUP_SUCCESS, payload };
+export function success() {
+    return { type: SIGNUP_SUCCESS, payload: true };
 }
 
 export function error(payload) {
@@ -20,12 +20,11 @@ export function error(payload) {
 export const signUp = (formValues, callback) => async dispatch => {
     dispatch(loading());
     try {
-        await authApi.post("/register", formValues);
-        dispatch({ type: SIGNUP_SUCCESS, payload: true });
+        await api.post("/register", formValues);
+        dispatch(success());
         callback();
     } catch (err) {
-        console.log(err);
-        dispatch({ type: SIGNUP_FAILURE, payload: err });
+        dispatch(error(err));
     }
 };
 

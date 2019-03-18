@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createIngredient, reset } from "../../actions/ingredient/create";
 import IngredientForm from "./IngredientForm";
-import { ErrorAlert, Spinner } from "../misc";
+import ErrorAlert from "../misc/ErrorAlert";
 
 class IngredientCreate extends React.Component {
     componentWillUnmount() {
@@ -23,9 +23,7 @@ class IngredientCreate extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3 text-center">
-                    Create a new ingredient <Spinner isLoading={isLoading} />
-                </h3>
+                <h3 className="my-3 text-center">Create a new ingredient</h3>
                 <IngredientForm
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={isLoading}

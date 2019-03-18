@@ -1,9 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { ButtonGroup, Table } from "react-bootstrap";
+import { ButtonGroup, ListGroup } from "react-bootstrap";
 import { fetchTags, reset } from "../../actions/tag/list";
-import { UpdateButton, DeleteButton, BackButton, CreateButton } from "../form";
+import {
+    LinkButton,
+    UpdateButton,
+    DeleteButton,
+    BackButton,
+    CreateButton
+} from "../form";
 import { ErrorAlert, Spinner } from "../misc";
 
 class TagList extends React.Component {
@@ -19,17 +24,13 @@ class TagList extends React.Component {
         return this.props.tags.map(tag => {
             const { id, name } = tag;
             return (
-                <tr key={id}>
-                    <td className="w-100">
-                        <Link to={`/tags/${id}`}>{name}</Link>
-                    </td>
-                    <td className="p-0">
-                        <ButtonGroup>
-                            <UpdateButton link={`/tags/update/${id}`} />
-                            <DeleteButton link={`/tags/delete/${id}`} />
-                        </ButtonGroup>
-                    </td>
-                </tr>
+                <ListGroup.Item key={id}>
+                    <ButtonGroup className="d-flex justify-content-between">
+                        <LinkButton link={`/tags/${id}`}>{name}</LinkButton>
+                        <UpdateButton link={`/tags/update/${id}`} />
+                        <DeleteButton link={`/tags/delete/${id}`} />
+                    </ButtonGroup>
+                </ListGroup.Item>
             );
         });
     }
@@ -40,24 +41,14 @@ class TagList extends React.Component {
         return (
             <div>
                 <h3 className="my-3 text-center">Tags</h3>
-                <Table responsive striped bordered hover size="sm">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>{null}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.renderList()}
-                        {isLoading && (
-                            <tr>
-                                <td colSpan="2">
-                                    <Spinner isLoading={isLoading} />
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </Table>
+                <ListGroup className="mb-3">
+                    {this.renderList()}
+                    {isLoading && (
+                        <ListGroup.Item>
+                            <Spinner isLoading={isLoading} />
+                        </ListGroup.Item>
+                    )}
+                </ListGroup>
                 <div className="row mb-3">
                     <div className="col text-left">
                         <BackButton link="/" />

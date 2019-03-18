@@ -23,8 +23,7 @@ export const createTag = formValues => async dispatch => {
         const response = await api.post("/tags", { ...formValues });
         dispatch(success(response.data));
     } catch (err) {
-        console.log(err);
-        dispatch(error(err.message));
+        dispatch(error(err));
     }
 };
 

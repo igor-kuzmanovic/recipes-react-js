@@ -1,9 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { ButtonGroup, Table } from "react-bootstrap";
+import { ButtonGroup, ListGroup } from "react-bootstrap";
 import { fetchRecipes, reset } from "../../actions/recipe/list";
-import { UpdateButton, DeleteButton, BackButton, CreateButton } from "../form";
+import {
+    LinkButton,
+    UpdateButton,
+    DeleteButton,
+    BackButton,
+    CreateButton
+} from "../form";
 import { ErrorAlert, Spinner } from "../misc";
 
 class RecipeList extends React.Component {
@@ -19,17 +24,13 @@ class RecipeList extends React.Component {
         return this.props.recipes.map(recipe => {
             const { id, title } = recipe;
             return (
-                <tr key={id}>
-                    <td className="w-100">
-                        <Link to={`/recipes/${id}`}>{title}</Link>
-                    </td>
-                    <td className="p-0">
-                        <ButtonGroup>
-                            <UpdateButton link={`/recipes/update/${id}`} />
-                            <DeleteButton link={`/recipes/delete/${id}`} />
-                        </ButtonGroup>
-                    </td>
-                </tr>
+                <ListGroup.Item key={id}>
+                    <ButtonGroup className="d-flex justify-content-between">
+                        <LinkButton link={`/recipes/${id}`}>{title}</LinkButton>
+                        <UpdateButton link={`/recipes/update/${id}`} />
+                        <DeleteButton link={`/recipes/delete/${id}`} />
+                    </ButtonGroup>
+                </ListGroup.Item>
             );
         });
     }
@@ -40,24 +41,14 @@ class RecipeList extends React.Component {
         return (
             <div>
                 <h3 className="my-3 text-center">Recipes</h3>
-                <Table responsive striped bordered hover size="sm">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>{null}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.renderList()}
-                        {isLoading && (
-                            <tr>
-                                <td colSpan="2">
-                                    <Spinner isLoading={isLoading} />
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </Table>
+                <ListGroup className="mb-3">
+                    {this.renderList()}
+                    {isLoading && (
+                        <ListGroup.Item>
+                            <Spinner isLoading={isLoading} />
+                        </ListGroup.Item>
+                    )}
+                </ListGroup>
                 <div className="row mb-3">
                     <div className="col text-left">
                         <BackButton link="/" />

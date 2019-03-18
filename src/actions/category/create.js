@@ -23,8 +23,7 @@ export const createCategory = formValues => async dispatch => {
         const response = await api.post("/categories", { ...formValues });
         dispatch(success(response.data));
     } catch (err) {
-        console.log(err);
-        dispatch(error(err.message));
+        dispatch(error(err));
     }
 };
 

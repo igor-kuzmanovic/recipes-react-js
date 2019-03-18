@@ -1,4 +1,4 @@
-import authApi from "../../apis/auth";
+import api from "../../apis/api";
 import {
     SIGNIN_REQUEST,
     SIGNIN_SUCCESS,
@@ -9,8 +9,8 @@ export function loading() {
     return { type: SIGNIN_REQUEST };
 }
 
-export function success(payload) {
-    return { type: SIGNIN_SUCCESS, payload };
+export function success() {
+    return { type: SIGNIN_SUCCESS, payload: true };
 }
 
 export function error(payload) {
@@ -20,13 +20,12 @@ export function error(payload) {
 export const signIn = (formValues, callback) => async dispatch => {
     dispatch(loading());
     try {
-        const response = await authApi.post("/login", formValues);
-        dispatch({ type: SIGNIN_SUCCESS, payload: true });
+        const response = await api.post("/login", formValues);
+        dispatch(success());
         localStorage.setItem("token", response.data.token);
         callback();
     } catch (err) {
-        console.log(err);
-        dispatch({ type: SIGNIN_FAILURE, payload: err });
+        dispatch(error(err));
     }
 };
 

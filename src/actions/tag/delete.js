@@ -23,8 +23,7 @@ export const deleteTag = id => async dispatch => {
         await api.delete(`/tags/${id}`);
         dispatch(success(id));
     } catch (err) {
-        console.log(err);
-        dispatch(error(err.message));
+        dispatch(error(err));
     }
 };
 

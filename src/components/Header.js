@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 class Header extends React.Component {
@@ -31,19 +31,13 @@ class Header extends React.Component {
                                     <LinkContainer to="/tags">
                                         <Nav.Link>Tags</Nav.Link>
                                     </LinkContainer>
-                                    <LinkContainer to="/logout">
-                                        <Nav.Link>Log Out</Nav.Link>
-                                    </LinkContainer>
-                                </>
-                            )}
-                            {!this.props.isLoggedIn && (
-                                <>
-                                    <LinkContainer to="/register">
-                                        <Nav.Link>Sign Up</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="/login">
-                                        <Nav.Link>Log In</Nav.Link>
-                                    </LinkContainer>
+                                    <NavDropdown>
+                                        <LinkContainer to="/logout">
+                                            <NavDropdown.Item>
+                                                Log Out
+                                            </NavDropdown.Item>
+                                        </LinkContainer>
+                                    </NavDropdown>
                                 </>
                             )}
                         </Nav>

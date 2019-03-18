@@ -6,7 +6,7 @@ import { fetchIngredients } from "../../actions/ingredient/list";
 import { fetchCategories } from "../../actions/category/list";
 import { fetchTags } from "../../actions/tag/list";
 import RecipeForm from "./RecipeForm";
-import { ErrorAlert, Spinner } from "../misc";
+import ErrorAlert from "../misc/ErrorAlert";
 
 class RecipeCreate extends React.Component {
     componentDidMount() {
@@ -39,9 +39,7 @@ class RecipeCreate extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3 text-center">
-                    Create a new recipe <Spinner isLoading={isLoading} />
-                </h3>
+                <h3 className="my-3 text-center">Create a new recipe</h3>
                 <RecipeForm
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={isLoading}

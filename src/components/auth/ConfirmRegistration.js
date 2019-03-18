@@ -1,16 +1,34 @@
 import React from "react";
 import { connect } from "react-redux";
-import { confirmRegistration, reset } from "../../actions/auth/confirmRegistration";
+import {
+    confirmRegistration,
+    reset
+} from "../../actions/auth/confirmRegistration";
 import ConfirmationForm from "./ConfirmationForm";
-import { ErrorAlert, Spinner } from "../misc";
+import ErrorAlert from "../misc/ErrorAlert";
 
 class ConfirmRegistration extends React.Component {
     componentWillUnmount() {
         this.props.reset();
     }
 
+    getInitialValues() {
+        const queryParams = {};
+        const search = this.props.location.search;
+        if (search) {
+            const searchParams = search.substring(1).split("&");
+            searchParams.forEach(param => {
+                const [key, value] = param.split("=");
+                queryParams[key] = value;
+            });
+        }
+        return queryParams;
+    }
+
     onSubmit = formValues => {
-        this.props.confirmRegistration(formValues, () => this.props.history.push("/"));
+        this.props.confirmRegistration(formValues, () =>
+            this.props.history.push("/")
+        );
     };
 
     render() {
@@ -18,13 +36,10 @@ class ConfirmRegistration extends React.Component {
 
         return (
             <div>
-                <h3 className="my-3 text-center">
-                    Confirm your registration <Spinner isLoading={isLoading} />
-                </h3>
-                <h4 className="text-center">
-                    Please check your email
-                </h4>
+                <h3 className="my-3 text-center">Confirm your registration</h3>
+                <h4 className="text-center">Please check your email</h4>
                 <ConfirmationForm
+                    initialValues={this.getInitialValues()}
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={isLoading}
                 />
