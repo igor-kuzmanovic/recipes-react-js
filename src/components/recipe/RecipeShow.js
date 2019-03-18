@@ -53,7 +53,7 @@ class RecipeShow extends React.Component {
                     <strong className="text-secondary">Creation Date:</strong>{" "}
                     {recipe &&
                         moment(recipe.creationDate).format(
-                            "MMMM Do YYYY, h:mm:ss"
+                            "MMMM Do YYYY"
                         )}
                     <Spinner isLoading={isLoading && !recipe} />
                 </h4>
