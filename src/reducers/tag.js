@@ -35,6 +35,9 @@ export default (state = initialState, action) => {
         case DELETE_TAG_REQUEST:
             return {
                 ...state,
+                created: 0,
+                deleted: 0,
+                updated: 0,
                 isLoading: true
             };
         case FETCH_TAGS_ERROR:
@@ -44,11 +47,15 @@ export default (state = initialState, action) => {
         case DELETE_TAG_ERROR:
             return {
                 ...state,
+                created: 0,
+                deleted: 0,
+                updated: 0,
                 isLoading: false,
                 error: action.payload
             };
         case FETCH_TAGS_SUCCESS:
             return {
+                ...state,
                 items: {
                     ...state.items,
                     ..._.mapKeys(action.payload, "id")
@@ -58,6 +65,7 @@ export default (state = initialState, action) => {
             };
         case FETCH_TAG_SUCCESS:
             return {
+                ...state,
                 items: {
                     ...state.items,
                     [action.payload.id]: action.payload
@@ -67,6 +75,7 @@ export default (state = initialState, action) => {
             };
         case CREATE_TAG_SUCCESS:
             return {
+                ...state,
                 items: {
                     ...state.items,
                     [action.payload.id]: action.payload
@@ -77,6 +86,7 @@ export default (state = initialState, action) => {
             };
         case UPDATE_TAG_SUCCESS:
             return {
+                ...state,
                 items: {
                     ...state.items,
                     [action.payload.id]: action.payload
@@ -87,6 +97,7 @@ export default (state = initialState, action) => {
             };
         case DELETE_TAG_SUCCESS:
             return {
+                ...state,
                 items: {
                     ..._.omit(state.items, action.payload)
                 },

@@ -35,6 +35,9 @@ export default (state = initialState, action) => {
         case DELETE_RECIPE_REQUEST:
             return {
                 ...state,
+                created: 0,
+                deleted: 0,
+                updated: 0,
                 isLoading: true
             };
         case FETCH_RECIPES_ERROR:
@@ -44,11 +47,15 @@ export default (state = initialState, action) => {
         case DELETE_RECIPE_ERROR:
             return {
                 ...state,
+                created: 0,
+                deleted: 0,
+                updated: 0,
                 isLoading: false,
                 error: action.payload
             };
         case FETCH_RECIPES_SUCCESS:
             return {
+                ...state,
                 items: {
                     ...state.items,
                     ..._.mapKeys(action.payload, "id")
@@ -58,6 +65,7 @@ export default (state = initialState, action) => {
             };
         case FETCH_RECIPE_SUCCESS:
             return {
+                ...state,
                 items: {
                     ...state.items,
                     [action.payload.id]: action.payload
@@ -67,6 +75,7 @@ export default (state = initialState, action) => {
             };
         case CREATE_RECIPE_SUCCESS:
             return {
+                ...state,
                 items: {
                     ...state.items,
                     [action.payload.id]: action.payload
@@ -77,6 +86,7 @@ export default (state = initialState, action) => {
             };
         case UPDATE_RECIPE_SUCCESS:
             return {
+                ...state,
                 items: {
                     ...state.items,
                     [action.payload.id]: action.payload
@@ -87,6 +97,7 @@ export default (state = initialState, action) => {
             };
         case DELETE_RECIPE_SUCCESS:
             return {
+                ...state,
                 items: {
                     ..._.omit(state.items, action.payload)
                 },
