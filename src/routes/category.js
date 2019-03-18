@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import requireAuth from "../components/hoc/requireAuth";
+import requireAdmin from "../components/hoc/requireAdmin";
 import {
     CategoryList,
     CategoryShow,
@@ -12,26 +12,26 @@ import {
 export default [
     <Route
         path="/categories"
-        component={requireAuth(CategoryList)}
+        component={requireAdmin(CategoryList)}
         exact
         key="list"
     />,
     <Route
         path="/categories/create"
-        component={requireAuth(CategoryCreate)}
+        component={requireAdmin(CategoryCreate)}
         exact
         key="create"
     />,
-    <Route path="/categories/:id" component={CategoryShow} exact key="show" />,
+    <Route path="/categories/:id" component={requireAdmin(CategoryShow)} exact key="show" />,
     <Route
         path="/categories/update/:id"
-        component={requireAuth(CategoryUpdate)}
+        component={requireAdmin(CategoryUpdate)}
         exact
         key="update"
     />,
     <Route
         path="/categories/delete/:id"
-        component={requireAuth(CategoryDelete)}
+        component={requireAdmin(CategoryDelete)}
         exact
         key="delete"
     />

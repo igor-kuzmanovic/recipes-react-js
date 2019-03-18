@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Spinner from "../misc/Spinner";
 
 export default ChildComponent => {
-    class RequiresNoAuthentication extends React.Component {
+    class RequiresAuthentication extends React.Component {
         componentDidMount() {
             this.shouldNavigateAway();
         }
@@ -13,13 +13,13 @@ export default ChildComponent => {
         }
 
         shouldNavigateAway() {
-            if (this.props.user) {
+            if (!this.props.user || !this.props.user.roles.includes("ROLE_ADMIN")) {
                 this.props.history.push("/");
             }
         }
 
         render() {
-            if (!this.props.user) {
+            if (this.props.user && this.props.user.roles.includes("ROLE_ADMIN")) {
                 return <ChildComponent {...this.props} />;
             }
 
@@ -31,5 +31,5 @@ export default ChildComponent => {
         return { user: state.auth.user };
     };
 
-    return connect(mapStateToProps)(RequiresNoAuthentication);
+    return connect(mapStateToProps)(RequiresAuthentication);
 };

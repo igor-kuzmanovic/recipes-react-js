@@ -27,8 +27,12 @@ class RecipeList extends React.Component {
                 <ListGroup.Item key={id}>
                     <ButtonGroup className="d-flex justify-content-between">
                         <LinkButton link={`/recipes/${id}`}>{title}</LinkButton>
-                        <UpdateButton link={`/recipes/update/${id}`} />
-                        <DeleteButton link={`/recipes/delete/${id}`} />
+                        {this.props.user.roles.includes("ROLE_ADMIN") && (
+                            <>
+                                <UpdateButton link={`/recipes/update/${id}`} />
+                                <DeleteButton link={`/recipes/delete/${id}`} />
+                            </>
+                        )}
                     </ButtonGroup>
                 </ListGroup.Item>
             );
@@ -67,7 +71,8 @@ const mapStateToProps = state => {
     return {
         isLoading: state.recipes.isLoading,
         error: state.recipes.error,
-        recipes: Object.values(state.recipes.items)
+        recipes: Object.values(state.recipes.items),
+        user: state.auth.user
     };
 };
 

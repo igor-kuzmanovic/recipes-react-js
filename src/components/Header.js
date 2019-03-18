@@ -5,6 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 class Header extends React.Component {
     render() {
+        const { user } = this.props;
         return (
             <Navbar bg="light" expand="md">
                 <div className="container">
@@ -14,24 +15,25 @@ class Header extends React.Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">
-                            {this.props.isLoggedIn && (
+                            {user && (
                                 <>
-                                    <LinkContainer to="/">
-                                        <Nav.Link>Home</Nav.Link>
-                                    </LinkContainer>
                                     <LinkContainer to="/recipes">
                                         <Nav.Link>Recipes</Nav.Link>
                                     </LinkContainer>
-                                    <LinkContainer to="/ingredients">
-                                        <Nav.Link>Ingredients</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="/categories">
-                                        <Nav.Link>Categories</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="/tags">
-                                        <Nav.Link>Tags</Nav.Link>
-                                    </LinkContainer>
-                                    <NavDropdown>
+                                    {user.roles.includes("ROLE_ADMIN") && (
+                                        <>
+                                            <LinkContainer to="/ingredients">
+                                                <Nav.Link>Ingredients</Nav.Link>
+                                            </LinkContainer>
+                                            <LinkContainer to="/categories">
+                                                <Nav.Link>Categories</Nav.Link>
+                                            </LinkContainer>
+                                            <LinkContainer to="/tags">
+                                                <Nav.Link>Tags</Nav.Link>
+                                            </LinkContainer>
+                                        </>
+                                    )}
+                                    <NavDropdown title={user.username}>
                                         <LinkContainer to="/logout">
                                             <NavDropdown.Item>
                                                 Log Out
@@ -50,7 +52,7 @@ class Header extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.auth.isLoggedIn
+        user: state.auth.user
     };
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import requireAuth from "../components/hoc/requireAuth";
+import requireAdmin from "../components/hoc/requireAdmin";
 import {
     IngredientList,
     IngredientShow,
@@ -12,31 +12,31 @@ import {
 export default [
     <Route
         path="/ingredients"
-        component={requireAuth(IngredientList)}
+        component={requireAdmin(IngredientList)}
         exact
         key="list"
     />,
     <Route
         path="/ingredients/create"
-        component={requireAuth(IngredientCreate)}
+        component={requireAdmin(IngredientCreate)}
         exact
         key="create"
     />,
     <Route
         path="/ingredients/:id"
-        component={requireAuth(IngredientShow)}
+        component={requireAdmin(IngredientShow)}
         exact
         key="show"
     />,
     <Route
         path="/ingredients/update/:id"
-        component={requireAuth(IngredientUpdate)}
+        component={requireAdmin(IngredientUpdate)}
         exact
         key="update"
     />,
     <Route
         path="/ingredients/delete/:id"
-        component={requireAuth(IngredientDelete)}
+        component={requireAdmin(IngredientDelete)}
         exact
         key="delete"
     />

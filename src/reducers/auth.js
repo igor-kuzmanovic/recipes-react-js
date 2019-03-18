@@ -12,7 +12,7 @@ import {
 } from "../constants/actionTypes";
 
 const initialState = {
-    isLoggedIn: false,
+    user: null,
     hasSignedUp: false,
     isLoading: false,
     error: null
@@ -47,14 +47,14 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                isLoggedIn: action.payload,
+                user: action.payload,
                 hasSignedUp: false,
                 error: null
             };
         case SIGNOUT:
             return {
                 ...state,
-                isLoggedIn: action.payload
+                user: action.payload
             };
         default:
             return state;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import requireAuth from "../components/hoc/requireAuth";
+import { requireAuth, requireAdmin } from "../components/hoc";
 import {
     RecipeList,
     RecipeShow,
@@ -18,7 +18,7 @@ export default [
     />,
     <Route
         path="/recipes/create"
-        component={RecipeCreate}
+        component={requireAuth(RecipeCreate)}
         exact
         key="create"
     />,
@@ -30,13 +30,13 @@ export default [
     />,
     <Route
         path="/recipes/update/:id"
-        component={requireAuth(RecipeUpdate)}
+        component={requireAdmin(RecipeUpdate)}
         exact
         key="update"
     />,
     <Route
         path="/recipes/delete/:id"
-        component={requireAuth(RecipeDelete)}
+        component={requireAdmin(RecipeDelete)}
         exact
         key="delete"
     />

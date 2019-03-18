@@ -13,13 +13,13 @@ export default ChildComponent => {
         }
 
         shouldNavigateAway() {
-            if (!this.props.isLoggedIn) {
+            if (!this.props.user) {
                 this.props.history.push("/login");
             }
         }
 
         render() {
-            if (this.props.isLoggedIn) {
+            if (this.props.user) {
                 return <ChildComponent {...this.props} />;
             }
 
@@ -28,7 +28,7 @@ export default ChildComponent => {
     }
 
     const mapStateToProps = state => {
-        return { isLoggedIn: state.auth.isLoggedIn };
+        return { user: state.auth.user };
     };
 
     return connect(mapStateToProps)(RequiresAuthentication);
