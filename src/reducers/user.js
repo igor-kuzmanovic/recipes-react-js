@@ -1,7 +1,7 @@
 import {
     UPDATE_USER_REQUEST,
     UPDATE_USER_SUCCESS,
-    UPDATE_USER_ERROR,
+    UPDATE_USER_ERROR
 } from "../constants/actionTypes";
 
 const initialState = {

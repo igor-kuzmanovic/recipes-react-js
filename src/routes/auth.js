@@ -1,7 +1,14 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { requireAuth, requireNoAuth } from "../components/hoc";
-import { SignUp, ConfirmRegistration, SignIn, SignOut, ResetPassword, NewPassword } from "../components/auth";
+import {
+    SignUp,
+    ConfirmRegistration,
+    SignIn,
+    SignOut,
+    ResetPassword,
+    NewPassword
+} from "../components/auth";
 
 export default [
     <Route

@@ -20,7 +20,7 @@ export function error(payload) {
 export const updateUser = formValues => async dispatch => {
     dispatch(loading());
     try {
-        const response = await api.put(`/user/update`, formValues);
+        const response = await api.put(`/update_user`, formValues);
         dispatch(success(response.data));
     } catch (err) {
         dispatch(error(err));

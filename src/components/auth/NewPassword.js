@@ -1,9 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-    newPassword,
-    reset
-} from "../../actions/auth/newPassword";
+import { newPassword, reset } from "../../actions/auth/newPassword";
 import NewPasswordForm from "./NewPasswordForm";
 import ErrorAlert from "../misc/ErrorAlert";
 
@@ -26,9 +23,7 @@ class NewPassword extends React.Component {
     }
 
     onSubmit = formValues => {
-        this.props.newPassword(formValues, () =>
-            this.props.history.push("/")
-        );
+        this.props.newPassword(formValues, () => this.props.history.push("/"));
     };
 
     render() {

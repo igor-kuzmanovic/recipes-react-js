@@ -9,7 +9,9 @@ const store = createStore(
     rootReducer,
     {
         auth: {
-            user: localStorage.getItem("token") ? jwt_decode(localStorage.getItem("token")) : null
+            user: localStorage.getItem("token")
+                ? jwt_decode(localStorage.getItem("token"))
+                : null
         }
     },
     storeEnhancers(applyMiddleware(reduxThunk))

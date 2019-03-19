@@ -4,10 +4,4 @@ import { signIn } from "./signIn";
 import { signOut } from "./signOut";
 import { resetPassword } from "./resetPassword";
 
-export {
-    signUp,
-    confirmRegistration,
-    signIn,
-    signOut,
-    resetPassword
-};
+export { signUp, confirmRegistration, signIn, signOut, resetPassword };
