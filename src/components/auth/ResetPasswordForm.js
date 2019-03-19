@@ -3,7 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { Form } from "react-bootstrap";
 import { Input, SubmitButton } from "../form";
 
-class AuthForm extends React.Component {
+class ResetPasswordForm extends React.Component {
     onSubmit = formValues => {
         this.props.onSubmit(formValues);
     };
@@ -16,13 +16,6 @@ class AuthForm extends React.Component {
                     name="email"
                     type="email"
                     placeholder="Enter your email"
-                    component={Input}
-                />
-                <Field
-                    label="Password"
-                    name="password"
-                    type="password"
-                    placeholder="Enter your password"
                     component={Input}
                 />
                 <div className="text-center mb-3">
@@ -38,13 +31,10 @@ const validate = formValues => {
     if (!formValues.email) {
         errors.email = "You must enter your email";
     }
-    if (!formValues.password) {
-        errors.password = "You must enter a password";
-    }
     return errors;
 };
 
 export default reduxForm({
-    form: "authForm",
+    form: "resetPasswordForm",
     validate
-})(AuthForm);
+})(ResetPasswordForm);

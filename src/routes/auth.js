@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { requireAuth, requireNoAuth } from "../components/hoc";
-import { SignUp, ConfirmRegistration, SignIn, SignOut } from "../components/auth";
+import { SignUp, ConfirmRegistration, SignIn, SignOut, ResetPassword, NewPassword } from "../components/auth";
 
 export default [
     <Route
@@ -27,5 +27,17 @@ export default [
         component={requireAuth(SignOut)}
         exact
         key="signout"
+    />,
+    <Route
+        path="/reset_password"
+        component={requireNoAuth(ResetPassword)}
+        exact
+        key="reset_password"
+    />,
+    <Route
+        path="/new_password"
+        component={requireNoAuth(NewPassword)}
+        exact
+        key="new_password"
     />
 ];

@@ -8,7 +8,13 @@ import {
     SIGNIN_REQUEST,
     SIGNIN_SUCCESS,
     SIGNIN_FAILURE,
-    SIGNOUT
+    SIGNOUT,
+    RESET_PASSWORD_REQUEST,
+    RESET_PASSWORD_SUCCESS,
+    RESET_PASSWORD_FAILURE,
+    NEW_PASSWORD_REQUEST,
+    NEW_PASSWORD_SUCCESS,
+    NEW_PASSWORD_FAILURE
 } from "../constants/actionTypes";
 import jwt_decode from "jwt-decode";
 
@@ -24,6 +30,8 @@ export default (state = initialState, action) => {
         case SIGNUP_REQUEST:
         case CONFIRM_SIGNUP_REQUEST:
         case SIGNIN_REQUEST:
+        case RESET_PASSWORD_REQUEST:
+        case NEW_PASSWORD_REQUEST:
             return {
                 ...state,
                 isLoading: true
@@ -31,6 +39,8 @@ export default (state = initialState, action) => {
         case SIGNUP_FAILURE:
         case CONFIRM_SIGNUP_FAILURE:
         case SIGNIN_FAILURE:
+        case RESET_PASSWORD_FAILURE:
+        case NEW_PASSWORD_FAILURE:
             return {
                 ...state,
                 isLoading: false,
@@ -45,6 +55,7 @@ export default (state = initialState, action) => {
             };
         case CONFIRM_SIGNUP_SUCCESS:
         case SIGNIN_SUCCESS:
+        case NEW_PASSWORD_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
@@ -56,6 +67,12 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 user: action.payload
+            };
+        case RESET_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: null
             };
         default:
             return state;

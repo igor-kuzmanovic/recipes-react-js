@@ -1,17 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { signIn, reset } from "../../actions/auth/signIn";
-import AuthForm from "./AuthForm";
+import {
+    resetPassword,
+    reset
+} from "../../actions/auth/resetPassword";
+import ResetPasswordForm from "./ResetPasswordForm";
 import ErrorAlert from "../misc/ErrorAlert";
 
-class SignIn extends React.Component {
+class ResetPassword extends React.Component {
     componentWillUnmount() {
         this.props.reset();
     }
 
     onSubmit = formValues => {
-        this.props.signIn(formValues, () => this.props.history.push("/"));
+        this.props.resetPassword(formValues, () =>
+            this.props.history.push("/new_password")
+        );
     };
 
     render() {
@@ -19,17 +23,11 @@ class SignIn extends React.Component {
 
         return (
             <div className="mx-auto col-md-6 col-lg-4">
-                <h3 className="my-3 text-center">Log In</h3>
-                <AuthForm
+                <h3 className="my-3 text-center">Reset your password</h3>
+                <ResetPasswordForm
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={isLoading}
                 />
-                <h6 className="text-center">
-                    Don't have an account? <Link to="/register">Sign Up!</Link>
-                </h6>
-                <h6 className="text-center">
-                    <Link to="/reset_password">Forgot your password?</Link>
-                </h6>
                 <ErrorAlert error={error} />
             </div>
         );
@@ -44,11 +42,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    signIn,
+    resetPassword,
     reset
 };
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(SignIn);
+)(ResetPassword);
