@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { requireAuth, requireAdmin } from "../components/hoc";
+import { requireAuth } from "../components/hoc";
 import {
     RecipeList,
     RecipeShow,
