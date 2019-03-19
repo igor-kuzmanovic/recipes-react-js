@@ -27,7 +27,7 @@ class SignIn extends React.Component {
                 <h6 className="text-center">
                     Don't have an account? <Link to="/register">Sign Up!</Link>
                 </h6>
-                <h6 className="text-center">
+                <h6 className="text-center mb-3">
                     <Link to="/reset_password">Forgot your password?</Link>
                 </h6>
                 <ErrorAlert error={error} />

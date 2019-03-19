@@ -26,7 +26,7 @@ class SignUp extends React.Component {
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={isLoading}
                 />
-                <h6 className="text-center">
+                <h6 className="text-center mb-3">
                     Already have an account? <Link to="/login">Log In!</Link>
                 </h6>
                 <ErrorAlert error={error} />
