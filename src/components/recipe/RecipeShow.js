@@ -50,7 +50,12 @@ class RecipeShow extends React.Component {
                     <Spinner isLoading={isLoading && !recipe} />
                 </h4>
                 <h4 className="my-3 text-center">
-                    <strong className="text-secondary">Creation Date:</strong>{" "}
+                    <strong className="text-secondary">By:</strong>{" "}
+                    {recipe && recipe.user.email}
+                    <Spinner isLoading={isLoading && !recipe} />
+                </h4>
+                <h4 className="my-3 text-center">
+                    <strong className="text-secondary">Date:</strong>{" "}
                     {recipe &&
                         moment(recipe.creationDate).format(
                             "MMMM Do YYYY"

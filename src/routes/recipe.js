@@ -30,13 +30,13 @@ export default [
     />,
     <Route
         path="/recipes/update/:id"
-        component={requireAdmin(RecipeUpdate)}
+        component={requireAuth(RecipeUpdate)}
         exact
         key="update"
     />,
     <Route
         path="/recipes/delete/:id"
-        component={requireAdmin(RecipeDelete)}
+        component={requireAuth(RecipeDelete)}
         exact
         key="delete"
     />
