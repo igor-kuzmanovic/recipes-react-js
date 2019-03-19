@@ -5,6 +5,7 @@ import recipeReducer from "./recipe";
 import ingredientReducer from "./ingredient";
 import categoryReducer from "./category";
 import tagReducer from "./tag";
+import userReducer from "./user";
 
 export default combineReducers({
     form: formReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     recipes: recipeReducer,
     ingredients: ingredientReducer,
     categories: categoryReducer,
-    tags: tagReducer
+    tags: tagReducer,
+    users: userReducer
 });

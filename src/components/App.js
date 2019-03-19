@@ -8,6 +8,7 @@ import recipeRoutes from "../routes/recipe";
 import ingredientRoutes from "../routes/ingredient";
 import categoryRoutes from "../routes/category";
 import tagRoutes from "../routes/tag";
+import userRoutes from "../routes/user";
 
 const App = () => {
     return (
@@ -21,6 +22,7 @@ const App = () => {
                     {ingredientRoutes}
                     {categoryRoutes}
                     {tagRoutes}
+                    {userRoutes}
                     <Route
                         render={() => (
                             <h1 className="text-center mt-5">

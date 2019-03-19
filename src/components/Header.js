@@ -35,6 +35,12 @@ class Header extends React.Component {
                                         </>
                                     )}
                                     <NavDropdown title={user.username}>
+                                        <LinkContainer to="/settings">
+                                            <NavDropdown.Item>
+                                                Settings
+                                            </NavDropdown.Item>
+                                        </LinkContainer>
+                                        <NavDropdown.Divider />
                                         <LinkContainer to="/logout">
                                             <NavDropdown.Item>
                                                 Log Out
