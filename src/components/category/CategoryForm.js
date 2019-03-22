@@ -35,6 +35,8 @@ const validate = formValues => {
     const errors = {};
     if (!formValues.name) {
         errors.name = "You must enter a name";
+    } else if (formValues.name.length > 50) {
+        errors.name = "Name cannot be longer than 50 characters";
     }
     return errors;
 };

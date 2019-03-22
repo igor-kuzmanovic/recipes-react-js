@@ -44,12 +44,23 @@ const validate = formValues => {
     const errors = {};
     if (!formValues.email) {
         errors.email = "You must enter your email";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formValues.email)) {
+        errors.email = "Email is not in the valid format";
+    } else if (formValues.email.length > 180) {
+        errors.email = "Email cannot be longer than 180 characters";
     }
     if (!formValues.resetPasswordToken) {
         errors.resetPasswordToken = "You must enter your password reset token";
+    } else if (!formValues.resetPasswordToken.length != 30) {
+        errors.resetPasswordToken =
+            "Password reset token is not in the valid format";
     }
     if (!formValues.password) {
         errors.password = "You must enter a new password";
+    } else if (formValues.password.length < 7) {
+        errors.password = "Password must be at least 7 characters";
+    } else if (formValues.password.length > 100) {
+        errors.password = "Password cannot be longer than 100 characters";
     }
     return errors;
 };

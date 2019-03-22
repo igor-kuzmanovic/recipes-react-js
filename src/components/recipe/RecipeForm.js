@@ -90,9 +90,13 @@ const validate = formValues => {
     const errors = {};
     if (!formValues.title) {
         errors.title = "You must enter a title";
+    } else if (formValues.title.length > 100) {
+        errors.title = "Title cannot be longer than 100 characters";
     }
     if (!formValues.description) {
         errors.description = "You must enter a description";
+    } else if (formValues.description.length > 500) {
+        errors.description = "Description cannot be longer than 500 characters";
     }
     if (!formValues.ingredients || !formValues.ingredients.length) {
         errors.ingredients = "You must select at least one ingredient";
