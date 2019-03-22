@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { ROLE_ADMIN } from "../constants/auth";
 
 class Header extends React.Component {
@@ -37,12 +39,16 @@ class Header extends React.Component {
                                     <NavDropdown title={user.username}>
                                         <LinkContainer to="/settings">
                                             <NavDropdown.Item>
+                                                <FontAwesomeIcon icon={faCog} />{" "}
                                                 Settings
                                             </NavDropdown.Item>
                                         </LinkContainer>
                                         <NavDropdown.Divider />
                                         <LinkContainer to="/logout">
                                             <NavDropdown.Item>
+                                                <FontAwesomeIcon
+                                                    icon={faSignOutAlt}
+                                                />{" "}
                                                 Log Out
                                             </NavDropdown.Item>
                                         </LinkContainer>
