@@ -44,7 +44,7 @@ const validate = formValues => {
     }
     if (!formValues.confirmationToken) {
         errors.confirmationToken = "You must enter your confirmation token";
-    } else if (!formValues.confirmationToken.length != 30) {
+    } else if (!formValues.confirmationToken.length !== 30) {
         errors.confirmationToken =
             "Confirmation token is not in the valid format";
     }

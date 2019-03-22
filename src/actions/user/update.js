@@ -1,3 +1,4 @@
+import _ from "lodash";
 import api from "../../apis/api";
 import {
     UPDATE_USER_REQUEST,
@@ -20,7 +21,10 @@ export function error(payload) {
 export const updateUser = formValues => async dispatch => {
     dispatch(loading());
     try {
-        const response = await api.put(`/update_user`, formValues);
+        const response = await api.put(
+            `/update_user`,
+            _.omit(formValues, "confirmPassword")
+        );
         dispatch(success(response.data));
     } catch (err) {
         dispatch(error(err));

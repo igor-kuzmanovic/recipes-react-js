@@ -1,3 +1,4 @@
+import _ from "lodash";
 import api from "../../apis/api";
 import {
     SIGNUP_REQUEST,
@@ -20,7 +21,7 @@ export function error(payload) {
 export const signUp = (formValues, callback) => async dispatch => {
     dispatch(loading());
     try {
-        await api.post("/register", formValues);
+        await api.post("/register", _.omit(formValues, "confirmPassword"));
         dispatch(success(true));
         callback();
     } catch (err) {

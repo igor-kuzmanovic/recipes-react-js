@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { signUp, reset } from "../../actions/auth/signUp";
-import AuthForm from "./AuthForm";
+import SignUpForm from "./SignUpForm";
 import ErrorAlert from "../misc/ErrorAlert";
 
 class SignUp extends React.Component {
@@ -22,7 +22,7 @@ class SignUp extends React.Component {
         return (
             <div className="mx-auto col-md-6 col-lg-4">
                 <h3 className="my-3 text-center">Sign Up</h3>
-                <AuthForm
+                <SignUpForm
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={isLoading}
                 />

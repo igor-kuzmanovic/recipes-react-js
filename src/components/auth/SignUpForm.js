@@ -3,7 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { Form } from "react-bootstrap";
 import { Input, SubmitButton } from "../form";
 
-class NewPasswordForm extends React.Component {
+class SignUpForm extends React.Component {
     onSubmit = formValues => {
         this.props.onSubmit(formValues);
     };
@@ -19,24 +19,17 @@ class NewPasswordForm extends React.Component {
                     component={Input}
                 />
                 <Field
-                    label="Password Reset Token"
-                    name="resetPasswordToken"
-                    type="resetPasswordToken"
-                    placeholder="Enter your password reset token"
-                    component={Input}
-                />
-                <Field
-                    label="New Password"
+                    label="Password"
                     name="password"
                     type="password"
-                    placeholder="Enter your new password"
+                    placeholder="Enter your password"
                     component={Input}
                 />
                 <Field
-                    label="Confirm New Password"
+                    label="Confirm Password"
                     name="confirmPassword"
                     type="password"
-                    placeholder="Confirm your new password"
+                    placeholder="Confirm your password"
                     component={Input}
                 />
                 <div className="text-center mb-3">
@@ -56,21 +49,15 @@ const validate = formValues => {
     } else if (formValues.email.length > 180) {
         errors.email = "Email cannot be longer than 180 characters";
     }
-    if (!formValues.resetPasswordToken) {
-        errors.resetPasswordToken = "You must enter your password reset token";
-    } else if (!formValues.resetPasswordToken.length !== 30) {
-        errors.resetPasswordToken =
-            "Password reset token is not in the valid format";
-    }
     if (!formValues.password) {
-        errors.password = "You must enter a new password";
+        errors.password = "You must enter a password";
     } else if (formValues.password.length < 7) {
         errors.password = "Password must be at least 7 characters";
     } else if (formValues.password.length > 100) {
         errors.password = "Password cannot be longer than 100 characters";
     }
     if (!formValues.confirmPassword) {
-        errors.confirmPassword = "You must confirm your new password";
+        errors.confirmPassword = "You must confirm your password";
     } else if (formValues.confirmPassword !== formValues.password) {
         errors.confirmPassword = "Passwords don't match";
     }
@@ -78,6 +65,6 @@ const validate = formValues => {
 };
 
 export default reduxForm({
-    form: "newPasswordForm",
+    form: "signUpForm",
     validate
-})(NewPasswordForm);
+})(SignUpForm);

@@ -1,3 +1,4 @@
+import _ from "lodash";
 import jwt_decode from "jwt-decode";
 import api from "../../apis/api";
 import {
@@ -21,7 +22,10 @@ export function error(payload) {
 export const newPassword = (formValues, callback) => async dispatch => {
     dispatch(loading());
     try {
-        const response = await api.post("/new_password", formValues);
+        const response = await api.post(
+            "/new_password",
+            _.omit(formValues, "confirmPassword")
+        );
         dispatch(success(jwt_decode(response.data.token)));
         localStorage.setItem("token", response.data.token);
         callback();

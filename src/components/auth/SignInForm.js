@@ -3,7 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { Form } from "react-bootstrap";
 import { Input, SubmitButton } from "../form";
 
-class AuthForm extends React.Component {
+class SignInForm extends React.Component {
     onSubmit = formValues => {
         this.props.onSubmit(formValues);
     };
@@ -53,6 +53,6 @@ const validate = formValues => {
 };
 
 export default reduxForm({
-    form: "authForm",
+    form: "signInForm",
     validate
-})(AuthForm);
+})(SignInForm);
