@@ -1,21 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { updateUser } from "../../actions/user/update";
+import { updateUser, reset } from "../../actions/user/update";
 import SettingsForm from "./SettingsForm";
-import ErrorAlert from "../misc/ErrorAlert";
+import { SuccessAlert, ErrorAlert } from "../misc";
 
 class UserSettings extends React.Component {
+    componentWillUnmount() {
+        this.props.reset();
+    }
+
     onSubmit = formValues => {
-        this.props.updateUser(formValues, () => this.props.history.push("/"));
+        this.props.updateUser(formValues);
     };
 
     render() {
-        const { updated, isLoading, error } = this.props;
-
-        if (updated) {
-            return <Redirect to="/" />;
-        }
+        const { hasUpdated, isLoading, error } = this.props;
 
         return (
             <div className="mx-auto col-md-6 col-lg-4">
@@ -25,6 +24,10 @@ class UserSettings extends React.Component {
                     isSubmitDisabled={isLoading}
                 />
                 <ErrorAlert error={error} />
+                <SuccessAlert
+                    isShown={hasUpdated}
+                    message="Successfully updated your password"
+                />
             </div>
         );
     }
@@ -34,12 +37,13 @@ const mapStateToProps = state => {
     return {
         isLoading: state.users.isLoading,
         error: state.users.error,
-        updated: state.users.updated
+        hasUpdated: state.users.hasUpdated
     };
 };
 
 const mapDispatchToProps = {
-    updateUser
+    updateUser,
+    reset
 };
 
 export default connect(
