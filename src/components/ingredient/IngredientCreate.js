@@ -1,15 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { createIngredient, reset } from "../../actions/ingredient/create";
+import { createIngredient } from "../../actions/ingredient/create";
 import IngredientForm from "./IngredientForm";
 import ErrorAlert from "../misc/ErrorAlert";
 
 class IngredientCreate extends React.Component {
-    componentWillUnmount() {
-        this.props.reset();
-    }
-
     onSubmit = formValues => {
         this.props.createIngredient(formValues);
     };
@@ -43,8 +39,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    createIngredient,
-    reset
+    createIngredient
 };
 
 export default connect(

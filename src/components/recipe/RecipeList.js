@@ -10,7 +10,7 @@ import {
     BackButton,
     CreateButton
 } from "../form";
-import { ErrorAlert, Spinner } from "../misc";
+import { SuccessAlert, ErrorAlert, Spinner } from "../misc";
 
 class RecipeList extends React.Component {
     componentDidMount() {
@@ -24,7 +24,10 @@ class RecipeList extends React.Component {
     renderList() {
         return this.props.recipes.map(recipe => {
             const { id, title, user } = recipe;
-            const showUpdateDeleteButtons = this.props.user.roles.includes(ROLE_ADMIN) || this.props.user.username === user.email;
+            const showUpdateDeleteButtons =
+                this.props.user.roles.includes(ROLE_ADMIN) ||
+                this.props.user.username === user.email;
+
             return (
                 <ListGroup.Item key={id} className="p-0">
                     <ButtonGroup className="d-flex justify-content-between">
@@ -42,7 +45,7 @@ class RecipeList extends React.Component {
     }
 
     render() {
-        const { isLoading, error } = this.props;
+        const { deleted, isLoading, error } = this.props;
 
         return (
             <div className="mx-auto col-md-10 col-lg-8">
@@ -64,6 +67,10 @@ class RecipeList extends React.Component {
                     </div>
                 </div>
                 <ErrorAlert error={error} />
+                <SuccessAlert
+                    isShown={deleted}
+                    message="Recipe successfully deleted"
+                />
             </div>
         );
     }
@@ -74,6 +81,7 @@ const mapStateToProps = state => {
         isLoading: state.recipes.isLoading,
         error: state.recipes.error,
         recipes: Object.values(state.recipes.items),
+        deleted: state.recipes.deleted,
         user: state.auth.user
     };
 };

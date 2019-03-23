@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { createRecipe, reset } from "../../actions/recipe/create";
+import { createRecipe } from "../../actions/recipe/create";
 import { fetchIngredients } from "../../actions/ingredient/list";
 import { fetchCategories } from "../../actions/category/list";
 import { fetchTags } from "../../actions/tag/list";
@@ -13,10 +13,6 @@ class RecipeCreate extends React.Component {
         this.props.fetchIngredients();
         this.props.fetchCategories();
         this.props.fetchTags();
-    }
-
-    componentWillUnmount() {
-        this.props.reset();
     }
 
     onSubmit = formValues => {
@@ -66,7 +62,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     createRecipe,
-    reset,
     fetchIngredients,
     fetchCategories,
     fetchTags

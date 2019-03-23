@@ -3,17 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { fetchCategory, updateCategory } from "../../actions/category";
-import { reset } from "../../actions/category/update";
 import CategoryForm from "./CategoryForm";
 import ErrorAlert from "../misc/ErrorAlert";
 
 class CategoryUpdate extends React.Component {
     componentDidMount() {
         this.props.fetchCategory(this.props.match.params.id);
-    }
-
-    componentWillUnmount() {
-        this.props.reset();
     }
 
     onSubmit = formValues => {
@@ -54,8 +49,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = {
     fetchCategory,
-    updateCategory,
-    reset
+    updateCategory
 };
 
 export default connect(

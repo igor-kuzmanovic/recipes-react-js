@@ -19,6 +19,7 @@ class Home extends React.Component {
     renderList() {
         return this.props.recipes.map(recipe => {
             const { id, title, description, creationDate } = recipe;
+
             return (
                 <div key={id} className="col-4">
                     <Card className="text-center m-2">

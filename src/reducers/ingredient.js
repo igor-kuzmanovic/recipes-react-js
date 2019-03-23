@@ -35,10 +35,8 @@ export default (state = initialState, action) => {
         case DELETE_INGREDIENT_REQUEST:
             return {
                 ...state,
-                created: 0,
-                deleted: 0,
-                updated: 0,
-                isLoading: true
+                isLoading: true,
+                error: null
             };
         case FETCH_INGREDIENTS_ERROR:
         case FETCH_INGREDIENT_ERROR:

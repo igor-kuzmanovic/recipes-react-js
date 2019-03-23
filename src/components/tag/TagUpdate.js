@@ -3,17 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { fetchTag, updateTag } from "../../actions/tag";
-import { reset } from "../../actions/tag/update";
 import TagForm from "./TagForm";
 import ErrorAlert from "../misc/ErrorAlert";
 
 class TagUpdate extends React.Component {
     componentDidMount() {
         this.props.fetchTag(this.props.match.params.id);
-    }
-
-    componentWillUnmount() {
-        this.props.reset();
     }
 
     onSubmit = formValues => {
@@ -54,8 +49,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = {
     fetchTag,
-    updateTag,
-    reset
+    updateTag
 };
 
 export default connect(

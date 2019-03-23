@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchCategory, reset } from "../../actions/category/show";
 import { BackButton } from "../form";
-import { ErrorAlert, Spinner } from "../misc";
+import { SuccessAlert, ErrorAlert, Spinner } from "../misc";
 
 class CategoryShow extends React.Component {
     componentDidMount() {
@@ -14,7 +14,7 @@ class CategoryShow extends React.Component {
     }
 
     render() {
-        const { category, isLoading, error } = this.props;
+        const { category, created, updated, isLoading, error } = this.props;
 
         return (
             <div className="mx-auto col-md-6 col-lg-4">
@@ -26,6 +26,14 @@ class CategoryShow extends React.Component {
                     <BackButton link="/categories" />
                 </div>
                 <ErrorAlert error={error} />
+                <SuccessAlert
+                    isShown={created}
+                    message="Tag successfully created"
+                />
+                <SuccessAlert
+                    isShown={updated}
+                    message="Tag successfully updated"
+                />
             </div>
         );
     }
@@ -35,7 +43,9 @@ const mapStateToProps = (state, ownProps) => {
     return {
         isLoading: state.categories.isLoading,
         error: state.categories.error,
-        category: state.categories.items[ownProps.match.params.id]
+        category: state.categories.items[ownProps.match.params.id],
+        created: state.categories.created,
+        updated: state.categories.updated
     };
 };
 

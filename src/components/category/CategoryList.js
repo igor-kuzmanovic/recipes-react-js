@@ -9,7 +9,7 @@ import {
     BackButton,
     CreateButton
 } from "../form";
-import { ErrorAlert, Spinner } from "../misc";
+import { SuccessAlert, ErrorAlert, Spinner } from "../misc";
 
 class CategoryList extends React.Component {
     componentDidMount() {
@@ -23,6 +23,7 @@ class CategoryList extends React.Component {
     renderList() {
         return this.props.categories.map(category => {
             const { id, name } = category;
+
             return (
                 <ListGroup.Item key={id} className="p-0">
                     <ButtonGroup className="d-flex justify-content-between">
@@ -38,7 +39,7 @@ class CategoryList extends React.Component {
     }
 
     render() {
-        const { isLoading, error } = this.props;
+        const { deleted, isLoading, error } = this.props;
 
         return (
             <div className="mx-auto col-md-10 col-lg-8">
@@ -60,6 +61,10 @@ class CategoryList extends React.Component {
                     </div>
                 </div>
                 <ErrorAlert error={error} />
+                <SuccessAlert
+                    isShown={deleted}
+                    message="Category successfully deleted"
+                />
             </div>
         );
     }
@@ -69,7 +74,8 @@ const mapStateToProps = state => {
     return {
         isLoading: state.categories.isLoading,
         error: state.categories.error,
-        categories: Object.values(state.categories.items)
+        categories: Object.values(state.categories.items),
+        deleted: state.categories.deleted
     };
 };
 

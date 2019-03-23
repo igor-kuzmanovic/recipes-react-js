@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { newPassword, reset } from "../../actions/auth/newPassword";
 import NewPasswordForm from "./NewPasswordForm";
-import ErrorAlert from "../misc/ErrorAlert";
+import { SuccessAlert, ErrorAlert } from "../misc";
 
 class NewPassword extends React.Component {
     componentWillUnmount() {
@@ -27,7 +27,7 @@ class NewPassword extends React.Component {
     };
 
     render() {
-        const { isLoading, error } = this.props;
+        const { hasResetPassword, isLoading, error } = this.props;
 
         return (
             <div className="mx-auto col-md-6 col-lg-4">
@@ -39,6 +39,10 @@ class NewPassword extends React.Component {
                     isSubmitDisabled={isLoading}
                 />
                 <ErrorAlert error={error} />
+                <SuccessAlert
+                    isShown={hasResetPassword}
+                    message="Password successfully reset"
+                />
             </div>
         );
     }
@@ -47,7 +51,8 @@ class NewPassword extends React.Component {
 const mapStateToProps = state => {
     return {
         isLoading: state.auth.isLoading,
-        error: state.auth.error
+        error: state.auth.error,
+        hasResetPassword: state.auth.hasResetPassword
     };
 };
 

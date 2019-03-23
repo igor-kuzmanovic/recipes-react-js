@@ -9,6 +9,7 @@ import { ROLE_ADMIN } from "../constants/auth";
 class Header extends React.Component {
     render() {
         const { user } = this.props;
+
         return (
             <Navbar bg="light" expand="md">
                 <div className="container">

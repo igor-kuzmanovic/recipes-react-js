@@ -23,6 +23,7 @@ const initialState = {
         ? jwt_decode(localStorage.getItem("token"))
         : null,
     hasSignedUp: false,
+    hasResetPassword: false,
     isLoading: false,
     error: null
 };
@@ -36,7 +37,8 @@ export default (state = initialState, action) => {
         case NEW_PASSWORD_REQUEST:
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
+                error: null
             };
         case SIGNUP_FAILURE:
         case CONFIRM_SIGNUP_FAILURE:
@@ -45,14 +47,16 @@ export default (state = initialState, action) => {
         case NEW_PASSWORD_FAILURE:
             return {
                 ...state,
+                hasSignedUp: false,
+                hasResetPassword: false,
                 isLoading: false,
                 error: action.payload
             };
         case SIGNUP_SUCCESS:
             return {
                 ...state,
+                hasSignedUp: true,
                 isLoading: false,
-                hasSignedUp: action.payload,
                 error: null
             };
         case CONFIRM_SIGNUP_SUCCESS:
@@ -60,9 +64,8 @@ export default (state = initialState, action) => {
         case NEW_PASSWORD_SUCCESS:
             return {
                 ...state,
-                isLoading: false,
                 user: action.payload,
-                hasSignedUp: false,
+                isLoading: false,
                 error: null
             };
         case SIGNOUT:
@@ -73,6 +76,7 @@ export default (state = initialState, action) => {
         case RESET_PASSWORD_SUCCESS:
             return {
                 ...state,
+                hasResetPassword: true,
                 isLoading: false,
                 error: null
             };

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchTag, reset } from "../../actions/tag/show";
 import { BackButton } from "../form";
-import { ErrorAlert, Spinner } from "../misc";
+import { SuccessAlert, ErrorAlert, Spinner } from "../misc";
 
 class TagShow extends React.Component {
     componentDidMount() {
@@ -14,7 +14,7 @@ class TagShow extends React.Component {
     }
 
     render() {
-        const { tag, isLoading, error } = this.props;
+        const { tag, created, updated, isLoading, error } = this.props;
 
         return (
             <div className="mx-auto col-md-6 col-lg-4">
@@ -26,6 +26,14 @@ class TagShow extends React.Component {
                     <BackButton link="/tags" />
                 </div>
                 <ErrorAlert error={error} />
+                <SuccessAlert
+                    isShown={created}
+                    message="Tag successfully created"
+                />
+                <SuccessAlert
+                    isShown={updated}
+                    message="Tag successfully updated"
+                />
             </div>
         );
     }
@@ -35,7 +43,9 @@ const mapStateToProps = (state, ownProps) => {
     return {
         isLoading: state.tags.isLoading,
         error: state.tags.error,
-        tag: state.tags.items[ownProps.match.params.id]
+        tag: state.tags.items[ownProps.match.params.id],
+        created: state.tags.created,
+        updated: state.tags.updates
     };
 };
 

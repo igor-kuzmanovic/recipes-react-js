@@ -9,8 +9,8 @@ export function loading() {
     return { type: RESET_PASSWORD_REQUEST };
 }
 
-export function success(payload) {
-    return { type: RESET_PASSWORD_SUCCESS, payload };
+export function success() {
+    return { type: RESET_PASSWORD_SUCCESS };
 }
 
 export function error(payload) {
@@ -21,7 +21,7 @@ export const resetPassword = (formValues, callback) => async dispatch => {
     dispatch(loading());
     try {
         await api.post("/reset_password", formValues);
-        dispatch(success(true));
+        dispatch(success());
         callback();
     } catch (err) {
         dispatch(error(err));

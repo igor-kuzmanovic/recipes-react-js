@@ -11,7 +11,7 @@ class UserSettings extends React.Component {
     }
 
     onSubmit = formValues => {
-        this.props.updateUser(formValues);
+        this.props.updateUser(formValues, () => this.props.history.push("/"));
     };
 
     render() {

@@ -1,15 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { deleteIngredient, reset } from "../../actions/ingredient/delete";
+import { deleteIngredient } from "../../actions/ingredient/delete";
 import { ConfirmButton, BackButton } from "../form";
 import { ErrorAlert } from "../misc";
 
 class IngredientDelete extends React.Component {
-    componentWillUnmount() {
-        this.props.reset();
-    }
-
     onDeleteClick = () => {
         this.props.deleteIngredient(this.props.match.params.id);
     };
@@ -52,8 +48,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    deleteIngredient,
-    reset
+    deleteIngredient
 };
 
 export default connect(

@@ -1,15 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { createCategory, reset } from "../../actions/category/create";
+import { createCategory } from "../../actions/category/create";
 import CategoryForm from "./CategoryForm";
 import ErrorAlert from "../misc/ErrorAlert";
 
 class CategoryCreate extends React.Component {
-    componentWillUnmount() {
-        this.props.reset();
-    }
-
     onSubmit = formValues => {
         this.props.createCategory(formValues);
     };
@@ -43,8 +39,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    createCategory,
-    reset
+    createCategory
 };
 
 export default connect(

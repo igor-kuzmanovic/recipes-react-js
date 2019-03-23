@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchIngredient, reset } from "../../actions/ingredient/show";
 import { BackButton } from "../form";
-import { ErrorAlert, Spinner } from "../misc";
+import { SuccessAlert, ErrorAlert, Spinner } from "../misc";
 
 class IngredientShow extends React.Component {
     componentDidMount() {
@@ -14,7 +14,7 @@ class IngredientShow extends React.Component {
     }
 
     render() {
-        const { ingredient, isLoading, error } = this.props;
+        const { ingredient, created, updated, isLoading, error } = this.props;
 
         return (
             <div className="mx-auto col-md-6 col-lg-4">
@@ -26,6 +26,14 @@ class IngredientShow extends React.Component {
                     <BackButton link="/ingredients" />
                 </div>
                 <ErrorAlert error={error} />
+                <SuccessAlert
+                    isShown={created}
+                    message="Tag successfully created"
+                />
+                <SuccessAlert
+                    isShown={updated}
+                    message="Tag successfully updated"
+                />
             </div>
         );
     }
@@ -35,7 +43,9 @@ const mapStateToProps = (state, ownProps) => {
     return {
         isLoading: state.ingredients.isLoading,
         error: state.ingredients.error,
-        ingredient: state.ingredients.items[ownProps.match.params.id]
+        ingredient: state.ingredients.items[ownProps.match.params.id],
+        created: state.ingredients.created,
+        updated: state.ingredients.updated
     };
 };
 

@@ -9,7 +9,7 @@ import {
     BackButton,
     CreateButton
 } from "../form";
-import { ErrorAlert, Spinner } from "../misc";
+import { SuccessAlert, ErrorAlert, Spinner } from "../misc";
 
 class IngredientList extends React.Component {
     componentDidMount() {
@@ -23,6 +23,7 @@ class IngredientList extends React.Component {
     renderList() {
         return this.props.ingredients.map(ingredient => {
             const { id, name } = ingredient;
+
             return (
                 <ListGroup.Item key={id} className="p-0">
                     <ButtonGroup className="d-flex justify-content-between">
@@ -38,7 +39,7 @@ class IngredientList extends React.Component {
     }
 
     render() {
-        const { isLoading, error } = this.props;
+        const { deleted, isLoading, error } = this.props;
 
         return (
             <div className="mx-auto col-md-10 col-lg-8">
@@ -60,6 +61,10 @@ class IngredientList extends React.Component {
                     </div>
                 </div>
                 <ErrorAlert error={error} />
+                <SuccessAlert
+                    isShown={deleted}
+                    message="Ingredient successfully deleted"
+                />
             </div>
         );
     }
@@ -69,7 +74,8 @@ const mapStateToProps = state => {
     return {
         isLoading: state.ingredients.isLoading,
         error: state.ingredients.error,
-        ingredients: Object.values(state.ingredients.items)
+        ingredients: Object.values(state.ingredients.items),
+        delted: state.ingredients.deleted
     };
 };
 

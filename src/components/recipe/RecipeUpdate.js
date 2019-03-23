@@ -3,7 +3,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { fetchRecipe, updateRecipe } from "../../actions/recipe";
-import { reset } from "../../actions/recipe/update";
 import { fetchIngredients } from "../../actions/ingredient/list";
 import { fetchCategories } from "../../actions/category/list";
 import { fetchTags } from "../../actions/tag/list";
@@ -16,10 +15,6 @@ class RecipeUpdate extends React.Component {
         this.props.fetchIngredients();
         this.props.fetchCategories();
         this.props.fetchTags();
-    }
-
-    componentWillUnmount() {
-        this.props.reset();
     }
 
     parseRecipe() {
@@ -93,7 +88,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = {
     fetchRecipe,
     updateRecipe,
-    reset,
     fetchIngredients,
     fetchCategories,
     fetchTags

@@ -5,7 +5,7 @@ import {
     reset
 } from "../../actions/auth/confirmRegistration";
 import ConfirmationForm from "./ConfirmationForm";
-import ErrorAlert from "../misc/ErrorAlert";
+import { SuccessAlert, ErrorAlert } from "../misc";
 
 class ConfirmRegistration extends React.Component {
     componentWillUnmount() {
@@ -32,7 +32,7 @@ class ConfirmRegistration extends React.Component {
     };
 
     render() {
-        const { isLoading, error } = this.props;
+        const { hasSignedUp, isLoading, error } = this.props;
 
         return (
             <div className="mx-auto col-md-6 col-lg-4">
@@ -44,6 +44,10 @@ class ConfirmRegistration extends React.Component {
                     isSubmitDisabled={isLoading}
                 />
                 <ErrorAlert error={error} />
+                <SuccessAlert
+                    isShown={hasSignedUp}
+                    message="Successfully signed up"
+                />
             </div>
         );
     }
@@ -52,7 +56,8 @@ class ConfirmRegistration extends React.Component {
 const mapStateToProps = state => {
     return {
         isLoading: state.auth.isLoading,
-        error: state.auth.error
+        error: state.auth.error,
+        hasSignedUp: state.auth.hasSignedUp
     };
 };
 

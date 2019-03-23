@@ -9,7 +9,7 @@ import {
     BackButton,
     CreateButton
 } from "../form";
-import { ErrorAlert, Spinner } from "../misc";
+import { SuccessAlert, ErrorAlert, Spinner } from "../misc";
 
 class TagList extends React.Component {
     componentDidMount() {
@@ -23,6 +23,7 @@ class TagList extends React.Component {
     renderList() {
         return this.props.tags.map(tag => {
             const { id, name } = tag;
+
             return (
                 <ListGroup.Item key={id} className="p-0">
                     <ButtonGroup className="d-flex justify-content-between">
@@ -36,7 +37,7 @@ class TagList extends React.Component {
     }
 
     render() {
-        const { isLoading, error } = this.props;
+        const { deleted, isLoading, error } = this.props;
 
         return (
             <div className="mx-auto col-md-10 col-lg-8">
@@ -58,6 +59,10 @@ class TagList extends React.Component {
                     </div>
                 </div>
                 <ErrorAlert error={error} />
+                <SuccessAlert
+                    isShown={deleted}
+                    message="Tag successfully deleted"
+                />
             </div>
         );
     }
@@ -67,7 +72,8 @@ const mapStateToProps = state => {
     return {
         isLoading: state.tags.isLoading,
         error: state.tags.error,
-        tags: Object.values(state.tags.items)
+        tags: Object.values(state.tags.items),
+        deleted: state.tags.deleted
     };
 };
 

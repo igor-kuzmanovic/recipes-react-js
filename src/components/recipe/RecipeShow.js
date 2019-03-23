@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchRecipe, reset } from "../../actions/recipe/show";
 import { BackButton } from "../form";
-import { ErrorAlert, Spinner } from "../misc";
+import { SuccessAlert, ErrorAlert, Spinner } from "../misc";
 
 class RecipeShow extends React.Component {
     componentDidMount() {
@@ -15,7 +15,7 @@ class RecipeShow extends React.Component {
     }
 
     render() {
-        const { recipe, isLoading, error } = this.props;
+        const { recipe, created, updated, isLoading, error } = this.props;
 
         return (
             <div className="mx-auto col-md-6 col-lg-4">
@@ -57,15 +57,21 @@ class RecipeShow extends React.Component {
                 <h4 className="my-3 text-center">
                     <strong className="text-secondary">Date:</strong>{" "}
                     {recipe &&
-                        moment(recipe.creationDate).format(
-                            "MMMM Do YYYY"
-                        )}
+                        moment(recipe.creationDate).format("MMMM Do YYYY")}
                     <Spinner isLoading={isLoading && !recipe} />
                 </h4>
                 <div className="mb-3 text-center">
                     <BackButton link="/recipes" />
                 </div>
                 <ErrorAlert error={error} />
+                <SuccessAlert
+                    isShown={created}
+                    message="Tag successfully created"
+                />
+                <SuccessAlert
+                    isShown={updated}
+                    message="Tag successfully updated"
+                />
             </div>
         );
     }
@@ -75,7 +81,9 @@ const mapStateToProps = (state, ownProps) => {
     return {
         isLoading: state.recipes.isLoading,
         error: state.recipes.error,
-        recipe: state.recipes.items[ownProps.match.params.id]
+        recipe: state.recipes.items[ownProps.match.params.id],
+        created: state.recipes.created,
+        updated: state.recipes.updated
     };
 };
 

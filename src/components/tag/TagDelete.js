@@ -1,15 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { deleteTag, reset } from "../../actions/tag/delete";
+import { deleteTag } from "../../actions/tag/delete";
 import { ConfirmButton, BackButton } from "../form";
 import { ErrorAlert } from "../misc";
 
 class TagDelete extends React.Component {
-    componentWillUnmount() {
-        this.props.reset();
-    }
-
     onDeleteClick = () => {
         this.props.deleteTag(this.props.match.params.id);
     };
@@ -52,8 +48,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    deleteTag,
-    reset
+    deleteTag
 };
 
 export default connect(

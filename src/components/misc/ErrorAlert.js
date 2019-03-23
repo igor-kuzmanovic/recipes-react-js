@@ -8,6 +8,7 @@ function capitalizeFirstLetter(string) {
 const ErrorAlert = ({ error }) => {
     if (error) {
         let errorText = "Oops, an error has occured!";
+
         if (error.response) {
             if (error.response.data.message) {
                 errorText = error.response.data.message;
@@ -15,8 +16,9 @@ const ErrorAlert = ({ error }) => {
                 errorText = capitalizeFirstLetter(error.response.data.detail);
             }
         }
+
         return (
-            <Alert variant="danger">
+            <Alert variant="danger" dismissible>
                 <span>{errorText}</span>
             </Alert>
         );

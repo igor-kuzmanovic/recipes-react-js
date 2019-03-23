@@ -1,15 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { signUp, reset } from "../../actions/auth/signUp";
+import { signUp } from "../../actions/auth/signUp";
 import SignUpForm from "./SignUpForm";
 import ErrorAlert from "../misc/ErrorAlert";
 
 class SignUp extends React.Component {
-    componentWillUnmount() {
-        this.props.reset();
-    }
-
     onSubmit = formValues => {
         this.props.signUp(formValues, () =>
             this.props.history.push("/confirm_registration")
@@ -43,8 +39,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    signUp,
-    reset
+    signUp
 };
 
 export default connect(

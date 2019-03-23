@@ -3,17 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { fetchIngredient, updateIngredient } from "../../actions/ingredient";
-import { reset } from "../../actions/ingredient/update";
 import IngredientForm from "./IngredientForm";
 import ErrorAlert from "../misc/ErrorAlert";
 
 class IngredientUpdate extends React.Component {
     componentDidMount() {
         this.props.fetchIngredient(this.props.match.params.id);
-    }
-
-    componentWillUnmount() {
-        this.props.reset();
     }
 
     onSubmit = formValues => {
@@ -54,8 +49,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = {
     fetchIngredient,
-    updateIngredient,
-    reset
+    updateIngredient
 };
 
 export default connect(

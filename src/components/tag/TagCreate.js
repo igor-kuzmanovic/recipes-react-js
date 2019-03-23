@@ -1,15 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { createTag, reset } from "../../actions/tag/create";
+import { createTag } from "../../actions/tag/create";
 import TagForm from "./TagForm";
 import ErrorAlert from "../misc/ErrorAlert";
 
 class TagCreate extends React.Component {
-    componentWillUnmount() {
-        this.props.reset();
-    }
-
     onSubmit = formValues => {
         this.props.createTag(formValues);
     };
@@ -43,8 +39,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    createTag,
-    reset
+    createTag
 };
 
 export default connect(

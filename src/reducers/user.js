@@ -15,8 +15,8 @@ export default (state = initialState, action) => {
         case UPDATE_USER_REQUEST:
             return {
                 ...state,
-                updated: false,
-                isLoading: true
+                isLoading: true,
+                error: null
             };
         case UPDATE_USER_ERROR:
             return {

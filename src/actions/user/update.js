@@ -18,7 +18,7 @@ export function error(payload) {
     return { type: UPDATE_USER_ERROR, payload };
 }
 
-export const updateUser = formValues => async dispatch => {
+export const updateUser = (formValues, callback) => async dispatch => {
     dispatch(loading());
     try {
         const response = await api.put(
@@ -26,6 +26,7 @@ export const updateUser = formValues => async dispatch => {
             _.omit(formValues, "confirmPassword")
         );
         dispatch(success(response.data));
+        callback();
     } catch (err) {
         dispatch(error(err));
     }

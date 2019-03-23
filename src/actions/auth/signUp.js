@@ -10,8 +10,8 @@ export function loading() {
     return { type: SIGNUP_REQUEST };
 }
 
-export function success(payload) {
-    return { type: SIGNUP_SUCCESS, payload };
+export function success() {
+    return { type: SIGNUP_SUCCESS };
 }
 
 export function error(payload) {
@@ -22,7 +22,7 @@ export const signUp = (formValues, callback) => async dispatch => {
     dispatch(loading());
     try {
         await api.post("/register", _.omit(formValues, "confirmPassword"));
-        dispatch(success(true));
+        dispatch(success());
         callback();
     } catch (err) {
         dispatch(error(err));

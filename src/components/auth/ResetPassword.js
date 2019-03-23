@@ -1,14 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { resetPassword, reset } from "../../actions/auth/resetPassword";
+import { resetPassword } from "../../actions/auth/resetPassword";
 import ResetPasswordForm from "./ResetPasswordForm";
 import ErrorAlert from "../misc/ErrorAlert";
 
 class ResetPassword extends React.Component {
-    componentWillUnmount() {
-        this.props.reset();
-    }
-
     onSubmit = formValues => {
         this.props.resetPassword(formValues, () =>
             this.props.history.push("/new_password")
@@ -39,8 +35,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    resetPassword,
-    reset
+    resetPassword
 };
 
 export default connect(

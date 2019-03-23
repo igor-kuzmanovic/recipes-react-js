@@ -1,15 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { deleteCategory, reset } from "../../actions/category/delete";
+import { deleteCategory } from "../../actions/category/delete";
 import { ConfirmButton, BackButton } from "../form";
 import { ErrorAlert } from "../misc";
 
 class CategoryDelete extends React.Component {
-    componentWillUnmount() {
-        this.props.reset();
-    }
-
     onDeleteClick = () => {
         this.props.deleteCategory(this.props.match.params.id);
     };
@@ -52,8 +48,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    deleteCategory,
-    reset
+    deleteCategory
 };
 
 export default connect(
