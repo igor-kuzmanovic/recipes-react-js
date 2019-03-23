@@ -5,7 +5,7 @@ import {
 } from "../constants/actionTypes";
 
 const initialState = {
-    updated: false,
+    hasUpdated: false,
     isLoading: false,
     error: null
 };
@@ -21,14 +21,14 @@ export default (state = initialState, action) => {
         case UPDATE_USER_ERROR:
             return {
                 ...state,
-                updated: false,
+                hasUpdated: false,
                 isLoading: false,
                 error: action.payload
             };
         case UPDATE_USER_SUCCESS:
             return {
                 ...state,
-                updated: true,
+                hasUpdated: true,
                 isLoading: false,
                 error: null
             };

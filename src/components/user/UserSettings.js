@@ -1,15 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { updateUser, reset } from "../../actions/user/update";
+import { updateUser } from "../../actions/user/update";
 import SettingsForm from "./SettingsForm";
 import ErrorAlert from "../misc/ErrorAlert";
 
 class UserSettings extends React.Component {
-    componentWillUnmount() {
-        this.props.reset();
-    }
-
     onSubmit = formValues => {
         this.props.updateUser(formValues, () => this.props.history.push("/"));
     };
@@ -43,8 +39,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    updateUser,
-    reset
+    updateUser
 };
 
 export default connect(

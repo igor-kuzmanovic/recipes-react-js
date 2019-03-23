@@ -5,7 +5,7 @@ import { Button, CardDeck, Card } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { fetchRecipes, reset } from "../actions/recipe/list";
 import { CreateButton } from "./form";
-import { ErrorAlert, Spinner } from "./misc";
+import { SuccessAlert, ErrorAlert, Spinner } from "./misc";
 
 class Home extends React.Component {
     componentDidMount() {
@@ -40,7 +40,7 @@ class Home extends React.Component {
     }
 
     render() {
-        const { recipes, isLoading, error } = this.props;
+        const { recipes, hasUserUpdated, isLoading, error } = this.props;
 
         return (
             <div>
@@ -55,6 +55,10 @@ class Home extends React.Component {
                     <CreateButton link="/recipes/create" />
                 </div>
                 <ErrorAlert error={error} />
+                <SuccessAlert
+                    isShown={hasUserUpdated}
+                    message="Successfully updated your password"
+                />
             </div>
         );
     }
@@ -64,7 +68,8 @@ const mapStateToProps = state => {
     return {
         isLoading: state.recipes.isLoading,
         error: state.recipes.error,
-        recipes: Object.values(state.recipes.items)
+        recipes: Object.values(state.recipes.items),
+        hasUserUpdated: state.user.hasUpdated
     };
 };
 
