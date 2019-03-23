@@ -58,7 +58,7 @@ const validate = formValues => {
     }
     if (!formValues.resetPasswordToken) {
         errors.resetPasswordToken = "You must enter your password reset token";
-    } else if (!formValues.resetPasswordToken.length !== 30) {
+    } else if (formValues.resetPasswordToken.length !== 30) {
         errors.resetPasswordToken =
             "Password reset token is not in the valid format";
     }
