@@ -21,7 +21,7 @@ class Home extends React.Component {
             const { id, title, description, creationDate } = recipe;
 
             return (
-                <div key={id} className="col-4">
+                <div key={id} className="col-md-4">
                     <Card className="text-center m-2">
                         <Card.Body>
                             <Card.Title>{title}</Card.Title>

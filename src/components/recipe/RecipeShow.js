@@ -66,11 +66,11 @@ class RecipeShow extends React.Component {
                 <ErrorAlert error={error} />
                 <SuccessAlert
                     isShown={created}
-                    message="Tag successfully created"
+                    message="Recipe successfully created"
                 />
                 <SuccessAlert
                     isShown={updated}
-                    message="Tag successfully updated"
+                    message="Recipe successfully updated"
                 />
             </div>
         );

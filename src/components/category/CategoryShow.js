@@ -28,11 +28,11 @@ class CategoryShow extends React.Component {
                 <ErrorAlert error={error} />
                 <SuccessAlert
                     isShown={created}
-                    message="Tag successfully created"
+                    message="Category successfully created"
                 />
                 <SuccessAlert
                     isShown={updated}
-                    message="Tag successfully updated"
+                    message="Category successfully updated"
                 />
             </div>
         );

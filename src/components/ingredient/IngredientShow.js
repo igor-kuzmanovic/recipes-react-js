@@ -28,11 +28,11 @@ class IngredientShow extends React.Component {
                 <ErrorAlert error={error} />
                 <SuccessAlert
                     isShown={created}
-                    message="Tag successfully created"
+                    message="Ingredient successfully created"
                 />
                 <SuccessAlert
                     isShown={updated}
-                    message="Tag successfully updated"
+                    message="Ingredient successfully updated"
                 />
             </div>
         );

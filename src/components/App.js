@@ -14,7 +14,7 @@ const App = () => {
     return (
         <div>
             <Header />
-            <div className="container">
+            <div className="container mt-5">
                 <Switch>
                     <Route path="/" component={requireAuth(Home)} exact />
                     {authRoutes}
