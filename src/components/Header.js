@@ -38,14 +38,14 @@ class Header extends React.Component {
                                         </>
                                     )}
                                     <NavDropdown title={user.username}>
-                                        <LinkContainer to="/settings">
+                                        <LinkContainer to="/settings" activeClassName="">
                                             <NavDropdown.Item>
                                                 <FontAwesomeIcon icon={faCog} />{" "}
                                                 Settings
                                             </NavDropdown.Item>
                                         </LinkContainer>
                                         <NavDropdown.Divider />
-                                        <LinkContainer to="/logout">
+                                        <LinkContainer to="/logout" activeClassName="">
                                             <NavDropdown.Item>
                                                 <FontAwesomeIcon
                                                     icon={faSignOutAlt}
