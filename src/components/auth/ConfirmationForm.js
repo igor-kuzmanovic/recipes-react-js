@@ -25,7 +25,7 @@ class ConfirmationForm extends React.Component {
                     placeholder="Enter your confirmation token"
                     component={Input}
                 />
-                <div className="text-center mb-3">
+                <div className="text-center my-4">
                     <SubmitButton disabled={this.props.isSubmitDisabled} />
                 </div>
             </Form>

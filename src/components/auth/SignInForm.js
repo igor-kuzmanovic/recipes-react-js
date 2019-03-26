@@ -25,7 +25,7 @@ class SignInForm extends React.Component {
                     placeholder="Enter your password"
                     component={Input}
                 />
-                <div className="text-center mb-3">
+                <div className="text-center my-4">
                     <SubmitButton disabled={this.props.isSubmitDisabled} />
                 </div>
             </Form>

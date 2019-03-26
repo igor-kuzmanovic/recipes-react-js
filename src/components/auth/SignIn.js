@@ -24,12 +24,12 @@ class SignIn extends React.Component {
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={isLoading}
                 />
-                <h6 className="text-center">
+                <h5 className="text-center">
                     Don't have an account? <Link to="/register">Sign Up!</Link>
-                </h6>
-                <h6 className="text-center mb-3">
+                </h5>
+                <h5 className="text-center mb-3">
                     <Link to="/reset_password">Forgot your password?</Link>
-                </h6>
+                </h5>
                 <ErrorAlert error={error} />
             </div>
         );

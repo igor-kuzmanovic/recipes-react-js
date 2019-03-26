@@ -22,9 +22,9 @@ class SignUp extends React.Component {
                     onSubmit={this.onSubmit}
                     isSubmitDisabled={isLoading}
                 />
-                <h6 className="text-center mb-3">
+                <h5 className="text-center mb-3">
                     Already have an account? <Link to="/login">Log In!</Link>
-                </h6>
+                </h5>
                 <ErrorAlert error={error} />
             </div>
         );
