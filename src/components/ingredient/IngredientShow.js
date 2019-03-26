@@ -22,7 +22,7 @@ class IngredientShow extends React.Component {
                     {ingredient && <strong>{ingredient.name}</strong>}{" "}
                     <Spinner isLoading={isLoading && !ingredient} />
                 </h3>
-                <div className="mb-3 text-center">
+                <div className="mb-3 text-center mt-5">
                     <BackButton link="/ingredients" />
                 </div>
                 <ErrorAlert error={error} />

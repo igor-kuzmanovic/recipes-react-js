@@ -22,7 +22,7 @@ class CategoryShow extends React.Component {
                     {category && <strong>{category.name}</strong>}{" "}
                     <Spinner isLoading={isLoading && !category} />
                 </h3>
-                <div className="mb-3 text-center">
+                <div className="mb-3 text-center mt-5">
                     <BackButton link="/categories" />
                 </div>
                 <ErrorAlert error={error} />

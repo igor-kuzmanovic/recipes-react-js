@@ -29,11 +29,11 @@ class RecipeShow extends React.Component {
                     <Spinner isLoading={isLoading && !recipe} />
                 </h4>
                 <h4 className="my-3 text-center">
-                    <strong className="text-secondary">Ingredients:</strong>
+                    <strong className="text-secondary">Ingredients:</strong>{" "}
                     {recipe &&
                         recipe.ingredients.map(ingredient => (
                             <span key={ingredient.id}> {ingredient.name}</span>
-                        ))}{" "}
+                        ))}
                     <Spinner isLoading={isLoading && !recipe} />
                 </h4>
                 <h4 className="my-3 text-center">
@@ -42,11 +42,11 @@ class RecipeShow extends React.Component {
                     <Spinner isLoading={isLoading && !recipe} />
                 </h4>
                 <h4 className="my-3 text-center">
-                    <strong className="text-secondary">Tags:</strong>
+                    <strong className="text-secondary">Tags:</strong>{" "}
                     {recipe &&
                         recipe.tags.map(tag => (
                             <span key={tag.id}> {tag.name}</span>
-                        ))}{" "}
+                        ))}
                     <Spinner isLoading={isLoading && !recipe} />
                 </h4>
                 <h4 className="my-3 text-center">
@@ -60,7 +60,7 @@ class RecipeShow extends React.Component {
                         moment(recipe.creationDate).format("MMMM Do YYYY")}
                     <Spinner isLoading={isLoading && !recipe} />
                 </h4>
-                <div className="mb-3 text-center">
+                <div className="mb-3 text-center mt-5">
                     <BackButton link="/recipes" />
                 </div>
                 <ErrorAlert error={error} />

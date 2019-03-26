@@ -22,7 +22,7 @@ class IngredientDelete extends React.Component {
                 <h3 className="my-3 text-center">
                     Are you sure you want to delete this ingredient?
                 </h3>
-                <div className="row mb-3">
+                <div className="row mb-3 mt-5">
                     <div className="col text-left">
                         <BackButton link="/ingredients" />
                     </div>
