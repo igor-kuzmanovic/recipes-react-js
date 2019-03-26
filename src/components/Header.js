@@ -11,7 +11,7 @@ class Header extends React.Component {
         const { user } = this.props;
 
         return (
-            <Navbar bg="primary" variant="dark" expand="md">
+            <Navbar bg="secondary" variant="dark" expand="md">
                 <div className="container">
                     <LinkContainer to="/">
                         <Navbar.Brand>RecipesApp</Navbar.Brand>
