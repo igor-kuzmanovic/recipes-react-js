@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { Form } from "react-bootstrap";
 import {
     Input,
+    Textarea,
     SelectSingle,
     SelectMultiple,
     SubmitButton,
@@ -27,9 +28,8 @@ class RecipeForm extends React.Component {
                 <Field
                     label="Description"
                     name="description"
-                    type="text"
                     placeholder="Enter a description"
-                    component={Input}
+                    component={Textarea}
                 />
                 <Field
                     label="Ingredients"

@@ -1,5 +1,5 @@
 import Input from "./Input";
-import InputError from "./InputError";
+import Textarea from "./Textarea";
 import SelectSingle from "./SelectSingle";
 import SelectMultiple from "./SelectMultiple";
 import SubmitButton from "./SubmitButton";
@@ -12,7 +12,7 @@ import LinkButton from "./LinkButton";
 
 export {
     Input,
-    InputError,
+    Textarea,
     SelectSingle,
     SelectMultiple,
     SubmitButton,
