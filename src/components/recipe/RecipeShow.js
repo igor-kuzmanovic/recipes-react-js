@@ -57,7 +57,7 @@ class RecipeShow extends React.Component {
                 <h4 className="my-3 text-center">
                     <strong className="text-secondary">Date:</strong>{" "}
                     {recipe &&
-                        moment(recipe.creationDate).format("MMMM Do YYYY")}
+                        moment(recipe.creationDate).format("MMMM Do, YYYY")}
                     <Spinner isLoading={isLoading && !recipe} />
                 </h4>
                 <div className="mb-3 text-center mt-5">
