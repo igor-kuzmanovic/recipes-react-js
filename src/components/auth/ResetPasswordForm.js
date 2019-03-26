@@ -1,7 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { Form } from "react-bootstrap";
-import { Input, SubmitButton } from "../form";
+import { BackButton, Input, SubmitButton} from "../form";
 
 class ResetPasswordForm extends React.Component {
     onSubmit = formValues => {
@@ -18,8 +18,13 @@ class ResetPasswordForm extends React.Component {
                     placeholder="Enter your email"
                     component={Input}
                 />
-                <div className="text-center mb-3">
-                    <SubmitButton disabled={this.props.isSubmitDisabled} />
+                <div className="row mb-3">
+                    <div className="col text-left">
+                        <BackButton link="/login" />
+                    </div>
+                    <div className="col text-right">
+                        <SubmitButton disabled={this.props.isSubmitDisabled} />
+                    </div>
                 </div>
             </Form>
         );
