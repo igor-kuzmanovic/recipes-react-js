@@ -10,7 +10,10 @@ const ErrorAlert = ({ error }) => {
         let errorText = "Oops, an error has occured!";
 
         if (error.response) {
-            if (error.response.data.message) {
+			if (error.response.data.status === 500) {
+				errorText = "An internal server error has occured";
+			}
+            else if (error.response.data.message) {
                 errorText = error.response.data.message;
             } else if (error.response.data.detail) {
                 errorText = capitalizeFirstLetter(error.response.data.detail);
