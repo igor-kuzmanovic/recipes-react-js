@@ -25,7 +25,7 @@ class SignIn extends React.Component {
                     isSubmitDisabled={isLoading}
                 />
                 <h5 className="text-center">
-                    Don't have an account? <Link to="/register">Sign Up!</Link>
+                    Don&#39;t have an account? <Link to="/register">Sign Up!</Link>
                 </h5>
                 <h5 className="text-center mb-3">
                     <Link to="/reset_password">Forgot your password?</Link>
